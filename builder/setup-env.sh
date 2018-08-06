@@ -8,4 +8,4 @@
 # node amount = 1
 # name = test001
 
-./gen-env.sh test001 1
+./gen-env.sh $1 1

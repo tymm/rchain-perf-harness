@@ -179,15 +179,16 @@ case class NodeConfig (
 
 
 class Config(arguments: Seq[String]) extends ScallopConf(arguments) {
-  val validators = opt[Int](required = true)
+//  val validators = opt[Int](required = true)
   val out = opt[Path](required = true)
 }
 
 object Templater {
   def main(args: Array[String]): Unit = {
     val conf = new Config(args)
+    conf.verify
     val amount = 4
-    val out = Paths.get("/Users/dzajkowski/workspaces/ws_pyrofex/envs/builder/envs/test001")
+    val out = conf.out()
 
     val bsc = genVCon(999).copy(name = "bootstrap")
     genConfig(out, bsc, Templates.bootstrap, bsc.port, "6a22ddc9300ef7658c67cfcf8da358c6e7ffa75257361261ca47409d0c7ea6ee")
