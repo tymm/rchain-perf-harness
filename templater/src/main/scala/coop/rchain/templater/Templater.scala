@@ -1,0 +1,281 @@
+package coop.rchain.templater
+
+import java.nio.file.{Files, Path, Paths}
+
+import org.clapper.scalasti.ST
+import org.rogach.scallop.ScallopConf
+
+object Templates {
+  val bootstrap =
+    """
+      |[server]
+      |host = "<c.host>"
+      |port = <c.port>
+      |metrics-port = <c.metricsPort>
+      |http-port = <c.httpPort>
+      |no-upnp = true
+      |default-timeout = 1000
+      |standalone = true
+      |map-size = 200000000
+      |data-dir = "./data"
+      |
+      |[grpc-server]
+      |host = "grpc"
+      |port = <c.grpcPort>
+      |
+      |[validators]
+      |public-key = "118eb0ae2193c83e960b46c42026bd6e21d5cc02854881baedd296764d5cd743"
+      |private-key = "<privateKey>"
+    """.stripMargin
+
+  val validator =
+    """
+      |[server]
+      |host = "<c.host>"
+      |port = <c.port>
+      |metrics-port = <c.metricsPort>
+      |http-port = <c.httpPort>
+      |no-upnp = true
+      |default-timeout = 1000
+      |map-size = 200000000
+      |data-dir = "./data"
+      |bootstrap = "rnode://7119ad2a26cdcde63dca675c4f2a4df85f404726@localhost:<bootstrapPort>"
+      |
+      |[grpc-server]
+      |host = "grpc"
+      |port = <c.grpcPort>
+      |
+      |[validators]
+      |private-key = "<privateKey>"
+    """.stripMargin
+
+  val start =
+    """
+      |#!/bin/bash
+      |
+      |java -jar $RCHAIN_RNODE -c ./config.toml run --http-port <c.httpPort>
+    """.stripMargin
+
+  val deploy =
+    """
+      |#!/bin/bash
+      |
+      |java -jar $RCHAIN_RNODE --grpc-port <grpcPort> deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 ../contracts/tut-philosophers.rho
+    """.stripMargin
+
+  val propose =
+    """
+      |#!/bin/bash
+      |
+      |java -jar $RCHAIN_RNODE --grpc-port <grpcPort> propose
+    """.stripMargin
+
+  val loop =
+    """
+      |#!/bin/bash
+      |
+      |for i in `seq 1 1000`;
+      |do
+      |    ./deploy.sh; ./propose.sh
+      |done
+    """.stripMargin
+
+  val runTests =
+    """
+      |#!/bin/bash
+      |
+      |export RCHAIN_RNODE=`pwd`/rnode.jar
+      |
+      |pushd bootstrap
+      |./loop.sh
+      |pid0=$!
+      |popd
+      |pushd 3001
+      |./loop.sh
+      |pid1=$!
+      |popd
+      |
+      |pushd 3002
+      |./loop.sh
+      |pid2=$!
+      |popd
+      |
+      |pushd 3003
+      |./loop.sh
+      |pid3=$!
+      |popd
+      |
+      |pushd 3004
+      |./loop.sh
+      |pid4=$!
+      |popd
+      |
+    """.stripMargin
+
+  val runBootstrap =
+    """
+      |#!/bin/bash
+      |
+      |export RCHAIN_RNODE=`pwd`/rnode.jar
+      |
+      |pushd bootstrap
+      |./start > output.log 2>&1 &
+      |pid0=$!
+      |popd
+      |
+      |echo $pid0
+    """.stripMargin
+
+  val runNetwork =
+    """
+      |#!/bin/bash
+      |
+      |export RCHAIN_RNODE=`pwd`/rnode.jar
+      |
+      |pushd 3001
+      |./start > output.log 2>&1 &
+      |pid1=$!
+      |popd
+      |
+      |pushd 3002
+      |./start > output.log 2>&1 &
+      |pid2=$!
+      |popd
+      |
+      |pushd 3003
+      |./start > output.log 2>&1 &
+      |pid3=$!
+      |popd
+      |
+      |pushd 3004
+      |./start > output.log 2>&1 &
+      |pid4=$!
+      |popd
+      |
+      |echo "kill -9" $pid1 $pid2 $pid3 $pid4
+    """.stripMargin
+
+
+}
+
+object Store {
+  val keys = Array(
+    "e8408a1444e4347cd5585c955053440f9c40479d69acfccf7f8662316acb6e3e",
+    "be0154f6a292b692d7dd506c4923dda178a419f8d99f5c7c941a8383c278e3a6",
+    "7d8e4576b131492bdb442f510ab76a506cdcf5e610a69dc1163a674f47a80448",
+    "c380558b21ed34779f1c29fec947353bb944d9d50c2338b899d6e2faed8849fa"
+  )
+}
+
+case class NodeConfig (
+                      name: String,
+                      host: String = "localhost",
+                      port: Int,
+                      metricsPort: Int,
+                      httpPort: Int,
+                      grpcPort: Int
+                      )
+
+
+
+class Config(arguments: Seq[String]) extends ScallopConf(arguments) {
+  val validators = opt[Int](required = true)
+  val out = opt[Path](required = true)
+}
+
+object Templater {
+  def main(args: Array[String]): Unit = {
+    val conf = new Config(args)
+    val amount = 4
+    val out = Paths.get("/Users/dzajkowski/workspaces/ws_pyrofex/envs/builder/envs/test001")
+
+    val bsc = genVCon(999).copy(name = "bootstrap")
+    genConfig(out, bsc, Templates.bootstrap, bsc.port, "6a22ddc9300ef7658c67cfcf8da358c6e7ffa75257361261ca47409d0c7ea6ee")
+    genBSData(out)
+    genTests(out, bsc)
+
+    (1 to amount).map(genVCon).zipWithIndex.foreach { case (c, i) =>
+      genConfig(out, c, Templates.validator, bsc.port, Store.keys(i))
+      genVData(out, c.name)
+      genTests(out, c)
+    }
+
+    getSetupBS(out)
+    getSetupEnv(out)
+    genRunTests(out)
+  }
+
+  def genBSData(dir: Path): Unit = {
+    val d = dir.resolve("bootstrap/data")
+    d.toFile.mkdirs()
+    Files.createSymbolicLink(d.resolve("genesis"), Paths.get("../../store/bootstrap/genesis"))
+    Files.createSymbolicLink(d.resolve("node.key.pem"), Paths.get("../../store/bootstrap/node.key.pem"))
+    Files.createSymbolicLink(d.resolve("node.certificate.pem"), Paths.get("../../store/bootstrap/node.certificate.pem"))
+  }
+
+  def genVData(dir: Path, name: String): Unit = {
+    val d = dir.resolve(s"$name/data")
+    d.toFile.mkdirs()
+    Files.createSymbolicLink(d.resolve("genesis"), Paths.get("../../store/bootstrap/genesis"))
+  }
+
+  def genVCon(i: Int): NodeConfig = {
+    val prefix = f"3$i%03d"
+    NodeConfig(name = prefix, port = (prefix + 1).toInt, metricsPort = (prefix + 2).toInt, httpPort = (prefix + 3).toInt, grpcPort = (prefix + 5).toInt)
+  }
+
+  def genConfig(out: Path, nc: NodeConfig, templ: String, bootstrapPort: Int, privateKey: String): Unit = {
+    val bs = ST(templ).add("c", nc)
+      .add("bootstrapPort", bootstrapPort)
+      .add("privateKey", privateKey).render()
+    val bsp = out.resolve(nc.name)
+    bsp.toFile.mkdirs()
+    val bscp = bsp.resolve("config.toml")
+    Files.write(bscp, bs.get.getBytes)
+    genStart(bsp, nc)
+  }
+
+  def genDeploy(out: Path, grpcPort: Int): Unit = {
+    val d = ST(Templates.deploy).add("grpcPort", grpcPort).render()
+    Files.write(out.resolve("deploy.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def genPropose(out: Path, grpcPort: Int): Unit = {
+    val d = ST(Templates.propose).add("grpcPort", grpcPort).render()
+    Files.write(out.resolve("propose.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def genLoop(out: Path): Unit = {
+    val d = ST(Templates.loop).render()
+    Files.write(out.resolve("loop.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def genTests(out: Path, c: NodeConfig): Unit = {
+    val path = out.resolve(c.name)
+    genDeploy(path, c.grpcPort)
+    genPropose(path, c.grpcPort)
+    genLoop(path)
+  }
+
+  def getSetupBS(out: Path): Unit = {
+    val d = ST(Templates.runBootstrap).render()
+    Files.write(out.resolve("run-bootstrap.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def getSetupEnv(out: Path): Unit = {
+    val d = ST(Templates.runNetwork).render()
+    Files.write(out.resolve("run-network.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def genRunTests(out: Path): Unit = {
+    val d = ST(Templates.runTests).render()
+    Files.write(out.resolve("test.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def genStart(dir: Path, nc: NodeConfig): Unit = {
+    val path = dir.resolve("start")
+    val s = ST(Templates.start).add("c", nc).render()
+    val start = Files.write(path, s.get.getBytes)
+    start.toFile.setExecutable(true)
+  }
+}
