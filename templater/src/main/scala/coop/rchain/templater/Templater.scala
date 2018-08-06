@@ -16,7 +16,7 @@ object Templates {
       |no-upnp = true
       |default-timeout = 1000
       |standalone = true
-      |map-size = 200000000
+      |map-size = 1000000000
       |data-dir = "./data"
       |
       |[grpc-server]
@@ -37,7 +37,7 @@ object Templates {
       |http-port = <c.httpPort>
       |no-upnp = true
       |default-timeout = 1000
-      |map-size = 200000000
+      |map-size = 1000000000
       |data-dir = "./data"
       |bootstrap = "rnode://7119ad2a26cdcde63dca675c4f2a4df85f404726@localhost:<bootstrapPort>"
       |

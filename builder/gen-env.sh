@@ -17,4 +17,3 @@ cp -R templates/contracts envs/$1/contracts
 echo "setting up binaries..."
 echo "assembly jar!"
 cp bins/jars/rnode-assembly-0.5.3.jar envs/$1/rnode.jar
-cp -R templates/actions envs/$1/actions
