@@ -1,0 +1,1 @@
+../rnode -c ./config.toml run --http-port 30013

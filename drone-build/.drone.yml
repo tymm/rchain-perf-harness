@@ -1,0 +1,23 @@
+workspace:
+  base: /rchain
+  path: data/
+
+pipeline:
+  bootstrap:
+    image: openjdk:8-alpine
+    commands:
+      - bootstrap/start
+
+  validator-30001:
+    image: openjdk:8-alpine
+    detach: true
+    commands:
+      - 30001/start
+  
+  test:
+    image: openjdk:8-alpine
+    commands:
+      - actions/deploy.sh
+
+
+  
