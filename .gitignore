@@ -1,2 +1,5 @@
 builder/bins/jars/**
 builder/envs/**
+*.class
+*.log
+
