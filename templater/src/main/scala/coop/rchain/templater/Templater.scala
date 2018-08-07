@@ -108,7 +108,7 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar -Xmx4096m -Xms4096m -XX:+CMSClassUnloadingEnabled -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC -XX:+UseConcMarkSweepGC  `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx16G -Xms16G -XX:+CMSClassUnloadingEnabled -XX:+UseParallelGC `pwd`/rnode.jar"
       |
       |pushd bootstrap
       |./start > output.log 2>&1 &
@@ -122,7 +122,7 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar -Xmx4096m -Xms4096m -XX:+CMSClassUnloadingEnabled -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC -XX:+UseConcMarkSweepGC  `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx16G -Xms16G -XX:+CMSClassUnloadingEnabled -XX:+UseParallelGC `pwd`/rnode.jar"
       |
       |pushd 3001
       |./start > output.log 2>&1 &
