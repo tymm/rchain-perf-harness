@@ -53,21 +53,21 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |java -jar $RCHAIN_RNODE -c ./config.toml run --http-port <c.httpPort>
+      |$RCHAIN_RNODE -c ./config.toml run --http-port <c.httpPort>
     """.stripMargin
 
   val deploy =
     """
       |#!/bin/bash
       |
-      |java -jar $RCHAIN_RNODE --grpc-port <grpcPort> deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 ../contracts/tut-philosophers.rho
+      |$RCHAIN_RNODE --grpc-port <grpcPort> deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 ../contracts/tut-philosophers.rho
     """.stripMargin
 
   val propose =
     """
       |#!/bin/bash
       |
-      |java -jar $RCHAIN_RNODE --grpc-port <grpcPort> propose
+      |$RCHAIN_RNODE --grpc-port <grpcPort> propose
     """.stripMargin
 
   val loop =
@@ -76,20 +76,23 @@ object Templates {
       |
       |for i in `seq 1 1000`;
       |do
-      |    ./deploy.sh; ./propose.sh
+      |    ./deploy.sh;
       |done
+      |
+      |./propose.sh
     """.stripMargin
 
   val runTests =
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE=`pwd`/rnode.jar
+      |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
       |
       |pushd bootstrap
       |./loop.sh
       |pid0=$!
       |popd
+      |
       |pushd 3001
       |./loop.sh
       |pid1=$!
@@ -110,27 +113,36 @@ object Templates {
       |pid4=$!
       |popd
       |
+    """.stripMargin
+
+  val runEnv =
+    """
+      |#!/bin/bash
+      |
+      |./run-bootstrap.sh
+      |sleep 5
+      |./run-network.sh
     """.stripMargin
 
   val runBootstrap =
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE=`pwd`/rnode.jar
+      |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
       |
       |pushd bootstrap
       |./start > output.log 2>&1 &
       |pid0=$!
       |popd
       |
-      |echo $pid0
+      |echo $pid0 > bootstrap.pid
     """.stripMargin
 
   val runNetwork =
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE=`pwd`/rnode.jar
+      |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
       |
       |pushd 3001
       |./start > output.log 2>&1 &
@@ -152,10 +164,13 @@ object Templates {
       |pid4=$!
       |popd
       |
-      |echo "kill -9" $pid1 $pid2 $pid3 $pid4
+      |echo $pid1 $pid2 $pid3 $pid4 >> network.pids
     """.stripMargin
 
-
+    val killNetwork =
+      """
+        |killall java -jar `pwd`/rnode.jar
+      """.stripMargin
 }
 
 object Store {
@@ -201,9 +216,11 @@ object Templater {
       genTests(out, c)
     }
 
-    getSetupBS(out)
-    getSetupEnv(out)
+    genSetupBS(out)
+    genSetupEnv(out)
+    genRunEnv(out)
     genRunTests(out)
+    genKillNetwork(out)
   }
 
   def genBSData(dir: Path): Unit = {
@@ -258,19 +275,29 @@ object Templater {
     genLoop(path)
   }
 
-  def getSetupBS(out: Path): Unit = {
+  def genSetupBS(out: Path): Unit = {
     val d = ST(Templates.runBootstrap).render()
     Files.write(out.resolve("run-bootstrap.sh"), d.get.getBytes).toFile.setExecutable(true)
   }
 
-  def getSetupEnv(out: Path): Unit = {
+  def genSetupEnv(out: Path): Unit = {
     val d = ST(Templates.runNetwork).render()
     Files.write(out.resolve("run-network.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def genRunEnv(out: Path): Unit = {
+    val d = ST(Templates.runEnv).render()
+    Files.write(out.resolve("run-env.sh"), d.get.getBytes).toFile.setExecutable(true)
   }
 
   def genRunTests(out: Path): Unit = {
     val d = ST(Templates.runTests).render()
     Files.write(out.resolve("test.sh"), d.get.getBytes).toFile.setExecutable(true)
+  }
+
+  def genKillNetwork(out: Path): Unit = {
+    val d = ST(Templates.killNetwork).render()
+    Files.write(out.resolve("kill-network.sh"), d.get.getBytes).toFile.setExecutable(true)
   }
 
   def genStart(dir: Path, nc: NodeConfig): Unit = {
