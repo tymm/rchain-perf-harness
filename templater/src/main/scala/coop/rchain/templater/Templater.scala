@@ -86,7 +86,7 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx2048m -Xms2048m  `pwd`/rnode.jar"
       |
       |pushd bootstrap
       |./loop.sh
@@ -129,7 +129,7 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx2048m -Xms2048m  `pwd`/rnode.jar"
       |
       |pushd bootstrap
       |./start > output.log 2>&1 &
@@ -143,7 +143,7 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx2048m -Xms2048m  `pwd`/rnode.jar"
       |
       |pushd 3001
       |./start > output.log 2>&1 &
