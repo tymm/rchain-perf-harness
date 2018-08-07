@@ -74,12 +74,13 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |for i in `seq 1 10`;
-      |do
+      |for j in `seq 1 10`;
+      | for i in `seq 1 10`;
+      | do
       |    ./deploy.sh;
+      | done
+      | ./propose.sh
       |done
-      |
-      |./propose.sh
     """.stripMargin
 
   val runTests =
@@ -89,27 +90,27 @@ object Templates {
       |export RCHAIN_RNODE="java -jar -Xmx2048m -Xms2048m  `pwd`/rnode.jar"
       |
       |pushd bootstrap
-      |./loop.sh
+      |./loop.sh &
       |pid0=$!
       |popd
       |
       |pushd 3001
-      |./loop.sh
+      |./loop.sh &
       |pid1=$!
       |popd
       |
       |pushd 3002
-      |./loop.sh
+      |./loop.sh &
       |pid2=$!
       |popd
       |
       |pushd 3003
-      |./loop.sh
+      |./loop.sh &
       |pid3=$!
       |popd
       |
       |pushd 3004
-      |./loop.sh
+      |./loop.sh &
       |pid4=$!
       |popd
       |
