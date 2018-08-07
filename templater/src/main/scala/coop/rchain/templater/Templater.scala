@@ -75,6 +75,7 @@ object Templates {
       |#!/bin/bash
       |
       |for j in `seq 1 10`;
+      |do
       | for i in `seq 1 10`;
       | do
       |    ./deploy.sh;
