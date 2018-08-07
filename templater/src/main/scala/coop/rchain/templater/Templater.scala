@@ -113,6 +113,7 @@ object Templates {
       |pid4=$!
       |popd
       |
+      |echo $pid0 $pid1 $pid2 $pid3 $pid4 >> loops.pids
     """.stripMargin
 
   val runEnv =
