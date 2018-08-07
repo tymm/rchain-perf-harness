@@ -77,9 +77,9 @@ object Templates {
       |for i in `seq 1 10`;
       |do
       |    ./deploy.sh;
+      |    ./propose.sh;
       |done
       |
-      |./propose.sh
     """.stripMargin
 
   val runTests =
@@ -93,19 +93,9 @@ object Templates {
       |pid0=$!
       |popd
       |
-      |pushd 3001
-      |./loop.sh &
-      |pid1=$!
-      |popd
-      |
       |pushd 3002
       |./loop.sh &
       |pid2=$!
-      |popd
-      |
-      |pushd 3003
-      |./loop.sh &
-      |pid3=$!
       |popd
       |
       |pushd 3004
