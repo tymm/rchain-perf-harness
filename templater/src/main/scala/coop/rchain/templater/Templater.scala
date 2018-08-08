@@ -100,16 +100,6 @@ object Templates {
       |pid1=$!
       |popd
       |
-      |pushd 3003
-      |./loop.sh &
-      |pid3=$!
-      |popd
-      |
-      |pushd 3004
-      |./loop.sh &
-      |pid4=$!
-      |popd
-      |
     """.stripMargin
 
   val runEnv =
