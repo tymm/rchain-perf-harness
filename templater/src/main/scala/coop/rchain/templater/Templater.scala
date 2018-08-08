@@ -5,6 +5,13 @@ import java.nio.file.{Files, Path, Paths}
 import org.clapper.scalasti.ST
 import org.rogach.scallop.ScallopConf
 
+object Consts {
+  val javaRuntime =
+    """
+      |export RCHAIN_RNODE="java -jar -Xmx2G -Xms2G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC `pwd`/rnode.jar"
+    """.stripMargin
+}
+
 object Templates {
   val bootstrap =
     """
@@ -86,11 +93,31 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar -Xmx2048m -Xms2048m  `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
       |
       |pushd bootstrap
       |./loop.sh &
       |pid0=$!
+      |popd
+      |
+      |pushd 3001
+      |./loop.sh &
+      |pid1=$!
+      |popd
+      |
+      |pushd 3002
+      |./loop.sh &
+      |pid2=$!
+      |popd
+      |
+      |pushd 3003
+      |./loop.sh &
+      |pid3=$!
+      |popd
+      |
+      |pushd 3004
+      |./loop.sh &
+      |pid4=$!
       |popd
       |
     """.stripMargin
@@ -105,43 +132,43 @@ object Templates {
     """.stripMargin
 
   val runBootstrap =
-    """
+    s"""
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar -Xmx2G -Xms2G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC `pwd`/rnode.jar"
+      |${Consts.javaRuntime}
       |
       |pushd bootstrap
       |./start > output.log 2>&1 &
-      |pid0=$!
+      |pid0=$$!
       |popd
       |
-      |echo $pid0 > bootstrap.pid
+      |echo $$pid0 > bootstrap.pid
     """.stripMargin
 
   val runNetwork =
-    """
+     s"""
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar -Xmx2G -Xms2G -XX:+CMSClassUnloadingEnabled -XX:+UseParallelGC `pwd`/rnode.jar"
+      |${Consts.javaRuntime}
       |
       |pushd 3001
       |./start > output.log 2>&1 &
-      |pid1=$!
+      |pid1=$$!
       |popd
       |
       |pushd 3002
       |./start > output.log 2>&1 &
-      |pid2=$!
+      |pid2=$$!
       |popd
       |
       |pushd 3003
       |./start > output.log 2>&1 &
-      |pid3=$!
+      |pid3=$$!
       |popd
       |
       |pushd 3004
       |./start > output.log 2>&1 &
-      |pid4=$!
+      |pid4=$$!
       |popd
       |
     """.stripMargin
