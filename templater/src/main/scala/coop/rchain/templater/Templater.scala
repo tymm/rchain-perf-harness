@@ -141,16 +141,6 @@ object Templates {
       |pid2=$$!
       |popd
       |
-      |pushd 3003
-      |./start > output.log 2>&1 &
-      |pid3=$$!
-      |popd
-      |
-      |pushd 3004
-      |./start > output.log 2>&1 &
-      |pid4=$$!
-      |popd
-      |
     """.stripMargin
 
     val killNetwork =
