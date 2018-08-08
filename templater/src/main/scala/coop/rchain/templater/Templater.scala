@@ -108,7 +108,7 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |export RCHAIN_RNODE="java -jar -Xmx2G -Xms2G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseParallelGC `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx2G -Xms2G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC `pwd`/rnode.jar"
       |
       |pushd bootstrap
       |./start > output.log 2>&1 &
