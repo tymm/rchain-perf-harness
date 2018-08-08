@@ -81,11 +81,8 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |for i in `seq 1 10`;
-      |do
       |    ./deploy.sh;
       |    ./propose.sh;
-      |done
       |
     """.stripMargin
 
@@ -126,7 +123,7 @@ object Templates {
     """.stripMargin
 
   val runNetwork =
-     s"""
+    s"""
       |#!/bin/bash
       |
       |${Consts.javaRuntime}
@@ -138,8 +135,8 @@ object Templates {
       |
     """.stripMargin
 
-    val killNetwork =
-      """
+  val killNetwork =
+    """
         |killall java -jar `pwd`/rnode.jar
       """.stripMargin
 }
@@ -153,16 +150,14 @@ object Store {
   )
 }
 
-case class NodeConfig (
-                      name: String,
-                      host: String = "localhost",
-                      port: Int,
-                      metricsPort: Int,
-                      httpPort: Int,
-                      grpcPort: Int
-                      )
-
-
+case class NodeConfig(
+    name: String,
+    host: String = "localhost",
+    port: Int,
+    metricsPort: Int,
+    httpPort: Int,
+    grpcPort: Int
+)
 
 class Config(arguments: Seq[String]) extends ScallopConf(arguments) {
 //  val validators = opt[Int](required = true)
@@ -177,14 +172,20 @@ object Templater {
     val out = conf.out()
 
     val bsc = genVCon(999).copy(name = "bootstrap")
-    genConfig(out, bsc, Templates.bootstrap, bsc.port, "6a22ddc9300ef7658c67cfcf8da358c6e7ffa75257361261ca47409d0c7ea6ee")
+    genConfig(
+      out,
+      bsc,
+      Templates.bootstrap,
+      bsc.port,
+      "6a22ddc9300ef7658c67cfcf8da358c6e7ffa75257361261ca47409d0c7ea6ee")
     genBSData(out)
     genTests(out, bsc)
 
-    (1 to amount).map(genVCon).zipWithIndex.foreach { case (c, i) =>
-      genConfig(out, c, Templates.validator, bsc.port, Store.keys(i))
-      genVData(out, c.name)
-      genTests(out, c)
+    (1 to amount).map(genVCon).zipWithIndex.foreach {
+      case (c, i) =>
+        genConfig(out, c, Templates.validator, bsc.port, Store.keys(i))
+        genVData(out, c.name)
+        genTests(out, c)
     }
 
     genSetupBS(out)
@@ -197,26 +198,41 @@ object Templater {
   def genBSData(dir: Path): Unit = {
     val d = dir.resolve("bootstrap/data")
     d.toFile.mkdirs()
-    Files.createSymbolicLink(d.resolve("genesis"), Paths.get("../../store/bootstrap/genesis"))
-    Files.createSymbolicLink(d.resolve("node.key.pem"), Paths.get("../../store/bootstrap/node.key.pem"))
-    Files.createSymbolicLink(d.resolve("node.certificate.pem"), Paths.get("../../store/bootstrap/node.certificate.pem"))
+    Files.createSymbolicLink(d.resolve("genesis"),
+                             Paths.get("../../store/bootstrap/genesis"))
+    Files.createSymbolicLink(d.resolve("node.key.pem"),
+                             Paths.get("../../store/bootstrap/node.key.pem"))
+    Files.createSymbolicLink(
+      d.resolve("node.certificate.pem"),
+      Paths.get("../../store/bootstrap/node.certificate.pem"))
   }
 
   def genVData(dir: Path, name: String): Unit = {
     val d = dir.resolve(s"$name/data")
     d.toFile.mkdirs()
-    Files.createSymbolicLink(d.resolve("genesis"), Paths.get("../../store/bootstrap/genesis"))
+    Files.createSymbolicLink(d.resolve("genesis"),
+                             Paths.get("../../store/bootstrap/genesis"))
   }
 
   def genVCon(i: Int): NodeConfig = {
     val prefix = f"3$i%03d"
-    NodeConfig(name = prefix, port = (prefix + 1).toInt, metricsPort = (prefix + 2).toInt, httpPort = (prefix + 3).toInt, grpcPort = (prefix + 5).toInt)
+    NodeConfig(name = prefix,
+               port = (prefix + 1).toInt,
+               metricsPort = (prefix + 2).toInt,
+               httpPort = (prefix + 3).toInt,
+               grpcPort = (prefix + 5).toInt)
   }
 
-  def genConfig(out: Path, nc: NodeConfig, templ: String, bootstrapPort: Int, privateKey: String): Unit = {
-    val bs = ST(templ).add("c", nc)
+  def genConfig(out: Path,
+                nc: NodeConfig,
+                templ: String,
+                bootstrapPort: Int,
+                privateKey: String): Unit = {
+    val bs = ST(templ)
+      .add("c", nc)
       .add("bootstrapPort", bootstrapPort)
-      .add("privateKey", privateKey).render()
+      .add("privateKey", privateKey)
+      .render()
     val bsp = out.resolve(nc.name)
     bsp.toFile.mkdirs()
     val bscp = bsp.resolve("config.toml")
@@ -226,17 +242,26 @@ object Templater {
 
   def genDeploy(out: Path, grpcPort: Int): Unit = {
     val d = ST(Templates.deploy).add("grpcPort", grpcPort).render()
-    Files.write(out.resolve("deploy.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("deploy.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genPropose(out: Path, grpcPort: Int): Unit = {
     val d = ST(Templates.propose).add("grpcPort", grpcPort).render()
-    Files.write(out.resolve("propose.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("propose.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genLoop(out: Path): Unit = {
     val d = ST(Templates.loop).render()
-    Files.write(out.resolve("loop.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("loop.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genTests(out: Path, c: NodeConfig): Unit = {
@@ -248,27 +273,42 @@ object Templater {
 
   def genSetupBS(out: Path): Unit = {
     val d = ST(Templates.runBootstrap).render()
-    Files.write(out.resolve("run-bootstrap.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("run-bootstrap.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genSetupEnv(out: Path): Unit = {
     val d = ST(Templates.runNetwork).render()
-    Files.write(out.resolve("run-network.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("run-network.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genRunEnv(out: Path): Unit = {
     val d = ST(Templates.runEnv).render()
-    Files.write(out.resolve("run-env.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("run-env.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genRunTests(out: Path): Unit = {
     val d = ST(Templates.runTests).render()
-    Files.write(out.resolve("test.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("test.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genKillNetwork(out: Path): Unit = {
     val d = ST(Templates.killNetwork).render()
-    Files.write(out.resolve("kill-network.sh"), d.get.getBytes).toFile.setExecutable(true)
+    Files
+      .write(out.resolve("kill-network.sh"), d.get.getBytes)
+      .toFile
+      .setExecutable(true)
   }
 
   def genStart(dir: Path, nc: NodeConfig): Unit = {

@@ -7,7 +7,7 @@ if [ -z ${1+x} ]; then echo "Provide the test environment directory to use"; exi
 envName=$1
 
 pushd templater
-sbt "run --out ../builder/envs/$envName"
+sbt "; project templater; run --out ../builder/envs/$envName"
 popd
 pushd builder
 cp $RNODE_JAR ./bins/jars/
