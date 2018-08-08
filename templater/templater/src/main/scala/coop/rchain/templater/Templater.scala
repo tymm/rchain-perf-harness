@@ -81,8 +81,11 @@ object Templates {
     """
       |#!/bin/bash
       |
+      |for i in `seq 1 3`;
+      |do
       |    ./deploy.sh;
-      |    ./propose.sh;
+      |done
+      |./propose.sh;
       |
     """.stripMargin
 
@@ -97,6 +100,20 @@ object Templates {
       |pid1=$!
       |popd
       |
+      |pushd 3002
+      |./loop.sh &
+      |pid2=$!
+      |popd
+      |
+      |pushd 3003
+      |./loop.sh &
+      |pid3=$!
+      |popd
+      |
+      |pushd 3004
+      |./loop.sh &
+      |pid4=$!
+      |popd
     """.stripMargin
 
   val runEnv =
@@ -131,6 +148,21 @@ object Templates {
       |pushd 3001
       |./start > output.log 2>&1 &
       |pid1=$$!
+      |popd
+      |
+      |pushd 3002
+      |./start > output.log 2>&1 &
+      |pid2=$$!
+      |popd
+      |
+      |pushd 3003
+      |./start > output.log 2>&1 &
+      |pid3=$$!
+      |popd
+      |
+      |pushd 3004
+      |./start > output.log 2>&1 &
+      |pid4=$$!
       |popd
       |
     """.stripMargin
