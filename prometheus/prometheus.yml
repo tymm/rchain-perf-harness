@@ -17,7 +17,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
   - job_name: 'rchain-node'
-    scrape_interval:     1m
+    scrape_interval:     10s
     metrics_path: "/"
     static_configs:
       - targets: ['localhost:39992','localhost:30012','localhost:30022','localhost:30032','localhost:30042']
