@@ -81,11 +81,14 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |for i in `seq 1 3`;
+      |for j in `seq 1 10`;
       |do
+      | for i in `seq 1 3`;
+      | do
       |    ./deploy.sh;
+      | done
+      | ./propose.sh;
       |done
-      |./propose.sh;
       |
     """.stripMargin
 
