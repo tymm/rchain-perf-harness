@@ -14,4 +14,6 @@ cp $RNODE_JAR ./bins/jars/
 sh setup-env.sh envs/$envName
 pushd envs/$envName
 ./run-env.sh
+echo "waiting for network to get up."
+sleep 5
 ./test.sh
