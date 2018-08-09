@@ -8,7 +8,7 @@ import org.rogach.scallop.ScallopConf
 object Consts {
   val javaRuntime =
     """
-      |export RCHAIN_RNODE="java -jar -Xmx4G -Xms4G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx16G -Xms16G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps `pwd`/rnode.jar"
     """.stripMargin
 }
 
@@ -23,7 +23,7 @@ object Templates {
       |no-upnp = true
       |default-timeout = 1000
       |standalone = true
-      |map-size = 2000000000
+      |map-size = 1000000000
       |data-dir = "./data"
       |
       |[grpc-server]
@@ -98,7 +98,7 @@ object Templates {
       |
       |export RCHAIN_RNODE="java -jar `pwd`/rnode.jar"
       |
-      |pushd bootstrap
+      |pushd 3001
       |./loop.sh &
       |pid1=$!
       |popd
