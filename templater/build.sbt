@@ -21,6 +21,9 @@ val monix               = "io.monix"                   %% "monix"               
 val scalapbRuntime      = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion % "protobuf"
 val scalapbRuntimeLib   = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion
 val scalapbRuntimegGrpc = "com.thesamet.scalapb"       %% "scalapb-runtime-grpc"      % scalapb.compiler.Version.scalapbVersion
+val scalacheck          = "org.scalacheck"             %% "scalacheck"                % "1.13.4"
+val gatling             = "io.gatling.highcharts"       % "gatling-charts-highcharts" % "2.3.1"
+val grpcNetty           = "io.grpc"                     % "grpc-netty"                % scalapb.compiler.Version.grpcJavaVersion
 
 val protobufDependencies: Seq[ModuleID] =
   Seq(scalapbRuntime)
@@ -47,7 +50,10 @@ lazy val runner = (project in file("runner"))
       scalapbRuntimegGrpc,
       catsCore,
       monix,
-      bouncyCastle
+      bouncyCastle,
+      scalacheck,
+      gatling,
+      grpcNetty
     ),
     PB.targets in Compile := Seq(
       scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
