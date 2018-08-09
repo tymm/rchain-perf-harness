@@ -181,7 +181,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(rspace_comm_consume_total[2s])",
+          "expr": "rate(rspace_comm_consume_total[1m])",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -190,7 +190,7 @@
           "refId": "A"
         },
         {
-          "expr": "rate(rspace_comm_produce_total[2s])",
+          "expr": "rate(rspace_comm_produce_total[1m])",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -359,14 +359,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(replayrspace_comm_consume_total[2s])",
+          "expr": "rate(replayrspace_comm_consume_total[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Consume",
           "refId": "A"
         },
         {
-          "expr": "rate(replayrspace_comm_produce_total[2s])",
+          "expr": "rate(replayrspace_comm_produce_total[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Produce",
