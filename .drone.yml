@@ -22,7 +22,7 @@ pipeline:
     image: rchain/rnode:master
     commands:
       - sleep 15
-      - /opt/docker/bin/rnode --grpc-port 30015 deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/performance/loop_recursive.rho
+      - /opt/docker/bin/rnode --host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/performance/loop_recursive.rho
 
   propose:
     image: rchain/rnode:master
