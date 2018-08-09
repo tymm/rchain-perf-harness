@@ -2,21 +2,22 @@ workspace:
   base: /workdir
   path: rchain-perf-harness
 
-pipeline:
 
-  start-bootstrap:
+services:
+  bootstrap:
     image: rchain/rnode:master
     detach: true
     commands:
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
-  start-validator1:
+  validator1:
     image: rchain/rnode:master
     detach: true
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
 
+pipeline:
   deploy:
     image: rchain/rnode:master
     commands:
