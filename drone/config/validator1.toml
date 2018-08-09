@@ -1,5 +1,5 @@
 [server]
-host = "localhost"
+host = "validator1"
 port = 30011
 metrics-port = 30012
 http-port = 30013
