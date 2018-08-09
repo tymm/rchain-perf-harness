@@ -21,7 +21,7 @@ pipeline:
   deploy:
     image: rchain/rnode:dev
     commands:
-      - sleep 15
+      - sleep 20
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/performance/loop_recursive.rho
 
   propose:
