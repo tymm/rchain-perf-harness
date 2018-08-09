@@ -1,23 +1,21 @@
 workspace:
-  base: /rchain
-  path: data/
+  base: /workdir
+  path: rchain-perf-harness
 
 pipeline:
-  bootstrap:
-    image: openjdk:8-alpine
-    commands:
-      - bootstrap/start
 
-  validator-30001:
-    image: openjdk:8-alpine
+  start-bootstrap:
+    image: rchain/rnode:master
     detach: true
     commands:
-      - 30001/start
-  
-  test:
-    image: openjdk:8-alpine
+      - -c ./config/bootstrap.toml run
+
+  deploy:
+    image: rchain/rnode:master
     commands:
-      - actions/deploy.sh
+      - -c ./config/bootstrap.toml deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/performance/loop_recursive.rho
 
-
-  
+  propose:
+    image: rchain/rnode:master
+    commands:
+      - -c ./config/bootstrap.toml propose
