@@ -7,7 +7,7 @@ no-upnp = true
 default-timeout = 1000
 standalone = true
 map-size = 1000000000
-data-dir = "./data"
+data-dir = "./drone/config/data"
 
 [grpc-server]
 host = "grpc"
