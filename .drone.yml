@@ -14,6 +14,7 @@ pipeline:
     image: rchain/rnode:master
     detach: true
     commands:
+      - sleep 15
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
 
   deploy:
