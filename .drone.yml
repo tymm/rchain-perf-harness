@@ -8,7 +8,7 @@ pipeline:
     image: rchain/rnode:master
     detach: true
     commands:
-      - bin/rnode -c ./config/bootstrap.toml run
+      - /opt/docker/bin/rnode -c ./config/bootstrap.toml run
 
   deploy:
     image: rchain/rnode:master
