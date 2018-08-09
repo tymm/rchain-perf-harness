@@ -27,4 +27,4 @@ pipeline:
   propose:
     image: rchain/rnode:dev
     commands:
-      - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 -c propose
+      - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
