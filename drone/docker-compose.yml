@@ -24,6 +24,8 @@ services:
 
   drone-agent:
     image: drone/agent:0.8
+    networks:
+      - rchain-perf-harness_metrics
     command: agent
     restart: always
     depends_on:
