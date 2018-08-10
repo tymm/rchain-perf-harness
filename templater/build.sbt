@@ -1,4 +1,6 @@
 
+import sbt._
+
 name := "rchain-perf-harness"
 
 scalaVersion := "2.12.6"
@@ -22,7 +24,7 @@ val scalapbRuntime      = "com.thesamet.scalapb"       %% "scalapb-runtime"     
 val scalapbRuntimeLib   = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion
 val scalapbRuntimegGrpc = "com.thesamet.scalapb"       %% "scalapb-runtime-grpc"      % scalapb.compiler.Version.scalapbVersion
 val scalacheck          = "org.scalacheck"             %% "scalacheck"                % "1.13.4"
-val gatling             = "io.gatling.highcharts"       % "gatling-charts-highcharts" % "2.3.1"
+val gatling             = "io.gatling.highcharts"       % "gatling-charts-highcharts" % "2.3.1" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
 val grpcNetty           = "io.grpc"                     % "grpc-netty"                % scalapb.compiler.Version.grpcJavaVersion
 
 val protobufDependencies: Seq[ModuleID] =
@@ -57,5 +59,6 @@ lazy val runner = (project in file("runner"))
     ),
     PB.targets in Compile := Seq(
       scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
-    )
+    ),
+    mainClass := Some("coop.rchain.perf.GatlingRunner")
   )

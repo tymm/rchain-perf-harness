@@ -2,29 +2,28 @@ package coop.rchain.perf
 
 import akka.actor.ActorSystem
 import com.google.protobuf.empty.Empty
-import com.typesafe.config.ConfigException.ValidationFailed
-import coop.rchain.casper.protocol.{DeployData, DeployServiceGrpc, DeployServiceResponse}
 import coop.rchain.casper.protocol.DeployServiceGrpc.DeployServiceBlockingClient
+import coop.rchain.casper.protocol.{
+  DeployData,
+  DeployServiceGrpc,
+  DeployServiceResponse
+}
 import io.gatling.app.Gatling
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
-import io.gatling.core.action.{Action, ExitableAction}
 import io.gatling.core.action.builder.ActionBuilder
+import io.gatling.core.action.{Action, ExitableAction}
 import io.gatling.core.config.{GatlingConfiguration, GatlingPropertiesBuilder}
 import io.gatling.core.protocol.{Protocol, ProtocolComponents, ProtocolKey}
 import io.gatling.core.stats.StatsEngine
 import io.gatling.core.stats.message.ResponseTimings
 import io.gatling.core.structure.ScenarioContext
 import io.gatling.core.util.NameGen
-import io.gatling.http.protocol.HttpProtocol
 import io.grpc.{ManagedChannel, ManagedChannelBuilder}
 
-import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
-object Runner {
-
-}
+object Runner {}
 
 object GatlingRunner {
   def main(args: Array[String]) {
@@ -37,35 +36,9 @@ object GatlingRunner {
 }
 
 import io.gatling.core.Predef._
-import io.gatling.http.Predef._
-
 
 class RNodeSimulation extends Simulation {
   import RNodeActionDSL._
-  val protocol = RNodeProtocol()
-
-  val scn = scenario("DeployProposeSimulation")
-    .exec(deploy())
-    .pause(1)
-    .exec(propose())
-    .pause(1)
-
-  setUp(
-    scn.inject(atOnceUsers(1))
-  ).protocols(protocol)
-}
-
-case class RNodeProtocol() extends Protocol {
-
-}
-
-object Propose {
-  def a(client: DeployServiceBlockingClient): DeployServiceResponse = {
-    client.createBlock(Empty())
-  }
-}
-
-object Deploy {
   val term =
     """
       |// This benchmark example runs N iterations recursively.
@@ -87,19 +60,53 @@ object Deploy {
       |}
     """.stripMargin
 
+  val host = System.getenv().getOrDefault("host", "localhost")
+  val port = Integer.parseInt(System.getenv().getOrDefault("port", "40401"))
+
+  val protocol = RNodeProtocol(host, port)
+
+  val scn = scenario("DeployProposeSimulation")
+    .exec(deploy(term))
+    .pause(1)
+    .exec(propose())
+    .pause(1)
+
+  setUp(
+    scn.inject(atOnceUsers(1))
+  ).protocols(protocol)
+}
+
+case class RNodeProtocol(host: String, port: Int) extends Protocol {}
+
+object Propose {
   def a(client: DeployServiceBlockingClient): DeployServiceResponse = {
+    client.createBlock(Empty())
+  }
+}
+
+object Deploy {
+
+  def a(term: String)(
+      client: DeployServiceBlockingClient): DeployServiceResponse = {
     val d = DeployData()
-                .withTimestamp(System.currentTimeMillis())
-                .withTerm(term)
-                .withFrom("0x1")
-                .withPhloLimit(0)
-                .withPhloPrice(0)
-                .withNonce(0)
+      .withTimestamp(System.currentTimeMillis())
+      .withTerm(term)
+      .withFrom("0x1")
+      .withPhloLimit(0)
+      .withPhloPrice(0)
+      .withNonce(0)
     client.doDeploy(d)
   }
 }
 
-class RNodeRequestAction(val actionName: String, val execute: DeployServiceBlockingClient => DeployServiceResponse, val statsEngine: StatsEngine, val next: Action, val client: DeployServiceBlockingClient) extends ExitableAction with NameGen {
+class RNodeRequestAction(
+    val actionName: String,
+    val execute: DeployServiceBlockingClient => DeployServiceResponse,
+    val statsEngine: StatsEngine,
+    val next: Action,
+    val client: DeployServiceBlockingClient)
+    extends ExitableAction
+    with NameGen {
   override def name: String = genName(s"rnodeRequest-$actionName")
 
   override def execute(session: Session): Unit = recover(session) {
@@ -110,7 +117,13 @@ class RNodeRequestAction(val actionName: String, val execute: DeployServiceBlock
 
       r match {
         case Failure(exception) =>
-          statsEngine.logResponse(session, name, timings, KO, None, Some(exception.getMessage))
+          exception.printStackTrace()
+          statsEngine.logResponse(session,
+                                  name,
+                                  timings,
+                                  KO,
+                                  None,
+                                  Some(exception.getMessage))
           next ! session.markAsFailed
 
         case Success(DeployServiceResponse(false, msg)) =>
@@ -133,9 +146,9 @@ object RNodeActionDSL {
     }
   }
 
-  def deploy(): RNodeActionBuilder = {
+  def deploy(term: String): RNodeActionBuilder = {
     new RNodeActionBuilder {
-      override val execute = Deploy.a
+      override val execute = Deploy.a(term)
       override val actionName: String = "deploy"
     }
   }
@@ -146,8 +159,13 @@ abstract class RNodeActionBuilder extends ActionBuilder {
 
   override def build(ctx: ScenarioContext, next: Action): Action = {
     import ctx._
-    val rnodeComponents = protocolComponentsRegistry.components(RNodeProtocol.RNodeProtocolKey)
-    new RNodeRequestAction(actionName, execute, coreComponents.statsEngine, next, rnodeComponents.client)
+    val rnodeComponents =
+      protocolComponentsRegistry.components(RNodeProtocol.RNodeProtocolKey)
+    new RNodeRequestAction(actionName,
+                           execute,
+                           coreComponents.statsEngine,
+                           next,
+                           rnodeComponents.client)
   }
 }
 
@@ -156,20 +174,34 @@ object RNodeProtocol {
     type Protocol = RNodeProtocol
     type Components = RNodeComponents
 
-    def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[RNodeProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
+    def protocolClass: Class[io.gatling.core.protocol.Protocol] =
+      classOf[RNodeProtocol]
+        .asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
 
-    def defaultProtocolValue(configuration: GatlingConfiguration): RNodeProtocol =
-      throw new IllegalStateException("Can't provide a default value for RNodeProtocol")
+    def defaultProtocolValue(
+        configuration: GatlingConfiguration): RNodeProtocol =
+      throw new IllegalStateException(
+        "Can't provide a default value for RNodeProtocol")
 
-    def newComponents(system: ActorSystem, coreComponents: CoreComponents): RNodeProtocol => RNodeComponents = {
-      val channel: ManagedChannel = ManagedChannelBuilder.forAddress("localhost", 40401).usePlaintext(true).build
-      val client = DeployServiceGrpc.blockingStub(channel)
-      rnodeProtocol => RNodeComponents(rnodeProtocol, client)
+    def newComponents(
+        system: ActorSystem,
+        coreComponents: CoreComponents): RNodeProtocol => RNodeComponents = {
+      rnodeProtocol =>
+        {
+          val channel: ManagedChannel = ManagedChannelBuilder
+            .forAddress(rnodeProtocol.host, rnodeProtocol.port)
+            .usePlaintext(true)
+            .build
+          val client = DeployServiceGrpc.blockingStub(channel)
+          RNodeComponents(rnodeProtocol, client)
+        }
     }
   }
 }
 
-case class RNodeComponents(rnodeProtocol: RNodeProtocol, client: DeployServiceBlockingClient) extends ProtocolComponents {
+case class RNodeComponents(rnodeProtocol: RNodeProtocol,
+                           client: DeployServiceBlockingClient)
+    extends ProtocolComponents {
 
   def onStart: Option[Session => Session] = {
     Some(s => {
