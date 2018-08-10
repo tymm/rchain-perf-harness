@@ -8,7 +8,7 @@ import org.rogach.scallop.ScallopConf
 object Consts {
   val javaRuntime =
     """
-      |export RCHAIN_RNODE="java -jar -Xmx16G -Xms16G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="java -jar -Xmx2G -Xms2G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps `pwd`/rnode.jar"
     """.stripMargin
 }
 
@@ -80,15 +80,8 @@ object Templates {
   val loop =
     """
       |#!/bin/bash
-      |
-      |for j in `seq 1 10`;
-      |do
-      | for i in `seq 1 3`;
-      | do
-      |    ./deploy.sh;
-      | done
-      | ./propose.sh;
-      |done
+      |./deploy.sh;
+      |./propose.sh;
       |
     """.stripMargin
 
@@ -102,22 +95,7 @@ object Templates {
       |./loop.sh &
       |pid1=$!
       |popd
-      |
-      |pushd 3002
-      |./loop.sh &
-      |pid2=$!
-      |popd
-      |
-      |pushd 3003
-      |./loop.sh &
-      |pid3=$!
-      |popd
-      |
-      |pushd 3004
-      |./loop.sh &
-      |pid4=$!
-      |popd
-    """.stripMargin
+   """.stripMargin
 
   val runEnv =
     """
@@ -152,22 +130,6 @@ object Templates {
       |./start > output.log 2>&1 &
       |pid1=$$!
       |popd
-      |
-      |pushd 3002
-      |./start > output.log 2>&1 &
-      |pid2=$$!
-      |popd
-      |
-      |pushd 3003
-      |./start > output.log 2>&1 &
-      |pid3=$$!
-      |popd
-      |
-      |pushd 3004
-      |./start > output.log 2>&1 &
-      |pid4=$$!
-      |popd
-      |
     """.stripMargin
 
   val killNetwork =
