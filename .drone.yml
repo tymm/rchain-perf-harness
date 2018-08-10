@@ -30,7 +30,7 @@ pipeline:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
 
   push-metrics:
-    image: alpine-curl
+    image: byrnedo/alpine-curl
     commands:
       - metrics=`curl bootstrap:39992`
       - echo $metric | curl --data-binary @- http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/bootstrap
