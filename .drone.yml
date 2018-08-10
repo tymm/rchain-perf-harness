@@ -32,5 +32,5 @@ pipeline:
   push-metrics:
     image: byrnedo/alpine-curl
     commands:
-      - metrics=`curl http://bootstrap:39992`
-      - echo $metrics | curl --data-binary @- http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/bootstrap
+      - curl http://bootstrap:39992 > metrics.txt
+      - cat metrics.txt | curl --data-binary @- http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/bootstrap
