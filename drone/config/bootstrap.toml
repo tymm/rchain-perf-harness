@@ -1,0 +1,18 @@
+[server]
+host = "bootstrap"
+port = 39991
+metrics-port = 39992
+http-port = 39993
+no-upnp = true
+default-timeout = 1000
+standalone = true
+map-size = 1000000000
+data-dir = "./drone/config/data"
+
+[grpc-server]
+host = "grpc"
+port = 39995
+
+[validators]
+public-key = "118eb0ae2193c83e960b46c42026bd6e21d5cc02854881baedd296764d5cd743"
+private-key = "6a22ddc9300ef7658c67cfcf8da358c6e7ffa75257361261ca47409d0c7ea6ee"
