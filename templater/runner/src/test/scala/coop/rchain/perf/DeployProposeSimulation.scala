@@ -5,7 +5,7 @@ import io.gatling.core.Predef._
 
 import scala.io.Source
 
-class RNodeSimulation extends Simulation {
+class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """

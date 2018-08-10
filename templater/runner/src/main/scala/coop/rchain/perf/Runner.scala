@@ -25,56 +25,7 @@ import scala.util.{Failure, Success, Try}
 
 object Runner {}
 
-object GatlingRunner {
-  def main(args: Array[String]) {
-    val simClass = classOf[RNodeSimulation].getName
-
-    val props = new GatlingPropertiesBuilder
-    props.simulationClass(simClass)
-    Gatling.fromMap(props.build)
-  }
-}
-
 import io.gatling.core.Predef._
-
-class RNodeSimulation extends Simulation {
-  import RNodeActionDSL._
-  val term =
-    """
-      |// This benchmark example runs N iterations recursively.
-      |// Useful to measure RSpace performance.
-      |
-      |new LoopRecursive, stdout(`rho:io:stdout`) in {
-      |  contract LoopRecursive(@count) = {
-      |    match count {
-      |    0 => stdout!("Done!")
-      |    x => {
-      |        stdout!("Step")
-      |         | LoopRecursive!(x - 1)
-      |      }
-      |    }
-      |  } |
-      |  new myChannel in {
-      |    LoopRecursive!(10000)
-      |  }
-      |}
-    """.stripMargin
-
-  val host = System.getenv().getOrDefault("host", "localhost")
-  val port = Integer.parseInt(System.getenv().getOrDefault("port", "40401"))
-
-  val protocol = RNodeProtocol(host, port)
-
-  val scn = scenario("DeployProposeSimulation")
-    .exec(deploy(term))
-    .pause(1)
-    .exec(propose())
-    .pause(1)
-
-  setUp(
-    scn.inject(atOnceUsers(1))
-  ).protocols(protocol)
-}
 
 case class RNodeProtocol(host: String, port: Int) extends Protocol {}
 
