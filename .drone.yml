@@ -17,7 +17,6 @@ services:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
 
-pipeline:
   push-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
     detach: true
@@ -25,6 +24,7 @@ pipeline:
       - cd metrics
       - /bin/bash loop-metrics.sh
 
+pipeline:
   deploy:
     image: rchain/rnode:dev
     commands:
