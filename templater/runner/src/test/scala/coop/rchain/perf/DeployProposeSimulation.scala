@@ -42,12 +42,10 @@ class DeployProposeSimulation extends Simulation {
   val protocol = RNodeProtocol(host, port)
 
   val scn = scenario("DeployProposeSimulation")
-    .repeat(5) {
-      exec(deploy(contract))
-        .pause(1)
-        .exec(propose())
-        .pause(1)
-    }
+    .exec(deploy(contract))
+    .pause(1)
+    .exec(propose())
+    .pause(1)
 
   setUp(
     scn.inject(atOnceUsers(1))
