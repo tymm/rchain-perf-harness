@@ -42,7 +42,7 @@ pipeline:
       - pwd
       - cd templater
       - sbt -Dhost=validator1 -Dport=30015 runner/gatling:test
-      - echo "stop" > ./metrics/stop-loop
+      - echo "stop" > ../metrics/stop-loop
 
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
