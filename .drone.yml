@@ -8,7 +8,6 @@ services:
     image: rchain/rnode:dev
     detach: true
     commands:
-      - whoami
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
   validator1:
@@ -23,7 +22,6 @@ pipeline:
     image: cfmanteiga/alpine-bash-curl-jq
     detach: true
     commands:
-      - whoami
       - cd metrics
       - /bin/bash loop-metrics.sh
 
