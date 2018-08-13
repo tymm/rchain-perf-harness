@@ -1,3 +1,4 @@
+import sbt._
 
 name := "rchain-perf-harness"
 
@@ -13,9 +14,18 @@ lazy val projectSettings = Seq(
   scalafmtOnCompile := true
 )
 
+val bouncyCastle        = "org.bouncycastle"            % "bcprov-jdk15on"            % "1.59"
+val catsCore            = "org.typelevel"              %% "cats-core"                 % "1.1.0"
+val catsEffect          = "org.typelevel"              %% "cats-effect"               % "1.0.0-RC2"
+val catsMtl             = "org.typelevel"              %% "cats-mtl-core"             % "0.2.3"
+val monix               = "io.monix"                   %% "monix"                     % "3.0.0-RC1"
 val scalapbRuntime      = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion % "protobuf"
 val scalapbRuntimeLib   = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion
 val scalapbRuntimegGrpc = "com.thesamet.scalapb"       %% "scalapb-runtime-grpc"      % scalapb.compiler.Version.scalapbVersion
+val scalacheck          = "org.scalacheck"             %% "scalacheck"                % "1.13.4"
+val gatling             = "io.gatling.highcharts"       % "gatling-charts-highcharts" % "2.3.1" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
+val gatlingTF           = "io.gatling"                  % "gatling-test-framework"    % "2.3.1" % "test" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
+val grpcNetty           = "io.grpc"                     % "grpc-netty"                % scalapb.compiler.Version.grpcJavaVersion
 
 val protobufDependencies: Seq[ModuleID] =
   Seq(scalapbRuntime)
@@ -38,5 +48,18 @@ lazy val templater = (project in file("templater"))
 lazy val runner = (project in file("runner"))
   .settings(commonSettings: _*)
   .settings(
-    libraryDependencies ++= protobufDependencies ++ protobufLibDependencies ++ Seq()
-  )
+    libraryDependencies ++= protobufDependencies ++ protobufLibDependencies ++ Seq(
+      scalapbRuntimegGrpc,
+      catsCore,
+      monix,
+      bouncyCastle,
+      scalacheck,
+      grpcNetty,
+      gatling,
+      gatlingTF
+    ),
+    PB.targets in Compile := Seq(
+      scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
+    ),
+    mainClass := Some("coop.rchain.perf.GatlingRunner")
+  ).enablePlugins(GatlingPlugin)

@@ -8,6 +8,7 @@ services:
     image: rchain/rnode:dev
     detach: true
     commands:
+      - whoami
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
   validator1:
@@ -18,21 +19,28 @@ services:
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
 
 pipeline:
+  push-metrics:
+    image: cfmanteiga/alpine-bash-curl-jq
+    detach: true
+    commands:
+      - whoami
+      - cd metrics
+      - /bin/bash loop-metrics.sh
+
   deploy:
     image: rchain/rnode:dev
     commands:
-      - sleep 20
+      - sleep 40
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/tut-philosophers.rho
 
   propose:
     image: rchain/rnode:dev
     commands:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
-
-  push-metrics:
-    image: byrnedo/alpine-curl
+  
+  gatling:
+    image: hseeberger/scala-sbt
     commands:
-      - curl http://bootstrap:39992 > bootstrap.txt
-      - cat bootstrap.txt | curl --data-binary @- http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/bootstrap
-      - curl http://validator1:30012 > validator1.txt
-      - cat validator1.txt | curl --data-binary @- http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/validator1
+      - pwd
+      - cd templater
+      - sbt -Dhost=validator1 -Dport=30015 runner/gatling:test
