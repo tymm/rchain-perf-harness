@@ -61,5 +61,16 @@ lazy val runner = (project in file("runner"))
     PB.targets in Compile := Seq(
       scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
     ),
-    mainClass := Some("coop.rchain.perf.GatlingRunner")
+    mainClass := Some("coop.rchain.perf.ContinuousRunner")
+  )
+  .settings(
+    assemblyJarName in assembly := "runner.jar",
+    mainClass in assembly := Some("coop.rchain.perf.ContinuousRunner"),
+    assemblyMergeStrategy in assembly := {
+      case x if x.endsWith("io.netty.versions.properties") => MergeStrategy.first
+      case x if x.endsWith("gatling-version.properties") => MergeStrategy.first
+      case x =>
+        val oldStrategy = (assemblyMergeStrategy in assembly).value
+        oldStrategy(x)
+    },
   ).enablePlugins(GatlingPlugin)

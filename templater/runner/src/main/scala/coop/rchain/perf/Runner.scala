@@ -8,12 +8,11 @@ import coop.rchain.casper.protocol.{
   DeployServiceGrpc,
   DeployServiceResponse
 }
-import io.gatling.app.Gatling
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.action.{Action, ExitableAction}
-import io.gatling.core.config.{GatlingConfiguration, GatlingPropertiesBuilder}
+import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.protocol.{Protocol, ProtocolComponents, ProtocolKey}
 import io.gatling.core.stats.StatsEngine
 import io.gatling.core.stats.message.ResponseTimings
@@ -30,17 +29,20 @@ import io.gatling.core.Predef._
 case class RNodeProtocol(host: String, port: Int) extends Protocol {}
 
 object Propose {
-  def a(client: DeployServiceBlockingClient): DeployServiceResponse = {
+  def a(session: Session)(
+      client: DeployServiceBlockingClient): DeployServiceResponse = {
     client.createBlock(Empty())
   }
 }
 
 object Deploy {
-  def a(term: String)(
+  def a(session: Session)(
       client: DeployServiceBlockingClient): DeployServiceResponse = {
+    val (contractName, contract): (String, String) = session("contract")
+      .as[(String, String)]
     val d = DeployData()
       .withTimestamp(System.currentTimeMillis())
-      .withTerm(term)
+      .withTerm(contract)
       .withFrom("0x1")
       .withPhloLimit(0)
       .withPhloPrice(0)
@@ -51,37 +53,53 @@ object Deploy {
 
 class RNodeRequestAction(
     val actionName: String,
-    val execute: DeployServiceBlockingClient => DeployServiceResponse,
+    val request: Session => DeployServiceBlockingClient => DeployServiceResponse,
     val statsEngine: StatsEngine,
     val next: Action,
+    val rnodeProtocol: RNodeProtocol,
     val client: DeployServiceBlockingClient)
     extends ExitableAction
     with NameGen {
-  override def name: String = genName(s"rnodeRequest-$actionName")
+  override def name: String = s"req-$actionName-${rnodeProtocol.host}"
 
   override def execute(session: Session): Unit = recover(session) {
+    val (contractName, contract): (String, String) =
+      session("contract").as[(String, String)]
     val start = System.currentTimeMillis()
     io.gatling.commons.validation.Success("").map { _ =>
-      val r = Try { execute(client) }
+      val r = Try { request(session)(client) }
       val timings = ResponseTimings(start, System.currentTimeMillis())
 
       r match {
         case Failure(exception) =>
           exception.printStackTrace()
           statsEngine.logResponse(session,
-                                  name,
+                                  s"$name-$contractName",
                                   timings,
                                   KO,
                                   None,
-                                  Some(exception.getMessage))
+                                  Some(exception.getMessage),
+                                  List(contractName))
           next ! session.markAsFailed
 
         case Success(DeployServiceResponse(false, msg)) =>
-          statsEngine.logResponse(session, name, timings, KO, None, Some(msg))
+          statsEngine.logResponse(session,
+                                  s"$name-$contractName",
+                                  timings,
+                                  KO,
+                                  None,
+                                  Some(msg),
+                                  List(contractName))
           next ! session.markAsFailed
 
         case Success(DeployServiceResponse(true, msg)) =>
-          statsEngine.logResponse(session, name, timings, OK, None, Some(msg))
+          statsEngine.logResponse(session,
+                                  s"$name-$contractName",
+                                  timings,
+                                  OK,
+                                  None,
+                                  Some(msg),
+                                  List(contractName))
           next ! session.markAsSucceeded
       }
     }
@@ -96,15 +114,15 @@ object RNodeActionDSL {
     }
   }
 
-  def deploy(term: String): RNodeActionBuilder = {
+  def deploy(): RNodeActionBuilder = {
     new RNodeActionBuilder {
-      override val execute = Deploy.a(term)
+      override val execute = Deploy.a
       override val actionName: String = "deploy"
     }
   }
 }
 abstract class RNodeActionBuilder extends ActionBuilder {
-  val execute: DeployServiceBlockingClient => DeployServiceResponse
+  val execute: Session => DeployServiceBlockingClient => DeployServiceResponse
   val actionName: String
 
   override def build(ctx: ScenarioContext, next: Action): Action = {
@@ -115,6 +133,7 @@ abstract class RNodeActionBuilder extends ActionBuilder {
                            execute,
                            coreComponents.statsEngine,
                            next,
+                           rnodeComponents.rnodeProtocol,
                            rnodeComponents.client)
   }
 }

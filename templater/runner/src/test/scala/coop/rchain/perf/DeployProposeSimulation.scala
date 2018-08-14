@@ -1,5 +1,7 @@
 package coop.rchain.perf
 
+import java.nio.file.{Path, Paths}
+
 import io.gatling.core.Predef.{Simulation, atOnceUsers, scenario}
 import io.gatling.core.Predef._
 
@@ -31,8 +33,10 @@ class DeployProposeSimulation extends Simulation {
   val host = Option(System.getProperty("host")).getOrElse("localhost")
   val port = Integer.getInteger("port", 40401)
   val contract = Option(System.getProperty("contract"))
-    .map(Source.fromFile(_).mkString)
-    .getOrElse(defaultTerm)
+    .map { s =>
+      (Paths.get(s).getFileName.toString, Source.fromFile(s).mkString)
+    }
+    .getOrElse(("recursive-loop", defaultTerm))
 
   println(s"will run simulation on $host:$port, contract:")
   println("-------------------------------")
@@ -42,11 +46,13 @@ class DeployProposeSimulation extends Simulation {
   val protocol = RNodeProtocol(host, port)
 
   val scn = scenario("DeployProposeSimulation")
-    .repeat(2) {
-      exec(deploy(contract))
-        .pause(1)
-        .exec(propose())
-        .pause(1)
+    .foreach(List(contract), "contract") {
+      repeat(10) {
+        exec(deploy())
+          .pause(1)
+          .exec(propose())
+          .pause(1)
+      }
     }
 
   setUp(

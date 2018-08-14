@@ -6,3 +6,4 @@ libraryDependencies += "com.thesamet.scalapb" %% "compilerplugin" % "0.7.1"
 resolvers += Resolver.bintrayRepo("gatling", "maven")
 
 addSbtPlugin("io.gatling" % "gatling-sbt" % "2.2.2")
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.7")
