@@ -120,6 +120,16 @@ abstract class RNodeActionBuilder extends ActionBuilder {
 }
 
 object RNodeProtocol {
+
+  def apply(host: String): RNodeProtocol = {
+    val s = host.split(":")
+    assert(s.size == 2,
+           s"Invalid host string $s, expected format is address:port")
+    val address = s(0)
+    val port = s(1).toInt
+    RNodeProtocol(address, port)
+  }
+
   val RNodeProtocolKey = new ProtocolKey {
     type Protocol = RNodeProtocol
     type Components = RNodeComponents
