@@ -36,7 +36,6 @@ object Propose {
 }
 
 object Deploy {
-
   def a(term: String)(
       client: DeployServiceBlockingClient): DeployServiceResponse = {
     val d = DeployData()
@@ -117,6 +116,8 @@ abstract class RNodeActionBuilder extends ActionBuilder {
                            coreComponents.statsEngine,
                            next,
                            rnodeComponents.client)
+    val rnodeComponents = protocolComponentsRegistry.components(RNodeProtocol.RNodeProtocolKey)
+    new RNodeRequestAction(actionName, execute, coreComponents.statsEngine, next, rnodeComponents.client)
   }
 }
 
