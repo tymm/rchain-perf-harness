@@ -2,4 +2,5 @@ builder/bins/jars/**
 builder/envs/**
 *.class
 *.log
+templater/results/**
 
