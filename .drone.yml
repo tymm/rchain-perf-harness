@@ -37,7 +37,7 @@ pipeline:
     image: rchain/rnode:dev
     commands:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
-  
+
   gatling:
     image: hseeberger/scala-sbt
     commands:
@@ -49,4 +49,4 @@ pipeline:
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
     commands:
-      - curl -XDELETE http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}
+      - for instance in bootstrap validator1; do curl -XDELETE http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/$instance; done
