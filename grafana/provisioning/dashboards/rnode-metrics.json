@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.0.0"
+      "version": "5.2.1"
     },
     {
       "type": "panel",
@@ -89,21 +89,21 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "Consume",
+          "legendFormat": "Consume@{{exported_instance}}@{{exported_job}}",
           "refId": "D"
         },
         {
           "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.produce\"}[1m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Produce",
+          "legendFormat": "Produce@{{exported_instance}}@{{exported_job}}",
           "refId": "A"
         },
         {
           "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.install\"}[1m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Install",
+          "legendFormat": "Install@{{exported_instance}}@{{exported_job}}",
           "refId": "B"
         }
       ],
@@ -141,7 +141,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -186,7 +190,7 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Consume",
+          "legendFormat": " Consume COMM@{{exported_instance}}@{{exported_job}}",
           "refId": "A"
         },
         {
@@ -195,7 +199,7 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Produce",
+          "legendFormat": "Produce COMM@{{exported_instance}}@{{exported_job}}",
           "refId": "B"
         }
       ],
@@ -233,7 +237,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -275,14 +283,14 @@
           "expr": "rate(span_processing_time_seconds_count{operation=~\"replayrspace.consume\"}[1m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Consume",
+          "legendFormat": "Consume@{{exported_instance}}@{{exported_job}}",
           "refId": "A"
         },
         {
           "expr": "rate(span_processing_time_seconds_count{operation=~\"replayrspace.produce\"}[1m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Produce",
+          "legendFormat": "Produce@{{exported_instance}}@{{exported_job}}",
           "refId": "B"
         }
       ],
@@ -320,7 +328,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -362,14 +374,14 @@
           "expr": "rate(replayrspace_comm_consume_total[1m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Consume",
+          "legendFormat": "Consume COMM@{{exported_instance}}@{{exported_job}}",
           "refId": "A"
         },
         {
           "expr": "rate(replayrspace_comm_produce_total[1m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Produce",
+          "legendFormat": "Produce COMM@{{exported_instance}}@{{exported_job}}",
           "refId": "B"
         }
       ],
@@ -407,7 +419,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "5s",
@@ -449,5 +465,5 @@
   "timezone": "",
   "title": "RNode metrics",
   "uid": "OBa5v8Dik",
-  "version": 21
+  "version": 2
 }
