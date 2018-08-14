@@ -6,12 +6,14 @@ workspace:
 services:
   bootstrap:
     image: rchain/rnode:dev
+    pull: true
     detach: true
     commands:
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
   validator1:
     image: rchain/rnode:dev
+    pull: true
     detach: true
     commands:
       - sleep 10
