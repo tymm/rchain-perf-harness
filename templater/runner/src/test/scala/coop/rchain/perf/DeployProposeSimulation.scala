@@ -9,24 +9,37 @@ class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """
-      |// This benchmark example runs N iterations recursively.
-      |// Useful to measure RSpace performance.
-      |
-      |new LoopRecursive, stdout(`rho:io:stdout`) in {
-      |  contract LoopRecursive(@count) = {
-      |    match count {
-      |    0 => stdout!("Done!")
-      |    x => {
-      |        stdout!("Step")
-      |         | LoopRecursive!(x - 1)
-      |      }
+      |new orExample in {
+      |  contract orExample(@{record /\ {{@"name"!(_) | @"age"!(_) | _} \/ {@"nombre"!(_) | @"edad"!(_)}}}) = {
+      |    match record {
+      |      {@"name"!(name) | @"age"!(age) | _} => @"stdout"!(["Hello, ", name, " aged ", age])
+      |      {@"nombre"!(nombre) | @"edad"!(edad) | _} => @"stdout"!(["Hola, ", nombre, " con ", edad, " años."])
       |    }
       |  } |
-      |  new myChannel in {
-      |    LoopRecursive!(10000)
-      |  }
+      |  orExample!(@"name"!("Joe") | @"age"!(40)) |
+      |  orExample!(@"nombre"!("Jose") | @"edad"!(41))
       |}
+      |
     """.stripMargin
+//    """
+//      |// This benchmark example runs N iterations recursively.
+//      |// Useful to measure RSpace performance.
+//      |
+//      |new LoopRecursive, stdout(`rho:io:stdout`) in {
+//      |  contract LoopRecursive(@count) = {
+//      |    match count {
+//      |    0 => stdout!("Done!")
+//      |    x => {
+//      |        stdout!("Step")
+//      |         | LoopRecursive!(x - 1)
+//      |      }
+//      |    }
+//      |  } |
+//      |  new myChannel in {
+//      |    LoopRecursive!(10000)
+//      |  }
+//      |}
+//    """.stripMargin
 
   val host = Option(System.getProperty("host")).getOrElse("localhost")
   val port = Integer.getInteger("port", 40401)
@@ -42,7 +55,7 @@ class DeployProposeSimulation extends Simulation {
   val protocol = RNodeProtocol(host, port)
 
   val scn = scenario("DeployProposeSimulation")
-    .repeat(2) {
+    .repeat(100) {
       exec(deploy(contract))
         .pause(1)
         .exec(propose())
@@ -50,6 +63,6 @@ class DeployProposeSimulation extends Simulation {
     }
 
   setUp(
-    scn.inject(atOnceUsers(2))
+    scn.inject(atOnceUsers(40))
   ).protocols(protocol)
 }
