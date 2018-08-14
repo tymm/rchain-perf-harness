@@ -43,7 +43,7 @@ pipeline:
     commands:
       - pwd
       - cd templater
-      - sbt -Dhost=validator1 -Dport=30015 runner/gatling:test
+      - sbt -Drnodes.1=bootstrap:39995 -Drnodes.2=validator1:30015 runner/gatling:test
       - echo "stop" > ../metrics/stop-loop
 
   push-metrics-delete-metrics:
