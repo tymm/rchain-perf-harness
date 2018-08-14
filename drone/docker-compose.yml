@@ -3,7 +3,8 @@ version: '2'
 services:
   drone-server:
     image: drone/drone:0.8
-
+    networks:
+      - rchain-perf-harness_metrics
     ports:
       - 8080:8000
       - 9000
@@ -11,7 +12,7 @@ services:
       - /var/lib/drone:/var/lib/drone/
     restart: always
     environment:
-      - DRONE_OPEN=false
+      - DRONE_OPEN=true
       - DRONE_ADMIN=lukasz-golebiewski
       - DRONE_ORGS=lukasz-golebiewski-org
       - DRONE_HOST=${DRONE_HOST}
@@ -19,10 +20,12 @@ services:
       - DRONE_GITHUB_CLIENT=${DRONE_GITHUB_CLIENT}
       - DRONE_GITHUB_SECRET=${DRONE_GITHUB_SECRET}
       - DRONE_SECRET=${DRONE_SECRET}
+      - DRONE_NETWORK=rchain-perf-harness_metrics
 
   drone-agent:
     image: drone/agent:0.8
-
+    networks:
+      - rchain-perf-harness_metrics
     command: agent
     restart: always
     depends_on:
@@ -32,3 +35,7 @@ services:
     environment:
       - DRONE_SERVER=drone-server:9000
       - DRONE_SECRET=${DRONE_SECRET}
+
+networks:
+  rchain-perf-harness_metrics:
+    external: true

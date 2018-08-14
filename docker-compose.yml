@@ -5,13 +5,24 @@ volumes:
     grafana_data_storage: {}
     rnode_data_storage: {}
 
+networks:
+  metrics:
+    driver: bridge
+
 services:
   prometheus-pushgateway:
     image: prom/pushgateway
-    network_mode: "host"
+    ports:
+      - 19091:9091
+    networks:
+      - metrics
+
   prometheus-server:
     image: prom/prometheus:v2.3.2
-    network_mode: "host"
+    ports:
+      - 19090:9090
+    networks:
+      - metrics
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data_storage:/prometheus
@@ -20,9 +31,13 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
+
   grafana-ui:
     image: grafana/grafana:5.2.1
-    network_mode: "host"
+    networks:
+      - metrics
+    ports:
+      - 13000:3000
     env_file:
       - ./grafana/grafana.conf
     volumes:
