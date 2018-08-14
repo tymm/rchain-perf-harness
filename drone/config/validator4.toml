@@ -1,0 +1,17 @@
+[server]
+host = "validator4"
+port = 30011
+metrics-port = 30012
+http-port = 30013
+no-upnp = true
+default-timeout = 1000
+map-size = 1000000000
+data-dir = "./validator4"
+bootstrap = "rnode://7119ad2a26cdcde63dca675c4f2a4df85f404726@bootstrap:39991"
+
+[grpc-server]
+host = "grpc"
+port = 30015
+
+[validators]
+private-key = "e8408a1444e4347cd5585c955053440f9c40479d69acfccf7f8662316acb6e3e"
