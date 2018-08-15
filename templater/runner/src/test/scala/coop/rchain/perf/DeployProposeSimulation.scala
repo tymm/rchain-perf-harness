@@ -13,49 +13,9 @@ class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """
-      |new stdout(`rho:io:stdout`), stdoutAck(`rho:io:stdoutAck`) in {
-      |  @"north"!("knife") |
-      |  @"south"!("spoon") |
-      |  for (@knf <- @"north"; @spn <- @"south") {
-      |    new ack in {
-      |      stdoutAck!("Philosopher 1 Utensils: ", *ack) |
-      |      for (_ <- ack) {
-      |        stdoutAck!(knf, *ack) |
-      |        for (_ <- ack) {
-      |          stdoutAck!(", ", *ack) |
-      |          for (_ <- ack) {
-      |            stdoutAck!(spn, *ack) |
-      |            for (_ <- ack) {
-      |              stdout!("\n")
-      |            }
-      |          }
-      |        }
-      |      }
-      |    } |
-      |    @"north"!(knf) |
-      |    @"south"!(spn)
-      |  } |
-      |  for (@spn <- @"south"; @knf <- @"north") {
-      |    new ack in {
-      |      stdoutAck!("Philosopher 2 Utensils: ", *ack) |
-      |      for (_ <- ack) {
-      |        stdoutAck!(knf, *ack) |
-      |        for (_ <- ack) {
-      |          stdoutAck!(", ", *ack) |
-      |          for (_ <- ack) {
-      |            stdoutAck!(spn, *ack) |
-      |            for (_ <- ack) {
-      |              stdout!("\n")
-      |            }
-      |          }
-      |        }
-      |      }
-      |    } |
-      |    @"north"!(knf) |
-      |    @"south"!(spn)
-      |  }
+      |new stdout(`rho:io:stdout`) in {
+      |    stdout!("hello, world!")
       |}
-      |
     """.stripMargin
 
   val conf = ConfigFactory.load()
@@ -76,13 +36,13 @@ class DeployProposeSimulation extends Simulation {
 
   val scn = scenario("DeployProposeSimulation")
     .foreach(List(contract), "contract") {
-      repeat(20) {
+      repeat(1) {
         exec(deploy())
           .exec(propose())
       }
     }
 
   setUp(
-    scn.inject(atOnceUsers(5))
+    scn.inject(atOnceUsers(1))
   ).protocols(protocol)
 }
