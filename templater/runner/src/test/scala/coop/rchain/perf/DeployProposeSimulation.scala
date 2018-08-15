@@ -57,6 +57,6 @@ class DeployProposeSimulation extends Simulation {
     }
 
   setUp(
-    scn.inject(atOnceUsers(1))
+    scn.inject(atOnceUsers(5))
   ).protocols(protocol)
 }
