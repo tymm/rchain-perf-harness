@@ -1,5 +1,8 @@
 package coop.rchain.perf
 
+import collection.JavaConversions._
+import com.typesafe.config.Config
+import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef.{Simulation, atOnceUsers, scenario}
 import io.gatling.core.Predef._
 
@@ -41,18 +44,19 @@ class DeployProposeSimulation extends Simulation {
 //      |}
 //    """.stripMargin
 
-  val host = Option(System.getProperty("host")).getOrElse("localhost")
-  val port = Integer.getInteger("port", 40401)
+  val conf = ConfigFactory.load();
+  val rnodes = conf.getStringList("rnodes").toList
+
   val contract = Option(System.getProperty("contract"))
     .map(Source.fromFile(_).mkString)
     .getOrElse(defaultTerm)
 
-  println(s"will run simulation on $host:$port, contract:")
+  println(s"will run simulation on ${rnodes.mkString(", ")}, contract:")
   println("-------------------------------")
   println(contract)
   println("-------------------------------")
 
-  val protocol = RNodeProtocol(host, port)
+  val protocol = RNodeProtocol.createFor(rnodes)
 
   val scn = scenario("DeployProposeSimulation")
     .repeat(10) {
