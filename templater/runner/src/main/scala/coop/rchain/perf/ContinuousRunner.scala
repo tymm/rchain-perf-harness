@@ -31,6 +31,7 @@ object ContinuousRunner {
     val contractsPath = System.getProperty("path")
     val hosts = System.getProperty("hosts")
     val sessions = Integer.getInteger("sessions", 1)
+    val loops = Integer.getInteger("loops", 1)
     val deploy2ProposeRatio: Int = Integer.getInteger("ratio", 1)
 
     val basePath = Paths.get(contractsPath)
@@ -47,7 +48,7 @@ object ContinuousRunner {
     val protocol: RNodeProtocol =
       RNodeProtocol(hosts.split(" ").map((_, 40401)).toList)
 
-    val scn = scenario("ContinuousSimulation").forever {
+    val scn = scenario("ContinuousSimulation").repeat(Int.unbox(loops)) {
       foreach(termsWithNames, "contract") {
         repeat(deploy2ProposeRatio) {
           exec(deploy())

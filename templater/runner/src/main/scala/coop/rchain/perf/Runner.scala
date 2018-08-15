@@ -30,15 +30,15 @@ import io.gatling.core.Predef._
 
 object Propose {
   def propose(session: Session)(
-      client: DeployServiceBlockingClient): (Session, DeployServiceResponse) = {
-    (session.remove("client"), client.createBlock(Empty()))
+      client: ClientWithDetails): (Session, DeployServiceResponse) = {
+    (session.remove("client"), client.client.createBlock(Empty()))
   }
 }
 
 object Deploy {
   def deploy(session: Session)(
-      client: DeployServiceBlockingClient): (Session, DeployServiceResponse) = {
-    val (contractName, contract): (String, String) = session("contract")
+      client: ClientWithDetails): (Session, DeployServiceResponse) = {
+    val (_, contract): (String, String) = session("contract")
       .as[(String, String)]
     val d = DeployData()
       .withTimestamp(System.currentTimeMillis())
@@ -47,52 +47,47 @@ object Deploy {
       .withPhloLimit(0)
       .withPhloPrice(0)
       .withNonce(0)
-    (session.set("client", client), client.doDeploy(d))
+    (session.set("client", client), client.client.doDeploy(d))
   }
 }
 
 class RNodeRequestAction(
     val actionName: String,
-    val request: Session => DeployServiceBlockingClient => (Session,
-                                                            DeployServiceResponse),
+    val request: Session => ClientWithDetails => (Session,
+                                                  DeployServiceResponse),
     val statsEngine: StatsEngine,
     val next: Action,
-    val clients: List[DeployServiceBlockingClient],
-    val pool: Iterator[DeployServiceBlockingClient])
+    val pool: Iterator[ClientWithDetails])
     extends ExitableAction
     with NameGen {
 
   override def name: String = actionName
 
-  private def requestName(cn: String) = s"$cn-$name"
+  private def requestName(cn: String, host: String) = s"$cn-$host-$name"
 
   def logResponse(timings: ResponseTimings,
                   ns: Session,
                   msg: String,
                   ok: Status,
-                  contractName: String) = {
+                  logName: String) = {
     statsEngine.logResponse(ns,
-                            requestName(contractName),
+                            logName,
                             timings,
                             ok,
                             None,
                             Some(msg),
-                            List(contractName))
+                            List(logName))
     ns
   }
 
   override def execute(session: Session): Unit = recover(session) {
-    val (contractName, contract): (String, String) =
+    val (contractName, _): (String, String) =
       session("contract").as[(String, String)]
     val client =
-      session("client").asOption[DeployServiceBlockingClient].getOrElse {
-        pool.next()
-      }
+      session("client").asOption[ClientWithDetails].getOrElse { pool.next() }
     val start = System.currentTimeMillis()
     io.gatling.commons.validation.Success("").map { _ =>
-      val r = Try {
-        request(session)(client)
-      }
+      val r = Try { request(session)(client) }
       val timings = ResponseTimings(start, System.currentTimeMillis())
 
       r match {
@@ -102,11 +97,19 @@ class RNodeRequestAction(
                              session.markAsFailed,
                              exception.getMessage,
                              KO,
-                             contractName)
+                             requestName(contractName, client.host))
         case Success((ns, DeployServiceResponse(false, msg))) =>
-          next ! logResponse(timings, ns.markAsFailed, msg, KO, contractName)
+          next ! logResponse(timings,
+                             ns.markAsFailed,
+                             msg,
+                             KO,
+                             requestName(contractName, client.host))
         case Success((ns, DeployServiceResponse(true, msg))) =>
-          next ! logResponse(timings, ns.markAsSucceeded, msg, OK, contractName)
+          next ! logResponse(timings,
+                             ns.markAsSucceeded,
+                             msg,
+                             OK,
+                             requestName(contractName, client.host))
       }
     }
   }
@@ -130,8 +133,7 @@ object RNodeActionDSL {
   }
 }
 abstract class RNodeActionBuilder extends ActionBuilder {
-  val execute: Session => DeployServiceBlockingClient => (Session,
-                                                          DeployServiceResponse)
+  val execute: Session => ClientWithDetails => (Session, DeployServiceResponse)
   val actionName: String
 
   override def build(ctx: ScenarioContext, next: Action): Action = {
@@ -142,12 +144,15 @@ abstract class RNodeActionBuilder extends ActionBuilder {
                            execute,
                            coreComponents.statsEngine,
                            next,
-                           rnodeComponents.clients,
                            rnodeComponents.pool)
   }
 }
 
 case class RNodeProtocol(hosts: List[(String, Int)]) extends Protocol {}
+
+case class ClientWithDetails(client: DeployServiceBlockingClient,
+                             host: String,
+                             port: Int)
 
 object RNodeProtocol {
 
@@ -182,14 +187,16 @@ object RNodeProtocol {
         coreComponents: CoreComponents): RNodeProtocol => RNodeComponents = {
       rnodeProtocol =>
         {
-          val clients: List[DeployServiceBlockingClient] =
+          val clients: List[ClientWithDetails] =
             rnodeProtocol.hosts.map {
               case (host, port) =>
                 val channel = ManagedChannelBuilder
                   .forAddress(host, port)
                   .usePlaintext(true)
                   .build
-                DeployServiceGrpc.blockingStub(channel)
+                ClientWithDetails(DeployServiceGrpc.blockingStub(channel),
+                                  host,
+                                  port)
             }
           val pool = RoundRobin(clients.toIndexedSeq)
           RNodeComponents(rnodeProtocol, clients, pool)
@@ -199,8 +206,8 @@ object RNodeProtocol {
 }
 
 case class RNodeComponents(rnodeProtocol: RNodeProtocol,
-                           clients: List[DeployServiceBlockingClient],
-                           pool: Iterator[DeployServiceBlockingClient])
+                           clients: List[ClientWithDetails],
+                           pool: Iterator[ClientWithDetails])
     extends ProtocolComponents {
 
   def onStart: Option[Session => Session] = {
