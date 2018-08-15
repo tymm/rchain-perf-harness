@@ -9,6 +9,7 @@ import coop.rchain.casper.protocol.{
   DeployServiceResponse
 }
 import io.gatling.app.Gatling
+import io.gatling.commons.util.RoundRobin
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
 import io.gatling.core.action.builder.ActionBuilder
@@ -26,8 +27,6 @@ import scala.util.{Failure, Success, Try}
 object Runner {}
 
 import io.gatling.core.Predef._
-
-case class RNodeProtocol(host: String, port: Int) extends Protocol {}
 
 object Propose {
   def a(client: DeployServiceBlockingClient): DeployServiceResponse = {
@@ -54,15 +53,17 @@ class RNodeRequestAction(
     val execute: DeployServiceBlockingClient => DeployServiceResponse,
     val statsEngine: StatsEngine,
     val next: Action,
-    val client: DeployServiceBlockingClient)
+    val clients: List[DeployServiceBlockingClient])
     extends ExitableAction
     with NameGen {
+
+  val clientsIterator = RoundRobin(clients.toIndexedSeq)
   override def name: String = genName(s"rnodeRequest-$actionName")
 
   override def execute(session: Session): Unit = recover(session) {
     val start = System.currentTimeMillis()
     io.gatling.commons.validation.Success("").map { _ =>
-      val r = Try { execute(client) }
+      val r = Try { execute(clientsIterator.next) }
       val timings = ResponseTimings(start, System.currentTimeMillis())
 
       r match {
@@ -115,19 +116,25 @@ abstract class RNodeActionBuilder extends ActionBuilder {
                            execute,
                            coreComponents.statsEngine,
                            next,
-                           rnodeComponents.client)
+                           rnodeComponents.clients)
   }
 }
 
+case class RNodeProtocol(hosts: List[(String, Int)]) extends Protocol {}
+
 object RNodeProtocol {
 
-  def apply(host: String): RNodeProtocol = {
-    val s = host.split(":")
-    assert(s.size == 2,
-           s"Invalid host string $s, expected format is address:port")
-    val address = s(0)
-    val port = s(1).toInt
-    RNodeProtocol(address, port)
+  def createFor(hostStrings: List[String]): RNodeProtocol = {
+    val mapped = hostStrings.map { host =>
+      val s = host.split(":")
+      assert(s.size == 2,
+             s"Invalid host string $s, expected format is address:port")
+      val address = s(0)
+      val port = s(1).toInt
+      (address, port)
+
+    }
+    RNodeProtocol(mapped)
   }
 
   val RNodeProtocolKey = new ProtocolKey {
@@ -148,19 +155,23 @@ object RNodeProtocol {
         coreComponents: CoreComponents): RNodeProtocol => RNodeComponents = {
       rnodeProtocol =>
         {
-          val channel: ManagedChannel = ManagedChannelBuilder
-            .forAddress(rnodeProtocol.host, rnodeProtocol.port)
-            .usePlaintext(true)
-            .build
-          val client = DeployServiceGrpc.blockingStub(channel)
-          RNodeComponents(rnodeProtocol, client)
+          val clients: List[DeployServiceBlockingClient] =
+            rnodeProtocol.hosts.map {
+              case (host, port) =>
+                val channel = ManagedChannelBuilder
+                  .forAddress(host, port)
+                  .usePlaintext(true)
+                  .build
+                DeployServiceGrpc.blockingStub(channel)
+            }
+          RNodeComponents(rnodeProtocol, clients)
         }
     }
   }
 }
 
 case class RNodeComponents(rnodeProtocol: RNodeProtocol,
-                           client: DeployServiceBlockingClient)
+                           clients: List[DeployServiceBlockingClient])
     extends ProtocolComponents {
 
   def onStart: Option[Session => Session] = {
