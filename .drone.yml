@@ -18,7 +18,7 @@ services:
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
-  
+
   validator2:
     image: rchain/rnode:dev
     pull: true
@@ -48,6 +48,7 @@ services:
     detach: true
     commands:
       - cd metrics
+      - sleep 15
       - /bin/bash loop-metrics.sh
 
 pipeline:
