@@ -14,4 +14,4 @@ host = "grpc"
 port = 30015
 
 [validators]
-private-key = "e8408a1444e4347cd5585c955053440f9c40479d69acfccf7f8662316acb6e3e"
+private-key = "c380558b21ed34779f1c29fec947353bb944d9d50c2338b899d6e2faed8849fa"
