@@ -1,7 +1,6 @@
 package coop.rchain.perf
 
-import collection.JavaConversions._
-import com.typesafe.config.Config
+import collection.JavaConverters._
 import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef.{Simulation, atOnceUsers, scenario}
 import io.gatling.core.Predef._
@@ -44,8 +43,8 @@ class DeployProposeSimulation extends Simulation {
 //      |}
 //    """.stripMargin
 
-  val conf = ConfigFactory.load();
-  val rnodes = conf.getStringList("rnodes").toList
+  val conf = ConfigFactory.load()
+  val rnodes = conf.getStringList("rnodes").asScala.toList
 
   val contract = Option(System.getProperty("contract"))
     .map(Source.fromFile(_).mkString)
@@ -61,12 +60,11 @@ class DeployProposeSimulation extends Simulation {
   val scn = scenario("DeployProposeSimulation")
     .repeat(10) {
       exec(deploy(contract))
-        .pause(1)
         .exec(propose())
         .pause(1)
     }
 
   setUp(
-    scn.inject(atOnceUsers(10))
+    scn.inject(atOnceUsers(2))
   ).protocols(protocol)
 }

@@ -53,17 +53,19 @@ class RNodeRequestAction(
     val execute: DeployServiceBlockingClient => DeployServiceResponse,
     val statsEngine: StatsEngine,
     val next: Action,
-    val clients: List[DeployServiceBlockingClient])
+    val clients: List[DeployServiceBlockingClient],
+    val pool: Iterator[DeployServiceBlockingClient])
     extends ExitableAction
     with NameGen {
 
-  val clientsIterator = RoundRobin(clients.toIndexedSeq)
   override def name: String = genName(s"rnodeRequest-$actionName")
 
   override def execute(session: Session): Unit = recover(session) {
     val start = System.currentTimeMillis()
     io.gatling.commons.validation.Success("").map { _ =>
-      val r = Try { execute(clientsIterator.next) }
+      val r = Try {
+        execute(pool.next())
+      }
       val timings = ResponseTimings(start, System.currentTimeMillis())
 
       r match {
@@ -116,7 +118,8 @@ abstract class RNodeActionBuilder extends ActionBuilder {
                            execute,
                            coreComponents.statsEngine,
                            next,
-                           rnodeComponents.clients)
+                           rnodeComponents.clients,
+                           rnodeComponents.pool)
   }
 }
 
@@ -164,14 +167,16 @@ object RNodeProtocol {
                   .build
                 DeployServiceGrpc.blockingStub(channel)
             }
-          RNodeComponents(rnodeProtocol, clients)
+          val pool = RoundRobin(clients.toIndexedSeq)
+          RNodeComponents(rnodeProtocol, clients, pool)
         }
     }
   }
 }
 
 case class RNodeComponents(rnodeProtocol: RNodeProtocol,
-                           clients: List[DeployServiceBlockingClient])
+                           clients: List[DeployServiceBlockingClient],
+                           pool: Iterator[DeployServiceBlockingClient])
     extends ProtocolComponents {
 
   def onStart: Option[Session => Session] = {
