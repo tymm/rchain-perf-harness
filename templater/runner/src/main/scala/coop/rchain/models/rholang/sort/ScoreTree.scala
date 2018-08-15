@@ -184,6 +184,11 @@ trait ScoreTree {
     final val CONNECTIVE_AND = 401
     final val CONNECTIVE_OR = 402
     final val CONNECTIVE_VARREF = 403
+    final val CONNECTIVE_BOOL = 404
+    final val CONNECTIVE_INT = 405
+    final val CONNECTIVE_STRING = 406
+    final val CONNECTIVE_URI = 407
+    final val CONNECTIVE_BYTEARRAY = 408
 
     final val PAR = 999
   }

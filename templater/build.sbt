@@ -1,4 +1,4 @@
-import sbt._
+import sbt.{compilerPlugin, _}
 
 name := "rchain-perf-harness"
 
@@ -27,6 +27,11 @@ val scalacheck          = "org.scalacheck"             %% "scalacheck"          
 val gatling             = "io.gatling.highcharts"       % "gatling-charts-highcharts" % "2.3.1" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
 val gatlingTF           = "io.gatling"                  % "gatling-test-framework"    % "2.3.1" % "test" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
 val grpcNetty           = "io.grpc"                     % "grpc-netty"                % scalapb.compiler.Version.grpcJavaVersion
+val scodecCore          = "org.scodec"                 %% "scodec-core"               % "1.10.3"
+val scodecCats          = "org.scodec"                 %% "scodec-cats"               % "0.7.0"
+val scodecBits          = "org.scodec"                 %% "scodec-bits"               % "1.1.5"
+
+val kp = compilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
 
 val protobufDependencies: Seq[ModuleID] =
   Seq(scalapbRuntime)
@@ -58,8 +63,11 @@ lazy val runner = (project in file("runner"))
       grpcNetty,
       gatling,
       gatlingTF,
-      config
-    ),
+      config,
+      scodecCore,
+      scodecCats,
+      scodecBits,
+    ) :+ kp,
     PB.targets in Compile := Seq(
       scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
     )

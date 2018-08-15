@@ -3,7 +3,11 @@ package coop.rchain.perf
 import akka.actor.ActorSystem
 import com.google.protobuf.empty.Empty
 import coop.rchain.casper.protocol.DeployServiceGrpc.DeployServiceBlockingClient
-import coop.rchain.casper.protocol.{DeployData, DeployServiceGrpc, DeployServiceResponse}
+import coop.rchain.casper.protocol.{
+  DeployData,
+  DeployServiceGrpc,
+  DeployServiceResponse
+}
 import io.gatling.commons.util.RoundRobin
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
@@ -49,7 +53,8 @@ object Deploy {
 
 class RNodeRequestAction(
     val actionName: String,
-    val request: Session => DeployServiceBlockingClient => (Session, DeployServiceResponse),
+    val request: Session => DeployServiceBlockingClient => (Session,
+                                                            DeployServiceResponse),
     val statsEngine: StatsEngine,
     val next: Action,
     val clients: List[DeployServiceBlockingClient],
@@ -61,23 +66,28 @@ class RNodeRequestAction(
 
   private def requestName(cn: String) = s"$cn-$name"
 
-  def logResponse(timings: ResponseTimings, ns: Session, msg: String, ok: Status, contractName: String) = {
+  def logResponse(timings: ResponseTimings,
+                  ns: Session,
+                  msg: String,
+                  ok: Status,
+                  contractName: String) = {
     statsEngine.logResponse(ns,
-      requestName(contractName),
-      timings,
-      ok,
-      None,
-      Some(msg),
-      List(contractName))
+                            requestName(contractName),
+                            timings,
+                            ok,
+                            None,
+                            Some(msg),
+                            List(contractName))
     ns
   }
 
   override def execute(session: Session): Unit = recover(session) {
     val (contractName, contract): (String, String) =
       session("contract").as[(String, String)]
-    val client = session("client").asOption[DeployServiceBlockingClient].getOrElse {
-      pool.next()
-    }
+    val client =
+      session("client").asOption[DeployServiceBlockingClient].getOrElse {
+        pool.next()
+      }
     val start = System.currentTimeMillis()
     io.gatling.commons.validation.Success("").map { _ =>
       val r = Try {
@@ -88,7 +98,11 @@ class RNodeRequestAction(
       r match {
         case Failure(exception) =>
           exception.printStackTrace()
-          next ! logResponse(timings, session.markAsFailed, exception.getMessage, KO, contractName)
+          next ! logResponse(timings,
+                             session.markAsFailed,
+                             exception.getMessage,
+                             KO,
+                             contractName)
         case Success((ns, DeployServiceResponse(false, msg))) =>
           next ! logResponse(timings, ns.markAsFailed, msg, KO, contractName)
         case Success((ns, DeployServiceResponse(true, msg))) =>
@@ -116,7 +130,8 @@ object RNodeActionDSL {
   }
 }
 abstract class RNodeActionBuilder extends ActionBuilder {
-  val execute: Session => DeployServiceBlockingClient => (Session, DeployServiceResponse)
+  val execute: Session => DeployServiceBlockingClient => (Session,
+                                                          DeployServiceResponse)
   val actionName: String
 
   override def build(ctx: ScenarioContext, next: Action): Action = {

@@ -1,5 +1,4 @@
 package coop.rchain.models.rholang.sort
-
 import coop.rchain.models.Expr.ExprInstance
 import coop.rchain.models.Expr.ExprInstance.GBool
 import coop.rchain.models._
