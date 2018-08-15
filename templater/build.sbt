@@ -18,6 +18,7 @@ val bouncyCastle        = "org.bouncycastle"            % "bcprov-jdk15on"      
 val catsCore            = "org.typelevel"              %% "cats-core"                 % "1.1.0"
 val catsEffect          = "org.typelevel"              %% "cats-effect"               % "1.0.0-RC2"
 val catsMtl             = "org.typelevel"              %% "cats-mtl-core"             % "0.2.3"
+val config              = "com.typesafe"                % "config"                    % "1.3.2"
 val monix               = "io.monix"                   %% "monix"                     % "3.0.0-RC1"
 val scalapbRuntime      = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion % "protobuf"
 val scalapbRuntimeLib   = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion
@@ -56,10 +57,10 @@ lazy val runner = (project in file("runner"))
       scalacheck,
       grpcNetty,
       gatling,
-      gatlingTF
+      gatlingTF,
+      config
     ),
     PB.targets in Compile := Seq(
       scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
-    ),
-    mainClass := Some("coop.rchain.perf.GatlingRunner")
+    )
   ).enablePlugins(GatlingPlugin)
