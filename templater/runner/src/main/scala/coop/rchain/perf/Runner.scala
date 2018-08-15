@@ -3,11 +3,7 @@ package coop.rchain.perf
 import akka.actor.ActorSystem
 import com.google.protobuf.empty.Empty
 import coop.rchain.casper.protocol.DeployServiceGrpc.DeployServiceBlockingClient
-import coop.rchain.casper.protocol.{
-  DeployData,
-  DeployServiceGrpc,
-  DeployServiceResponse
-}
+import coop.rchain.casper.protocol.{DeployData, DeployServiceGrpc, DeployServiceResponse}
 import io.gatling.commons.util.RoundRobin
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
@@ -15,6 +11,7 @@ import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.action.{Action, ExitableAction}
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.protocol.{Protocol, ProtocolComponents, ProtocolKey}
+import io.gatling.core.session.Session
 import io.gatling.core.stats.StatsEngine
 import io.gatling.core.stats.message.ResponseTimings
 import io.gatling.core.structure.ScenarioContext
@@ -28,15 +25,15 @@ object Runner {}
 import io.gatling.core.Predef._
 
 object Propose {
-  def a(session: Session)(
-      client: DeployServiceBlockingClient): DeployServiceResponse = {
-    client.createBlock(Empty())
+  def propose(session: Session)(
+      client: DeployServiceBlockingClient): (Session, DeployServiceResponse) = {
+    (session.remove("client"), client.createBlock(Empty()))
   }
 }
 
 object Deploy {
-  def a(session: Session)(
-      client: DeployServiceBlockingClient): DeployServiceResponse = {
+  def deploy(session: Session)(
+      client: DeployServiceBlockingClient): (Session, DeployServiceResponse) = {
     val (contractName, contract): (String, String) = session("contract")
       .as[(String, String)]
     val d = DeployData()
@@ -46,13 +43,13 @@ object Deploy {
       .withPhloLimit(0)
       .withPhloPrice(0)
       .withNonce(0)
-    client.doDeploy(d)
+    (session.set("client", client), client.doDeploy(d))
   }
 }
 
 class RNodeRequestAction(
     val actionName: String,
-    val request: Session => DeployServiceBlockingClient => DeployServiceResponse,
+    val request: Session => DeployServiceBlockingClient => (Session, DeployServiceResponse),
     val statsEngine: StatsEngine,
     val next: Action,
     val clients: List[DeployServiceBlockingClient],
@@ -60,71 +57,66 @@ class RNodeRequestAction(
     extends ExitableAction
     with NameGen {
 
-  override def name: String = s"req-$actionName"
+  override def name: String = actionName
+
+  private def requestName(cn: String) = s"$cn-$name"
+
+  def logResponse(timings: ResponseTimings, ns: Session, msg: String, ok: Status, contractName: String) = {
+    statsEngine.logResponse(ns,
+      requestName(contractName),
+      timings,
+      ok,
+      None,
+      Some(msg),
+      List(contractName))
+    ns
+  }
 
   override def execute(session: Session): Unit = recover(session) {
     val (contractName, contract): (String, String) =
       session("contract").as[(String, String)]
+    val client = session("client").asOption[DeployServiceBlockingClient].getOrElse {
+      pool.next()
+    }
     val start = System.currentTimeMillis()
     io.gatling.commons.validation.Success("").map { _ =>
       val r = Try {
-        request(session)(pool.next())
+        request(session)(client)
       }
       val timings = ResponseTimings(start, System.currentTimeMillis())
 
       r match {
         case Failure(exception) =>
           exception.printStackTrace()
-          statsEngine.logResponse(session,
-                                  s"$name-$contractName",
-                                  timings,
-                                  KO,
-                                  None,
-                                  Some(exception.getMessage),
-                                  List(contractName))
-          next ! session.markAsFailed
-
-        case Success(DeployServiceResponse(false, msg)) =>
-          statsEngine.logResponse(session,
-                                  s"$name-$contractName",
-                                  timings,
-                                  KO,
-                                  None,
-                                  Some(msg),
-                                  List(contractName))
-          next ! session.markAsFailed
-
-        case Success(DeployServiceResponse(true, msg)) =>
-          statsEngine.logResponse(session,
-                                  s"$name-$contractName",
-                                  timings,
-                                  OK,
-                                  None,
-                                  Some(msg),
-                                  List(contractName))
-          next ! session.markAsSucceeded
+          next ! logResponse(timings, session.markAsFailed, exception.getMessage, KO, contractName)
+        case Success((ns, DeployServiceResponse(false, msg))) =>
+          next ! logResponse(timings, ns.markAsFailed, msg, KO, contractName)
+        case Success((ns, DeployServiceResponse(true, msg))) =>
+          next ! logResponse(timings, ns.markAsSucceeded, msg, OK, contractName)
       }
     }
   }
 }
 
 object RNodeActionDSL {
+  // Note that these two actions work in tandem. a deploy will request a client and propose will utilise it.
+  // if proposes and deploys don't work in a balanced way weird behaviour might be observed on rnode.
   def propose(): RNodeActionBuilder = {
     new RNodeActionBuilder {
-      override val execute = Propose.a
+      override val execute = Propose.propose
       override val actionName: String = "propose"
     }
   }
 
   def deploy(): RNodeActionBuilder = {
     new RNodeActionBuilder {
-      override val execute = Deploy.a
+      override val execute = Deploy.deploy
       override val actionName: String = "deploy"
     }
   }
 }
 abstract class RNodeActionBuilder extends ActionBuilder {
-  val execute: Session => DeployServiceBlockingClient => DeployServiceResponse
+  val execute: Session => DeployServiceBlockingClient => (Session, DeployServiceResponse)
   val actionName: String
 
   override def build(ctx: ScenarioContext, next: Action): Action = {

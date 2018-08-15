@@ -51,8 +51,7 @@ object ContinuousRunner {
       foreach(termsWithNames, "contract") {
         repeat(deploy2ProposeRatio) {
           exec(deploy())
-            .pause(1)
-        }.exec(propose()).pause(1)
+        }.exec(propose())
       }
     }
 
