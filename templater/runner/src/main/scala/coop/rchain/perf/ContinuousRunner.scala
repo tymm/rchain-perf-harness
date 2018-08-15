@@ -44,8 +44,8 @@ object ContinuousRunner {
       }
       .toList
 
-    val listOfNodes: List[RNodeProtocol] =
-      hosts.split(" ").map(RNodeProtocol(_, 40401)).toList
+    val protocol: RNodeProtocol =
+      RNodeProtocol(hosts.split(" ").map((_, 40401)).toList)
 
     val scn = scenario("ContinuousSimulation").forever {
       foreach(termsWithNames, "contract") {
@@ -58,7 +58,7 @@ object ContinuousRunner {
 
     setUp(
       scn.inject(rampUsers(sessions) over (5 seconds))
-    ).protocols(listOfNodes)
+    ).protocols(protocol)
   }
 
 }
