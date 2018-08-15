@@ -68,10 +68,13 @@ pipeline:
     commands:
       - pwd
       - cd templater
-      - sbt -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test
+      - sbt -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out
       - echo "stop" > ../metrics/stop-loop
+      - /bin/bash metrics/check-build-status.sh
 
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
     commands:
       - for instance in bootstrap validator1 validator2 validator3 validator4; do curl -XDELETE http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/$instance; done
+    when:
+      status: [ success, failure ]
