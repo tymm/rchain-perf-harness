@@ -13,8 +13,22 @@ class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """
-      |new stdout(`rho:io:stdout`) in {
-      |    stdout!("hello, world!")
+      |// This benchmark example runs N iterations recursively.
+      |// Useful to measure RSpace performance.
+      |
+      |new LoopRecursive, stdout(`rho:io:stdout`) in {
+      |  contract LoopRecursive(@count) = {
+      |    match count {
+      |    0 => stdout!("Done!")
+      |    x => {
+      |        stdout!("Step")
+      |         | LoopRecursive!(x - 1)
+      |      }
+      |    }
+      |  } |
+      |  new myChannel in {
+      |    LoopRecursive!(10000)
+      |  }
       |}
     """.stripMargin
 
