@@ -8,6 +8,7 @@ import coop.rchain.casper.protocol.{
   DeployServiceGrpc,
   DeployServiceResponse
 }
+import io.gatling.commons.util.RoundRobin
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
 import io.gatling.core.action.builder.ActionBuilder
@@ -18,15 +19,13 @@ import io.gatling.core.stats.StatsEngine
 import io.gatling.core.stats.message.ResponseTimings
 import io.gatling.core.structure.ScenarioContext
 import io.gatling.core.util.NameGen
-import io.grpc.{ManagedChannel, ManagedChannelBuilder}
+import io.grpc.ManagedChannelBuilder
 
 import scala.util.{Failure, Success, Try}
 
 object Runner {}
 
 import io.gatling.core.Predef._
-
-case class RNodeProtocol(host: String, port: Int) extends Protocol {}
 
 object Propose {
   def a(session: Session)(
@@ -56,18 +55,21 @@ class RNodeRequestAction(
     val request: Session => DeployServiceBlockingClient => DeployServiceResponse,
     val statsEngine: StatsEngine,
     val next: Action,
-    val rnodeProtocol: RNodeProtocol,
-    val client: DeployServiceBlockingClient)
+    val clients: List[DeployServiceBlockingClient],
+    val pool: Iterator[DeployServiceBlockingClient])
     extends ExitableAction
     with NameGen {
-  override def name: String = s"req-$actionName-${rnodeProtocol.host}"
+
+  override def name: String = s"req-$actionName"
 
   override def execute(session: Session): Unit = recover(session) {
     val (contractName, contract): (String, String) =
       session("contract").as[(String, String)]
     val start = System.currentTimeMillis()
     io.gatling.commons.validation.Success("").map { _ =>
-      val r = Try { request(session)(client) }
+      val r = Try {
+        request(session)(pool.next())
+      }
       val timings = ResponseTimings(start, System.currentTimeMillis())
 
       r match {
@@ -133,12 +135,28 @@ abstract class RNodeActionBuilder extends ActionBuilder {
                            execute,
                            coreComponents.statsEngine,
                            next,
-                           rnodeComponents.rnodeProtocol,
-                           rnodeComponents.client)
+                           rnodeComponents.clients,
+                           rnodeComponents.pool)
   }
 }
 
+case class RNodeProtocol(hosts: List[(String, Int)]) extends Protocol {}
+
 object RNodeProtocol {
+
+  def createFor(hostStrings: List[String]): RNodeProtocol = {
+    val mapped = hostStrings.map { host =>
+      val s = host.split(":")
+      assert(s.size == 2,
+             s"Invalid host string $s, expected format is address:port")
+      val address = s(0)
+      val port = s(1).toInt
+      (address, port)
+
+    }
+    RNodeProtocol(mapped)
+  }
+
   val RNodeProtocolKey = new ProtocolKey {
     type Protocol = RNodeProtocol
     type Components = RNodeComponents
@@ -157,19 +175,25 @@ object RNodeProtocol {
         coreComponents: CoreComponents): RNodeProtocol => RNodeComponents = {
       rnodeProtocol =>
         {
-          val channel: ManagedChannel = ManagedChannelBuilder
-            .forAddress(rnodeProtocol.host, rnodeProtocol.port)
-            .usePlaintext(true)
-            .build
-          val client = DeployServiceGrpc.blockingStub(channel)
-          RNodeComponents(rnodeProtocol, client)
+          val clients: List[DeployServiceBlockingClient] =
+            rnodeProtocol.hosts.map {
+              case (host, port) =>
+                val channel = ManagedChannelBuilder
+                  .forAddress(host, port)
+                  .usePlaintext(true)
+                  .build
+                DeployServiceGrpc.blockingStub(channel)
+            }
+          val pool = RoundRobin(clients.toIndexedSeq)
+          RNodeComponents(rnodeProtocol, clients, pool)
         }
     }
   }
 }
 
 case class RNodeComponents(rnodeProtocol: RNodeProtocol,
-                           client: DeployServiceBlockingClient)
+                           clients: List[DeployServiceBlockingClient],
+                           pool: Iterator[DeployServiceBlockingClient])
     extends ProtocolComponents {
 
   def onStart: Option[Session => Session] = {

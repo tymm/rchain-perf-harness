@@ -1,12 +1,12 @@
 [server]
-host = "validator1"
+host = "validator2"
 port = 30011
 metrics-port = 30012
 http-port = 30013
 no-upnp = true
 default-timeout = 1000
 map-size = 1000000000
-data-dir = "./validator1"
+data-dir = "./validator2"
 bootstrap = "rnode://7119ad2a26cdcde63dca675c4f2a4df85f404726@bootstrap:30011"
 
 [grpc-server]
@@ -14,4 +14,4 @@ host = "grpc"
 port = 30015
 
 [validators]
-private-key = "e8408a1444e4347cd5585c955053440f9c40479d69acfccf7f8662316acb6e3e"
+private-key = "be0154f6a292b692d7dd506c4923dda178a419f8d99f5c7c941a8383c278e3a6"

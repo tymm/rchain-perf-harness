@@ -18,6 +18,30 @@ services:
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
+  
+  validator2:
+    image: rchain/rnode:dev
+    pull: true
+    detach: true
+    commands:
+      - sleep 10
+      - /opt/docker/bin/rnode -c ./drone/config/validator2.toml run
+
+  validator3:
+    image: rchain/rnode:dev
+    pull: true
+    detach: true
+    commands:
+      - sleep 10
+      - /opt/docker/bin/rnode -c ./drone/config/validator3.toml run
+
+  validator4:
+    image: rchain/rnode:dev
+    pull: true
+    detach: true
+    commands:
+      - sleep 10
+      - /opt/docker/bin/rnode -c ./drone/config/validator4.toml run
 
   push-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
@@ -37,16 +61,16 @@ pipeline:
     image: rchain/rnode:dev
     commands:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
-  
+
   gatling:
     image: hseeberger/scala-sbt
     commands:
       - pwd
       - cd templater
-      - sbt -Dhost=validator1 -Dport=30015 runner/gatling:test
+      - sbt -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test
       - echo "stop" > ../metrics/stop-loop
 
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
     commands:
-      - curl -XDELETE http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}
+      - for instance in bootstrap validator1 validator2 validator3 validator4; do curl -XDELETE http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/$instance; done
