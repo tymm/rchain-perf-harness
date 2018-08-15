@@ -73,4 +73,4 @@ pipeline:
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
     commands:
-      - for instance in bootstrap validator1 validator2 validator3 validator4; do curl -XDELETE http://prometheus-pushgateway:19091/metrics/job/${DRONE_COMMIT_SHA}/instance/$instance; done
+      - for instance in bootstrap validator1 validator2 validator3 validator4; do curl -XDELETE http://prometheus-pushgateway:9091/metrics/job/${DRONE_COMMIT_SHA}/instance/$instance; done
