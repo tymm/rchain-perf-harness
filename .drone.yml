@@ -8,6 +8,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=1
     commands:
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
@@ -25,6 +27,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=1
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator2.toml run
@@ -33,6 +37,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=1
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator3.toml run
@@ -41,6 +47,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=1
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator4.toml run
