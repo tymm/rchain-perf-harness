@@ -7,6 +7,8 @@ import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef.{Simulation, atOnceUsers, scenario}
 import io.gatling.core.Predef._
 
+import scala.concurrent.duration._
+
 import scala.io.Source
 
 class DeployProposeSimulation extends Simulation {
@@ -44,12 +46,14 @@ class DeployProposeSimulation extends Simulation {
   val scn = scenario("DeployProposeSimulation")
     .foreach(List(contract), "contract") {
       repeat(1) {
-        exec(deploy())
+        repeat(5) {
+          exec(deploy())
+        }
           .exec(propose())
       }
     }
 
   setUp(
-    scn.inject(atOnceUsers(10))
+    scn.inject(rampUsers(10) over (5 seconds))
   ).protocols(protocol)
 }
