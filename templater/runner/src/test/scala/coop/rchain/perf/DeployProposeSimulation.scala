@@ -13,29 +13,16 @@ class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """
-      |new loop, primeCheck in {
-      |  contract loop(@x) = {
-      |    match x {
-      |      [] => Nil
-      |      [head ...tail] => {
-      |        new ret in {
-      |          for (_ <- ret) {
-      |            loop!(tail)
-      |          } | primeCheck!(head, *ret)
-      |        }
-      |      }
-      |    }
-      |  } |
-      |  contract primeCheck(@x, ret) = {
-      |    match x {
-      |      Nil => @"stdoutAck"!("Nil", *ret)
-      |      ~{~Nil | ~Nil} => @"stdoutAck"!("Prime", *ret)
-      |      _ => @"stdoutAck"!("Composite", *ret)
-      |    }
-      |  } |
-      |  loop!([Nil, 7, 7 | 8, 9 | Nil, 9 | 10, Nil, 9])
+      |@["LinkedList", "range"]!(1, 100, "myList") |
+      |contract @"double"(@x, ret) = { ret!(2 * x) } |
+      |contract @"sum"(@x, @y, ret) = { ret!(x + y) } |
+      |for(@myList <- @"myList"){
+      |  @["LinkedList", "map"]!(myList, "double", "newList") |
+      |  for(@newList <- @"newList") {
+      |    @["LinkedList", "fold"]!(newList, 0, "sum", "result") |
+      |    for(@result <- @"result"){ @"stdout"!(result) }
+      |  }
       |}
-      |
     """.stripMargin
 
   val conf = ConfigFactory.load()
@@ -45,7 +32,7 @@ class DeployProposeSimulation extends Simulation {
     .map { s =>
       (Paths.get(s).getFileName.toString, Source.fromFile(s).mkString)
     }
-    .getOrElse(("check-prime", defaultTerm))
+    .getOrElse(("sum-list", defaultTerm))
 
   println(s"will run simulation on ${rnodes.mkString(", ")}, contract:")
   println("-------------------------------")
