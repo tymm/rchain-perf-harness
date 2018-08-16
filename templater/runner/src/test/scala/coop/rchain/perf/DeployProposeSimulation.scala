@@ -1,9 +1,13 @@
 package coop.rchain.perf
 
+import java.nio.file.Paths
+
 import collection.JavaConverters._
 import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef.{Simulation, atOnceUsers, scenario}
 import io.gatling.core.Predef._
+
+import scala.concurrent.duration._
 
 import scala.io.Source
 
@@ -11,44 +15,26 @@ class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """
-      |new orExample in {
-      |  contract orExample(@{record /\ {{@"name"!(_) | @"age"!(_) | _} \/ {@"nombre"!(_) | @"edad"!(_)}}}) = {
-      |    match record {
-      |      {@"name"!(name) | @"age"!(age) | _} => @"stdout"!(["Hello, ", name, " aged ", age])
-      |      {@"nombre"!(nombre) | @"edad"!(edad) | _} => @"stdout"!(["Hola, ", nombre, " con ", edad, " años."])
-      |    }
-      |  } |
-      |  orExample!(@"name"!("Joe") | @"age"!(40)) |
-      |  orExample!(@"nombre"!("Jose") | @"edad"!(41))
+      |@["LinkedList", "range"]!(1, 100, "myList") |
+      |contract @"double"(@x, ret) = { ret!(2 * x) } |
+      |contract @"sum"(@x, @y, ret) = { ret!(x + y) } |
+      |for(@myList <- @"myList"){
+      |  @["LinkedList", "map"]!(myList, "double", "newList") |
+      |  for(@newList <- @"newList") {
+      |    @["LinkedList", "fold"]!(newList, 0, "sum", "result") |
+      |    for(@result <- @"result"){ @"stdout"!(result) }
+      |  }
       |}
-      |
     """.stripMargin
-//    """
-//      |// This benchmark example runs N iterations recursively.
-//      |// Useful to measure RSpace performance.
-//      |
-//      |new LoopRecursive, stdout(`rho:io:stdout`) in {
-//      |  contract LoopRecursive(@count) = {
-//      |    match count {
-//      |    0 => stdout!("Done!")
-//      |    x => {
-//      |        stdout!("Step")
-//      |         | LoopRecursive!(x - 1)
-//      |      }
-//      |    }
-//      |  } |
-//      |  new myChannel in {
-//      |    LoopRecursive!(10000)
-//      |  }
-//      |}
-//    """.stripMargin
 
   val conf = ConfigFactory.load()
   val rnodes = conf.getStringList("rnodes").asScala.toList
 
   val contract = Option(System.getProperty("contract"))
-    .map(Source.fromFile(_).mkString)
-    .getOrElse(defaultTerm)
+    .map { s =>
+      (Paths.get(s).getFileName.toString, Source.fromFile(s).mkString)
+    }
+    .getOrElse(("sum-list", defaultTerm))
 
   println(s"will run simulation on ${rnodes.mkString(", ")}, contract:")
   println("-------------------------------")
@@ -58,12 +44,16 @@ class DeployProposeSimulation extends Simulation {
   val protocol = RNodeProtocol.createFor(rnodes)
 
   val scn = scenario("DeployProposeSimulation")
-    .repeat(20) {
-      exec(deploy(contract))
-        .exec(propose())
+    .foreach(List(contract), "contract") {
+      repeat(1) {
+        repeat(20) {
+          exec(deploy())
+        }
+          .exec(propose())
+      }
     }
 
   setUp(
-    scn.inject(atOnceUsers(5))
+    scn.inject(rampUsers(20) over (5 seconds))
   ).protocols(protocol)
 }

@@ -8,6 +8,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
@@ -15,6 +17,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
@@ -23,6 +27,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator2.toml run
@@ -31,6 +37,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator3.toml run
@@ -39,6 +47,8 @@ services:
     image: rchain/rnode:dev
     pull: true
     detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator4.toml run
@@ -69,6 +79,7 @@ pipeline:
       - pwd
       - cd templater
       - sbt -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out
+      - sleep 20
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
 
