@@ -13,23 +13,29 @@ class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """
-      |// This benchmark example runs N iterations recursively.
-      |// Useful to measure RSpace performance.
-      |
-      |new LoopRecursive, stdout(`rho:io:stdout`) in {
-      |  contract LoopRecursive(@count) = {
-      |    match count {
-      |    0 => stdout!("Done!")
-      |    x => {
-      |        stdout!("Step")
-      |         | LoopRecursive!(x - 1)
+      |new loop, primeCheck in {
+      |  contract loop(@x) = {
+      |    match x {
+      |      [] => Nil
+      |      [head ...tail] => {
+      |        new ret in {
+      |          for (_ <- ret) {
+      |            loop!(tail)
+      |          } | primeCheck!(head, *ret)
+      |        }
       |      }
       |    }
       |  } |
-      |  new myChannel in {
-      |    LoopRecursive!(10000)
-      |  }
+      |  contract primeCheck(@x, ret) = {
+      |    match x {
+      |      Nil => @"stdoutAck"!("Nil", *ret)
+      |      ~{~Nil | ~Nil} => @"stdoutAck"!("Prime", *ret)
+      |      _ => @"stdoutAck"!("Composite", *ret)
+      |    }
+      |  } |
+      |  loop!([Nil, 7, 7 | 8, 9 | Nil, 9 | 10, Nil, 9])
       |}
+      |
     """.stripMargin
 
   val conf = ConfigFactory.load()
@@ -39,7 +45,7 @@ class DeployProposeSimulation extends Simulation {
     .map { s =>
       (Paths.get(s).getFileName.toString, Source.fromFile(s).mkString)
     }
-    .getOrElse(("dining-philosophers", defaultTerm))
+    .getOrElse(("check-prime", defaultTerm))
 
   println(s"will run simulation on ${rnodes.mkString(", ")}, contract:")
   println("-------------------------------")
@@ -57,6 +63,6 @@ class DeployProposeSimulation extends Simulation {
     }
 
   setUp(
-    scn.inject(atOnceUsers(5))
+    scn.inject(atOnceUsers(10))
   ).protocols(protocol)
 }
