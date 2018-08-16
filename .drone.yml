@@ -16,7 +16,7 @@ services:
     pull: true
     detach: true
     environment:
-      - JAVA_OPTS=-Dkamon.metric.tick-interval="1 seconds"
+      - JAVA_OPTS=-Dkamon.metric.tick-interval="'1 seconds'"
     commands:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
