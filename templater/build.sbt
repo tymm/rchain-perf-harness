@@ -31,8 +31,6 @@ val scodecCore          = "org.scodec"                 %% "scodec-core"         
 val scodecCats          = "org.scodec"                 %% "scodec-cats"               % "0.7.0"
 val scodecBits          = "org.scodec"                 %% "scodec-bits"               % "1.1.5"
 
-val kp = compilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
-
 val protobufDependencies: Seq[ModuleID] =
   Seq(scalapbRuntime)
 
@@ -51,25 +49,17 @@ lazy val templater = (project in file("templater"))
     mainClass := Some("coop.rchain.templater.Templater")
   )
 
+lazy val models = sbt.ProjectRef(uri("git://github.com/rchain/rchain.git#dev"), "models")
+
 lazy val runner = (project in file("runner"))
   .settings(commonSettings: _*)
   .settings(
-    libraryDependencies ++= protobufDependencies ++ protobufLibDependencies ++ Seq(
+    libraryDependencies ++= Seq(
       scalapbRuntimegGrpc,
-      catsCore,
-      monix,
-      bouncyCastle,
-      scalacheck,
       grpcNetty,
       gatling,
       gatlingTF,
       config,
-      scodecCore,
-      scodecCats,
-      scodecBits,
-    ) :+ kp,
-    PB.targets in Compile := Seq(
-      scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
     )
   )
   .settings(
@@ -83,3 +73,4 @@ lazy val runner = (project in file("runner"))
         oldStrategy(x)
     },
   ).enablePlugins(GatlingPlugin)
+  .dependsOn(models)
