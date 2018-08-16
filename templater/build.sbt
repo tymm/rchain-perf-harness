@@ -1,4 +1,4 @@
-import sbt.{compilerPlugin, _}
+import sbt._
 
 name := "rchain-perf-harness"
 
@@ -14,28 +14,11 @@ lazy val projectSettings = Seq(
   scalafmtOnCompile := true
 )
 
-val bouncyCastle        = "org.bouncycastle"            % "bcprov-jdk15on"            % "1.59"
-val catsCore            = "org.typelevel"              %% "cats-core"                 % "1.1.0"
-val catsEffect          = "org.typelevel"              %% "cats-effect"               % "1.0.0-RC2"
-val catsMtl             = "org.typelevel"              %% "cats-mtl-core"             % "0.2.3"
 val config              = "com.typesafe"                % "config"                    % "1.3.2"
-val monix               = "io.monix"                   %% "monix"                     % "3.0.0-RC1"
-val scalapbRuntime      = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion % "protobuf"
-val scalapbRuntimeLib   = "com.thesamet.scalapb"       %% "scalapb-runtime"           % scalapb.compiler.Version.scalapbVersion
 val scalapbRuntimegGrpc = "com.thesamet.scalapb"       %% "scalapb-runtime-grpc"      % scalapb.compiler.Version.scalapbVersion
-val scalacheck          = "org.scalacheck"             %% "scalacheck"                % "1.13.4"
 val gatling             = "io.gatling.highcharts"       % "gatling-charts-highcharts" % "2.3.1" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
 val gatlingTF           = "io.gatling"                  % "gatling-test-framework"    % "2.3.1" % "test" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
 val grpcNetty           = "io.grpc"                     % "grpc-netty"                % scalapb.compiler.Version.grpcJavaVersion
-val scodecCore          = "org.scodec"                 %% "scodec-core"               % "1.10.3"
-val scodecCats          = "org.scodec"                 %% "scodec-cats"               % "0.7.0"
-val scodecBits          = "org.scodec"                 %% "scodec-bits"               % "1.1.5"
-
-val protobufDependencies: Seq[ModuleID] =
-  Seq(scalapbRuntime)
-
-val protobufLibDependencies: Seq[ModuleID] =
-  Seq(scalapbRuntimeLib)
 
 lazy val commonSettings = projectSettings
 
