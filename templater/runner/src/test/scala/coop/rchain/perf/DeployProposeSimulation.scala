@@ -56,13 +56,13 @@ class DeployProposeSimulation extends Simulation {
 
   val scn = scenario("DeployProposeSimulation")
     .foreach(List(contract), "contract") {
-      repeat(20) {
+      repeat(1) {
         exec(deploy())
           .exec(propose())
       }
     }
 
   setUp(
-    scn.inject(atOnceUsers(10))
+    scn.inject(atOnceUsers(1))
   ).protocols(protocol)
 }
