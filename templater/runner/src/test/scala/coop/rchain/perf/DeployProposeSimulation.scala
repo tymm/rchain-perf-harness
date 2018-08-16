@@ -46,7 +46,7 @@ class DeployProposeSimulation extends Simulation {
   val scn = scenario("DeployProposeSimulation")
     .foreach(List(contract), "contract") {
       repeat(1) {
-        repeat(5) {
+        repeat(20) {
           exec(deploy())
         }
           .exec(propose())
@@ -54,6 +54,6 @@ class DeployProposeSimulation extends Simulation {
     }
 
   setUp(
-    scn.inject(rampUsers(10) over (5 seconds))
+    scn.inject(rampUsers(20) over (5 seconds))
   ).protocols(protocol)
 }
