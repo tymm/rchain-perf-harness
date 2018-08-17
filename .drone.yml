@@ -12,8 +12,16 @@ services:
       - /bin/bash loop-metrics.sh
 
 pipeline:
+  setup:
+    image: docker
+    commands:
+      - docker pull rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+      - docker image tag rchain/rnode:${RNODE_IMAGE_VERSION=dev} rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
   bootstrap:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     pull: true
     detach: true
     environment:
@@ -22,7 +30,7 @@ pipeline:
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
   validator1:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     pull: true
     detach: true
     environment:
