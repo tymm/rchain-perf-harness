@@ -95,7 +95,7 @@ pipeline:
       - /bin/bash ../etc/check-build-status.sh
     when:
       event: deployment
-      environment: custom-contract
+      environment: custom_contract
 
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
