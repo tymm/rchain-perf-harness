@@ -4,7 +4,7 @@ workspace:
 
 services:
   bootstrap:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION}
+    image: rchain/rnode:$RNODE_IMAGE_VERSION
     pull: true
     detach: true
     environment:
