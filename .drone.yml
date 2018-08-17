@@ -95,7 +95,7 @@ pipeline:
   gatling:
     image: hseeberger/scala-sbt
     environment:
-      - RCHAIN_REPO_HASH=$RNODE_IMAGE_VERSION
+      - RCHAIN_REPO_HASH=${RNODE_IMAGE_VERSION}
     commands:
       - pwd
       - cd templater
@@ -109,7 +109,7 @@ pipeline:
   gatling-custom-contract:
     image: hseeberger/scala-sbt
     environment:
-      - RCHAIN_REPO_HASH=$RNODE_IMAGE_VERSION
+      - RCHAIN_REPO_HASH=${RNODE_IMAGE_VERSION}
     commands:
       - pwd
       - cd templater
