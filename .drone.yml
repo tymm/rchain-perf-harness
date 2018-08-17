@@ -2,57 +2,7 @@ workspace:
   base: /workdir
   path: rchain-perf-harness
 
-
 services:
-  bootstrap:
-    image: rchain/rnode:dev
-    pull: true
-    detach: true
-    environment:
-      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
-    commands:
-      - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
-
-  validator1:
-    image: rchain/rnode:dev
-    pull: true
-    detach: true
-    environment:
-      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
-    commands:
-      - sleep 10
-      - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
-
-  validator2:
-    image: rchain/rnode:dev
-    pull: true
-    detach: true
-    environment:
-      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
-    commands:
-      - sleep 10
-      - /opt/docker/bin/rnode -c ./drone/config/validator2.toml run
-
-  validator3:
-    image: rchain/rnode:dev
-    pull: true
-    detach: true
-    environment:
-      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
-    commands:
-      - sleep 10
-      - /opt/docker/bin/rnode -c ./drone/config/validator3.toml run
-
-  validator4:
-    image: rchain/rnode:dev
-    pull: true
-    detach: true
-    environment:
-      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
-    commands:
-      - sleep 10
-      - /opt/docker/bin/rnode -c ./drone/config/validator4.toml run
-
   push-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
     detach: true
@@ -62,14 +12,83 @@ services:
       - /bin/bash loop-metrics.sh
 
 pipeline:
+  setup:
+    image: docker
+    commands:
+      - echo $CONTRACT
+      - echo $RNODE_IMAGE_VERSION
+      - docker pull rchain/rnode:dev
+      - docker image tag rchain/rnode:dev rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: push
+
+  setup-when-custom-contract:
+    image: docker
+    commands:
+      - echo $CONTRACT
+      - echo $RNODE_IMAGE_VERSION
+      - docker pull rchain/rnode:$RNODE_IMAGE_VERSION
+      - docker image tag rchain/rnode:$RNODE_IMAGE_VERSION rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: deployment
+      environment: custom_contract
+
+  bootstrap:
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
+    commands:
+      - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
+
+  validator1:
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
+    commands:
+      - sleep 10
+      - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
+
+  validator2:
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
+    commands:
+      - sleep 10
+      - /opt/docker/bin/rnode -c ./drone/config/validator2.toml run
+
+  validator3:
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
+    commands:
+      - sleep 10
+      - /opt/docker/bin/rnode -c ./drone/config/validator3.toml run
+
+  validator4:
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    detach: true
+    environment:
+      - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
+    commands:
+      - sleep 10
+      - /opt/docker/bin/rnode -c ./drone/config/validator4.toml run
+
   deploy:
-    image: rchain/rnode:dev
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     commands:
       - sleep 40
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/tut-philosophers.rho
 
   propose:
-    image: rchain/rnode:dev
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     commands:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
 
@@ -82,6 +101,21 @@ pipeline:
       - sleep 20
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
+    when:
+      event: push
+
+  gatling-custom-contract:
+    image: hseeberger/scala-sbt
+    commands:
+      - pwd
+      - cd templater
+      - sbt -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out
+      - sleep 20
+      - echo "stop" > ../metrics/stop-loop
+      - /bin/bash ../etc/check-build-status.sh
+    when:
+      event: deployment
+      environment: custom_contract
 
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
