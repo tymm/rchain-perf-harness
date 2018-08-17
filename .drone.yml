@@ -2,10 +2,9 @@ workspace:
   base: /workdir
   path: rchain-perf-harness
 
-
 services:
   bootstrap:
-    image: rchain/rnode:dev
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     pull: true
     detach: true
     environment:
@@ -14,7 +13,7 @@ services:
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
   validator1:
-    image: rchain/rnode:dev
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     pull: true
     detach: true
     environment:
@@ -24,7 +23,7 @@ services:
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
 
   validator2:
-    image: rchain/rnode:dev
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     pull: true
     detach: true
     environment:
@@ -34,7 +33,7 @@ services:
       - /opt/docker/bin/rnode -c ./drone/config/validator2.toml run
 
   validator3:
-    image: rchain/rnode:dev
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     pull: true
     detach: true
     environment:
@@ -44,7 +43,7 @@ services:
       - /opt/docker/bin/rnode -c ./drone/config/validator3.toml run
 
   validator4:
-    image: rchain/rnode:dev
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     pull: true
     detach: true
     environment:
@@ -63,13 +62,13 @@ services:
 
 pipeline:
   deploy:
-    image: rchain/rnode:dev
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     commands:
       - sleep 40
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/tut-philosophers.rho
 
   propose:
-    image: rchain/rnode:dev
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     commands:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
 
@@ -82,6 +81,21 @@ pipeline:
       - sleep 20
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
+    when:
+      event: push
+
+  gatling-custom-contract:
+    image: hseeberger/scala-sbt
+    commands:
+      - pwd
+      - cd templater
+      - sbt -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out
+      - sleep 20
+      - echo "stop" > ../metrics/stop-loop
+      - /bin/bash ../etc/check-build-status.sh
+    when:
+      event: deployment
+      environment: contract
 
   push-metrics-delete-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
