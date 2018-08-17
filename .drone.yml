@@ -10,7 +10,7 @@ services:
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
-      - echo "RNode image version: $RNODE_IMAGE_VERSION"
+      - echo 'RNode image version: $RNODE_IMAGE_VERSION'
       - /opt/docker/bin/rnode -c ./drone/config/bootstrap.toml run
 
   validator1:
