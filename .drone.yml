@@ -7,6 +7,15 @@ matrix:
     - rchain/rnode:${RNODE_IMAGE_VERSION=dev}
 
 services:
+  push-metrics:
+    image: cfmanteiga/alpine-bash-curl-jq
+    detach: true
+    commands:
+      - cd metrics
+      - sleep 15
+      - /bin/bash loop-metrics.sh
+
+pipeline:
   bootstrap:
     image: ${IMAGE}
     pull: true
@@ -56,15 +65,6 @@ services:
       - sleep 10
       - /opt/docker/bin/rnode -c ./drone/config/validator4.toml run
 
-  push-metrics:
-    image: cfmanteiga/alpine-bash-curl-jq
-    detach: true
-    commands:
-      - cd metrics
-      - sleep 15
-      - /bin/bash loop-metrics.sh
-
-pipeline:
   deploy:
     image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     commands:
