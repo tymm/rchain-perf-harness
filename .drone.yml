@@ -8,7 +8,7 @@ matrix:
 
 services:
   bootstrap:
-    image: rchain/rnode:${IMAGE}
+    image: ${IMAGE}
     pull: true
     detach: true
     environment:
