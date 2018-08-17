@@ -17,14 +17,26 @@ pipeline:
     commands:
       - echo $CONTRACT
       - echo $RNODE_IMAGE_VERSION
-      - docker pull rchain/rnode:${RNODE_IMAGE_VERSION=dev}
-      - docker image tag rchain/rnode:${RNODE_IMAGE_VERSION=dev} rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+      - docker pull rchain/rnode:dev
+      - docker image tag rchain/rnode:dev rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+  setup-when-custom-contract:
+    image: docker
+    commands:
+      - echo $CONTRACT
+      - echo $RNODE_IMAGE_VERSION
+      - docker pull rchain/rnode:$RNODE_IMAGE_VERSION
+      - docker image tag rchain/rnode:$RNODE_IMAGE_VERSION rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: deployment
+      environment: custom_contract
+
   bootstrap:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
-    pull: true
     detach: true
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
@@ -33,7 +45,6 @@ pipeline:
 
   validator1:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
-    pull: true
     detach: true
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
@@ -43,7 +54,6 @@ pipeline:
 
   validator2:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
-    pull: true
     detach: true
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
@@ -53,7 +63,6 @@ pipeline:
 
   validator3:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
-    pull: true
     detach: true
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
@@ -63,7 +72,6 @@ pipeline:
 
   validator4:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
-    pull: true
     detach: true
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
