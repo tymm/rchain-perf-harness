@@ -15,8 +15,8 @@ pipeline:
   setup:
     image: docker
     commands:
-      - echo ${CONTRACT}
-      - echo ${RNODE_IMAGE_VERSION}
+      - echo $CONTRACT
+      - echo $RNODE_IMAGE_VERSION
       - docker pull rchain/rnode:${RNODE_IMAGE_VERSION=dev}
       - docker image tag rchain/rnode:${RNODE_IMAGE_VERSION=dev} rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     volumes:
