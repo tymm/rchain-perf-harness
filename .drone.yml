@@ -2,9 +2,13 @@ workspace:
   base: /workdir
   path: rchain-perf-harness
 
+matrix:
+  IMAGE:
+    - rchain/rnode:${RNODE_IMAGE_VERSION=def}
+
 services:
   bootstrap:
-    image: rchain/rnode:$RNODE_IMAGE_VERSION
+    image: rchain/rnode:${IMAGE}
     pull: true
     detach: true
     environment:
