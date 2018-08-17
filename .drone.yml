@@ -21,6 +21,8 @@ pipeline:
       - docker image tag rchain/rnode:dev rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: push
 
   setup-when-custom-contract:
     image: docker
