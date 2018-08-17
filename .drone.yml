@@ -2,10 +2,6 @@ workspace:
   base: /workdir
   path: rchain-perf-harness
 
-matrix:
-  IMAGE:
-    - rchain/rnode:${RNODE_IMAGE_VERSION=dev}
-
 services:
   push-metrics:
     image: cfmanteiga/alpine-bash-curl-jq
@@ -17,7 +13,7 @@ services:
 
 pipeline:
   bootstrap:
-    image: ${IMAGE}
+    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
     pull: true
     detach: true
     environment:
