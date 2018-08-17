@@ -32,7 +32,7 @@ lazy val templater = (project in file("templater"))
     mainClass := Some("coop.rchain.templater.Templater")
   )
 
-lazy val repoHashRef = sys.env.getOrElse("RCHAIN_REPO_HASH", "dev")
+lazy val repoHashRef = sys.env.get("RCHAIN_REPO_HASH").filter(_ != "").getOrElse("dev")
 
 lazy val models = sbt.ProjectRef(uri(s"git://github.com/rchain/rchain.git#$repoHashRef"), "models")
 
