@@ -40,7 +40,7 @@ pipeline:
       - /opt/docker/bin/rnode -c ./drone/config/validator1.toml run
 
   validator2:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     pull: true
     detach: true
     environment:
@@ -50,7 +50,7 @@ pipeline:
       - /opt/docker/bin/rnode -c ./drone/config/validator2.toml run
 
   validator3:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     pull: true
     detach: true
     environment:
@@ -60,7 +60,7 @@ pipeline:
       - /opt/docker/bin/rnode -c ./drone/config/validator3.toml run
 
   validator4:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     pull: true
     detach: true
     environment:
@@ -70,13 +70,13 @@ pipeline:
       - /opt/docker/bin/rnode -c ./drone/config/validator4.toml run
 
   deploy:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     commands:
       - sleep 40
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 drone/config/contracts/tut-philosophers.rho
 
   propose:
-    image: rchain/rnode:${RNODE_IMAGE_VERSION=dev}
+    image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     commands:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
 
