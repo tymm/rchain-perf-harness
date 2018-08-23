@@ -17,7 +17,7 @@ Classes of note:
 - `DeployProposeSimulation`
 
 ### Automation
-#### drone
+#### [drone](.drone.yml)
 Configuration and tools for a CI/CD tool that is used to setup an rchain network.
 
 How to setup?
@@ -32,7 +32,7 @@ Configuration for a bot attached to discord.
 A `hubot test performance of master using contract contracts/dupe.rho` will invoke a test using `master` image and `contracts/dupe.rho` contract.
 
 #### tools
-Holds a small set of tools that help build a perf runner docker image.
+Holds a small set of [tools](tools/setup.sh) that help build a perf runner docker image.
 To get a current version:
 
 - `setup.sh $$version$$`
@@ -44,7 +44,7 @@ This image can be then transported with `docker save` and `docker load` commands
 
 ### Metrics
 #### prometheus & grafana
-Configuration for docker-compose.
+Configuration for [docker-compose](docker-compose.yml)
 The usual `docker-compose up` should suffice to get monitoring.
 
 ### Performance testing
@@ -57,7 +57,7 @@ Assumption: an environment that has the `boot-p2p` script running:
 
 
 #### rchain-perf-runner:0.1.0
-This is the image that was built using Automation/tools script
+This is the image that was built using [Automation/tools script](tools/setup.sh)
 
 #### perf-runner parameters
 - `-v /root/perf-runner/test-contracts:/contracts` directory with contracts to run
