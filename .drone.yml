@@ -40,6 +40,8 @@ pipeline:
   bootstrap:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     detach: true
+    cpu_count: 4
+    mem_limit: 4000000000
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
@@ -57,6 +59,8 @@ pipeline:
   validator2:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     detach: true
+    cpu_count: 4
+    mem_limit: 4000000000
     environment:
       - JAVA_OPTS=-Dkamon.metric.tick-interval=5s
     commands:
