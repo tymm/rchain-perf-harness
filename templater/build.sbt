@@ -34,7 +34,7 @@ lazy val templater = (project in file("templater"))
 
 lazy val repoHashRef = sys.env.get("RCHAIN_REPO_HASH").filter(_ != "").getOrElse("dev")
 
-lazy val models = sbt.ProjectRef(uri(s"git://github.com/rchain/rchain.git#$repoHashRef"), "models")
+lazy val models = sbt.ProjectRef(uri(s"git://github.com/lukasz-golebiewski/rchain.git#$repoHashRef"), "models")
 
 lazy val runner = (project in file("runner"))
   .settings(commonSettings: _*)
