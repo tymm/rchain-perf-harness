@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ $# -ne 1 ]; then
+  echo 1>&2 "Usage: $0 <docker-tag>"
+  exit 3
+fi
+
 set -axe
 
 #run sbt
@@ -8,10 +13,12 @@ set -axe
 
 pushd ..
 pushd templater
-sbt runner:assembly
+sbt -mem 4096 runner:assembly
 popd
 popd
-mkdir runner
+if [ ! -d "runner" ]; then
+    mkdir runner
+fi
 cp continuous.sh runner/
 cp ../templater/runner/target/scala-2.12/runner.jar runner/
 
