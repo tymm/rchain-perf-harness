@@ -13,8 +13,8 @@ A tool that is used by `builder` to generate configs.
 Gatling based rnode client.
 Classes of note:
 
-- `ConinousRunner`
-- `DeployProposeSimulation`
+- [`ContinuousRunner`](templater/runner/src/main/scala/coop/rchain/perf/ContinuousRunner.scala)
+- [`DeployProposeSimulation`](templater/runner/src/test/scala/coop/rchain/perf/DeployProposeSimulation.scala)
 
 ### Automation
 #### [drone](.drone.yml)
