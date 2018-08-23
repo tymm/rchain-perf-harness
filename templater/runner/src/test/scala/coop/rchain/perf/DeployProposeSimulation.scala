@@ -15,16 +15,10 @@ class DeployProposeSimulation extends Simulation {
   import RNodeActionDSL._
   val defaultTerm =
     """
-      |@["LinkedList", "range"]!(1, 100, "myList") |
-      |contract @"double"(@x, ret) = { ret!(2 * x) } |
-      |contract @"sum"(@x, @y, ret) = { ret!(x + y) } |
-      |for(@myList <- @"myList"){
-      |  @["LinkedList", "map"]!(myList, "double", "newList") |
-      |  for(@newList <- @"newList") {
-      |    @["LinkedList", "fold"]!(newList, 0, "sum", "result") |
-      |    for(@result <- @"result"){ @"stdout"!(result) }
-      |  }
-      |}
+      |contract @"dupe"(@depth) = {
+      |  if (depth <= 0) { Nil } else { @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) | @"dupe"!(depth-1) }
+      |} |
+      |@"dupe"!(5)
     """.stripMargin
 
   val conf = ConfigFactory.load()
