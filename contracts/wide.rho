@@ -10,7 +10,7 @@ contract @"makeWide"(@n, ret) = {
     } |
     loop!(n, Nil)
   }
-}
+}|
 @"makeWide"!(100, "myWide") | //build up wide processes
 for(@wide <- @"myWide") {
   wide //execute wide processes
