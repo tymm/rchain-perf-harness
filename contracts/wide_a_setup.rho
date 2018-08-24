@@ -11,4 +11,4 @@ contract @"makeWide"(@n, ret) = {
     loop!(n, Nil)
   }
 } |
-@"makeWide"!(10000, "myWide")
+@"makeWide"!(100, "myWide")
