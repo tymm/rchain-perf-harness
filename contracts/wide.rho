@@ -1,0 +1,17 @@
+contract @"makeWide"(@n, ret) = {
+  new loop in {
+    contract loop(@k, @acc) = {
+      if (k == 0) { ret!(acc) }
+      else {
+        new name in {
+          loop!(k - 1, {acc | for(_ <- name){ Nil } | name!(Nil)})
+        }
+      }
+    } |
+    loop!(n, Nil)
+  }
+}
+@"makeWide"!(100, "myWide") | //build up wide processes
+for(@wide <- @"myWide") {
+  wide //execute wide processes
+}
