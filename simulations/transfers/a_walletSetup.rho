@@ -1,0 +1,705 @@
+
+//requires MakeMint, BasicWallet
+new revMintCh in {
+  @"MakeMint"!(*revMintCh) | for(@revMint <- revMintCh) {
+    //TODO: How should the revMint unforgeable name be exposed (if at all)?
+
+    //public contract for making empty rev purses
+    contract @["Rev", "makePurse"](return) = {
+       @[revMint, "makePurse"]!(0, *return)
+    } |
+
+    //basic wallets which exist from genesis
+    
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "44b6746d0abaa0cbf6b7f478f21407dfd6f8d20893708f74d78854bced50c514", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:44b6746d0abaa0cbf6b7f478f21407dfd6f8d20893708f74d78854bced50c514`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:44b6746d0abaa0cbf6b7f478f21407dfd6f8d20893708f74d78854bced50c514`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "562bcc43a53544a02984143d8c7601c3d42228e67faf92017ea8d4b09ac7ff7b", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:562bcc43a53544a02984143d8c7601c3d42228e67faf92017ea8d4b09ac7ff7b`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:562bcc43a53544a02984143d8c7601c3d42228e67faf92017ea8d4b09ac7ff7b`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "5e0557818ea73f3df4c07129e8f290bc5116ea87c5d737093ed4fefa876b8012", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:5e0557818ea73f3df4c07129e8f290bc5116ea87c5d737093ed4fefa876b8012`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:5e0557818ea73f3df4c07129e8f290bc5116ea87c5d737093ed4fefa876b8012`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "38267bdfe67d9fb9691f8c0157059348e7f158654a8d62c6580f407e75818d5f", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:38267bdfe67d9fb9691f8c0157059348e7f158654a8d62c6580f407e75818d5f`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:38267bdfe67d9fb9691f8c0157059348e7f158654a8d62c6580f407e75818d5f`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "0a271fbe3ac6368d2416dd8897d8e7c5c1399835a2174851a76f60af1b28f3ad", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:0a271fbe3ac6368d2416dd8897d8e7c5c1399835a2174851a76f60af1b28f3ad`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:0a271fbe3ac6368d2416dd8897d8e7c5c1399835a2174851a76f60af1b28f3ad`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "0a8699ee66e13ca020bfa0dd52360a13206469ea0a758041f8187c220ebe00f7", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:0a8699ee66e13ca020bfa0dd52360a13206469ea0a758041f8187c220ebe00f7`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:0a8699ee66e13ca020bfa0dd52360a13206469ea0a758041f8187c220ebe00f7`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "895dc64c5b859bebf7f993f80055d32dd0db70497fddedc12b5504090d26558a", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:895dc64c5b859bebf7f993f80055d32dd0db70497fddedc12b5504090d26558a`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:895dc64c5b859bebf7f993f80055d32dd0db70497fddedc12b5504090d26558a`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "d33f31b28682f46cf3190748f26c5507693e575e76a96e61c7b9821e014d7c1c", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:d33f31b28682f46cf3190748f26c5507693e575e76a96e61c7b9821e014d7c1c`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:d33f31b28682f46cf3190748f26c5507693e575e76a96e61c7b9821e014d7c1c`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "4214e3608b46e8d7e5d20c5b2b78981880686a500661dd7b5da4d563f6770f4f", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:4214e3608b46e8d7e5d20c5b2b78981880686a500661dd7b5da4d563f6770f4f`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:4214e3608b46e8d7e5d20c5b2b78981880686a500661dd7b5da4d563f6770f4f`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "ac28af032a4b6e85c7c08bbfa231407aec94f087dddca6f375d10d676517c489", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:ac28af032a4b6e85c7c08bbfa231407aec94f087dddca6f375d10d676517c489`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:ac28af032a4b6e85c7c08bbfa231407aec94f087dddca6f375d10d676517c489`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "9cc35dfae4b610849afdcf3cda423007225c92b28d42367f97645c6f9abf6bbe", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:9cc35dfae4b610849afdcf3cda423007225c92b28d42367f97645c6f9abf6bbe`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:9cc35dfae4b610849afdcf3cda423007225c92b28d42367f97645c6f9abf6bbe`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "2c648737ca176529af2b8766982f9a642b29121cd36a449517952b072424c042", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:2c648737ca176529af2b8766982f9a642b29121cd36a449517952b072424c042`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:2c648737ca176529af2b8766982f9a642b29121cd36a449517952b072424c042`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "b1b13fe4d93535fe68abd349286f2251282ed0ca90fca1d8f43cb8f34bcb06c6", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:b1b13fe4d93535fe68abd349286f2251282ed0ca90fca1d8f43cb8f34bcb06c6`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:b1b13fe4d93535fe68abd349286f2251282ed0ca90fca1d8f43cb8f34bcb06c6`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "3489fe12a2e289b40d39106d60e1e98de2f62c64265a098e5a6a4ed73667e251", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:3489fe12a2e289b40d39106d60e1e98de2f62c64265a098e5a6a4ed73667e251`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:3489fe12a2e289b40d39106d60e1e98de2f62c64265a098e5a6a4ed73667e251`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "96d970c079fe621db9559f1b434d1c0afdc9bede0918c90d0847052f2839b271", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:96d970c079fe621db9559f1b434d1c0afdc9bede0918c90d0847052f2839b271`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:96d970c079fe621db9559f1b434d1c0afdc9bede0918c90d0847052f2839b271`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "e45eba7322fbc3502c8562b30e4f1aeef7cec3d486b28ad556e8557ee8ab1886", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:e45eba7322fbc3502c8562b30e4f1aeef7cec3d486b28ad556e8557ee8ab1886`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:e45eba7322fbc3502c8562b30e4f1aeef7cec3d486b28ad556e8557ee8ab1886`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "bd6924e92fbc5e293c6e74a2936b441a1aff6bc0bdad6efb9f52065987e346ff", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:bd6924e92fbc5e293c6e74a2936b441a1aff6bc0bdad6efb9f52065987e346ff`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:bd6924e92fbc5e293c6e74a2936b441a1aff6bc0bdad6efb9f52065987e346ff`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "0f999c0b251f7cced8c392d92336d573df551edd942097163b1418ea37854335", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:0f999c0b251f7cced8c392d92336d573df551edd942097163b1418ea37854335`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:0f999c0b251f7cced8c392d92336d573df551edd942097163b1418ea37854335`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "fc46ce519bcd949f164561330216d069afb146a59f3a572ad52e55a21a67a5ef", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:fc46ce519bcd949f164561330216d069afb146a59f3a572ad52e55a21a67a5ef`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:fc46ce519bcd949f164561330216d069afb146a59f3a572ad52e55a21a67a5ef`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "de0f3e8432a43d4db5a4b9733b3aa9a68fa62018efe46f8e904186673a00e27e", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:de0f3e8432a43d4db5a4b9733b3aa9a68fa62018efe46f8e904186673a00e27e`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:de0f3e8432a43d4db5a4b9733b3aa9a68fa62018efe46f8e904186673a00e27e`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "8f72f46c2d53aa3fdeb411ae3ed6973da12fa980ded8a304d9f987d9e3b7c50b", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:8f72f46c2d53aa3fdeb411ae3ed6973da12fa980ded8a304d9f987d9e3b7c50b`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:8f72f46c2d53aa3fdeb411ae3ed6973da12fa980ded8a304d9f987d9e3b7c50b`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "e4193c22ce0065944a7c7d6ba239c891e1e587a7efc4a0728ba4c873a3a99aa7", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:e4193c22ce0065944a7c7d6ba239c891e1e587a7efc4a0728ba4c873a3a99aa7`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:e4193c22ce0065944a7c7d6ba239c891e1e587a7efc4a0728ba4c873a3a99aa7`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "2a1d7dba885d0be7fa1462405e9b844f6a41b1bf98b1c00b052cd7cecc1c0c9c", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:2a1d7dba885d0be7fa1462405e9b844f6a41b1bf98b1c00b052cd7cecc1c0c9c`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:2a1d7dba885d0be7fa1462405e9b844f6a41b1bf98b1c00b052cd7cecc1c0c9c`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "a73c46ca1ad7903ac21f8939380ab1975c49d0c371aeff0405ed74cde270fb04", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:a73c46ca1ad7903ac21f8939380ab1975c49d0c371aeff0405ed74cde270fb04`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:a73c46ca1ad7903ac21f8939380ab1975c49d0c371aeff0405ed74cde270fb04`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "1e338413182dadba58c37755bc7b3093c81d25d7638109447e1f3b8cad9d65a7", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:1e338413182dadba58c37755bc7b3093c81d25d7638109447e1f3b8cad9d65a7`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:1e338413182dadba58c37755bc7b3093c81d25d7638109447e1f3b8cad9d65a7`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "f042a93c05d41432331f9840238b1228c4ef12a18f4a18fdbf8c4ef31f26fe26", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:f042a93c05d41432331f9840238b1228c4ef12a18f4a18fdbf8c4ef31f26fe26`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:f042a93c05d41432331f9840238b1228c4ef12a18f4a18fdbf8c4ef31f26fe26`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "7c28b99d9f4c12b69bc4d89fc8457d18e7171cc384356ae7e1808de888dd4e2a", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:7c28b99d9f4c12b69bc4d89fc8457d18e7171cc384356ae7e1808de888dd4e2a`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:7c28b99d9f4c12b69bc4d89fc8457d18e7171cc384356ae7e1808de888dd4e2a`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "9abd35c859b356ab96f08566af12c6c07a3d0ff6cf2bc90c2dfaa6f5980e2140", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:9abd35c859b356ab96f08566af12c6c07a3d0ff6cf2bc90c2dfaa6f5980e2140`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:9abd35c859b356ab96f08566af12c6c07a3d0ff6cf2bc90c2dfaa6f5980e2140`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "e88242a5f0e9874bef9159f4540197d9211f472a0271383a9443267cf114e879", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:e88242a5f0e9874bef9159f4540197d9211f472a0271383a9443267cf114e879`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:e88242a5f0e9874bef9159f4540197d9211f472a0271383a9443267cf114e879`!("Error in wallet creation!") }
+      }
+    }
+  }
+} |
+
+new purseCh, walletCh in {
+  @[revMint, "makePurse"]!(100, *purseCh) |
+  for(@purse <- purseCh) {
+    @"BasicWallet"!(purse, "ed25519", "2be16bad3b002d5c754d20e97f812dd8fb8a3cae05d58f73cc1e9fe93210574e", *walletCh) |
+    for(@maybeWallet <- walletCh) {
+      match maybeWallet {
+        [wallet] => { @`rho:pubkey:ed25519:2be16bad3b002d5c754d20e97f812dd8fb8a3cae05d58f73cc1e9fe93210574e`!!(wallet) }
+        _        => { @`rho:pubkey:ed25519:2be16bad3b002d5c754d20e97f812dd8fb8a3cae05d58f73cc1e9fe93210574e`!("Error in wallet creation!") }
+      }
+    }
+  }
+}
+  }
+}
+   |
+
+    contract @"0x44b6746d0abaa0cbf6b7f478f21407dfd6f8d20893708f74d78854bced50c514"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:44b6746d0abaa0cbf6b7f478f21407dfd6f8d20893708f74d78854bced50c514`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x562bcc43a53544a02984143d8c7601c3d42228e67faf92017ea8d4b09ac7ff7b"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:562bcc43a53544a02984143d8c7601c3d42228e67faf92017ea8d4b09ac7ff7b`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x5e0557818ea73f3df4c07129e8f290bc5116ea87c5d737093ed4fefa876b8012"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:5e0557818ea73f3df4c07129e8f290bc5116ea87c5d737093ed4fefa876b8012`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x38267bdfe67d9fb9691f8c0157059348e7f158654a8d62c6580f407e75818d5f"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:38267bdfe67d9fb9691f8c0157059348e7f158654a8d62c6580f407e75818d5f`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x0a271fbe3ac6368d2416dd8897d8e7c5c1399835a2174851a76f60af1b28f3ad"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:0a271fbe3ac6368d2416dd8897d8e7c5c1399835a2174851a76f60af1b28f3ad`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x0a8699ee66e13ca020bfa0dd52360a13206469ea0a758041f8187c220ebe00f7"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:0a8699ee66e13ca020bfa0dd52360a13206469ea0a758041f8187c220ebe00f7`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x895dc64c5b859bebf7f993f80055d32dd0db70497fddedc12b5504090d26558a"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:895dc64c5b859bebf7f993f80055d32dd0db70497fddedc12b5504090d26558a`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xd33f31b28682f46cf3190748f26c5507693e575e76a96e61c7b9821e014d7c1c"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:d33f31b28682f46cf3190748f26c5507693e575e76a96e61c7b9821e014d7c1c`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x4214e3608b46e8d7e5d20c5b2b78981880686a500661dd7b5da4d563f6770f4f"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:4214e3608b46e8d7e5d20c5b2b78981880686a500661dd7b5da4d563f6770f4f`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xac28af032a4b6e85c7c08bbfa231407aec94f087dddca6f375d10d676517c489"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:ac28af032a4b6e85c7c08bbfa231407aec94f087dddca6f375d10d676517c489`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x9cc35dfae4b610849afdcf3cda423007225c92b28d42367f97645c6f9abf6bbe"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:9cc35dfae4b610849afdcf3cda423007225c92b28d42367f97645c6f9abf6bbe`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x2c648737ca176529af2b8766982f9a642b29121cd36a449517952b072424c042"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:2c648737ca176529af2b8766982f9a642b29121cd36a449517952b072424c042`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xb1b13fe4d93535fe68abd349286f2251282ed0ca90fca1d8f43cb8f34bcb06c6"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:b1b13fe4d93535fe68abd349286f2251282ed0ca90fca1d8f43cb8f34bcb06c6`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x3489fe12a2e289b40d39106d60e1e98de2f62c64265a098e5a6a4ed73667e251"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:3489fe12a2e289b40d39106d60e1e98de2f62c64265a098e5a6a4ed73667e251`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x96d970c079fe621db9559f1b434d1c0afdc9bede0918c90d0847052f2839b271"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:96d970c079fe621db9559f1b434d1c0afdc9bede0918c90d0847052f2839b271`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xe45eba7322fbc3502c8562b30e4f1aeef7cec3d486b28ad556e8557ee8ab1886"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:e45eba7322fbc3502c8562b30e4f1aeef7cec3d486b28ad556e8557ee8ab1886`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xbd6924e92fbc5e293c6e74a2936b441a1aff6bc0bdad6efb9f52065987e346ff"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:bd6924e92fbc5e293c6e74a2936b441a1aff6bc0bdad6efb9f52065987e346ff`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x0f999c0b251f7cced8c392d92336d573df551edd942097163b1418ea37854335"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:0f999c0b251f7cced8c392d92336d573df551edd942097163b1418ea37854335`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xfc46ce519bcd949f164561330216d069afb146a59f3a572ad52e55a21a67a5ef"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:fc46ce519bcd949f164561330216d069afb146a59f3a572ad52e55a21a67a5ef`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xde0f3e8432a43d4db5a4b9733b3aa9a68fa62018efe46f8e904186673a00e27e"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:de0f3e8432a43d4db5a4b9733b3aa9a68fa62018efe46f8e904186673a00e27e`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x8f72f46c2d53aa3fdeb411ae3ed6973da12fa980ded8a304d9f987d9e3b7c50b"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:8f72f46c2d53aa3fdeb411ae3ed6973da12fa980ded8a304d9f987d9e3b7c50b`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xe4193c22ce0065944a7c7d6ba239c891e1e587a7efc4a0728ba4c873a3a99aa7"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:e4193c22ce0065944a7c7d6ba239c891e1e587a7efc4a0728ba4c873a3a99aa7`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x2a1d7dba885d0be7fa1462405e9b844f6a41b1bf98b1c00b052cd7cecc1c0c9c"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:2a1d7dba885d0be7fa1462405e9b844f6a41b1bf98b1c00b052cd7cecc1c0c9c`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xa73c46ca1ad7903ac21f8939380ab1975c49d0c371aeff0405ed74cde270fb04"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:a73c46ca1ad7903ac21f8939380ab1975c49d0c371aeff0405ed74cde270fb04`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x1e338413182dadba58c37755bc7b3093c81d25d7638109447e1f3b8cad9d65a7"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:1e338413182dadba58c37755bc7b3093c81d25d7638109447e1f3b8cad9d65a7`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xf042a93c05d41432331f9840238b1228c4ef12a18f4a18fdbf8c4ef31f26fe26"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:f042a93c05d41432331f9840238b1228c4ef12a18f4a18fdbf8c4ef31f26fe26`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x7c28b99d9f4c12b69bc4d89fc8457d18e7171cc384356ae7e1808de888dd4e2a"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:7c28b99d9f4c12b69bc4d89fc8457d18e7171cc384356ae7e1808de888dd4e2a`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x9abd35c859b356ab96f08566af12c6c07a3d0ff6cf2bc90c2dfaa6f5980e2140"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:9abd35c859b356ab96f08566af12c6c07a3d0ff6cf2bc90c2dfaa6f5980e2140`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0xe88242a5f0e9874bef9159f4540197d9211f472a0271383a9443267cf114e879"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:e88242a5f0e9874bef9159f4540197d9211f472a0271383a9443267cf114e879`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+     |
+
+    contract @"0x2be16bad3b002d5c754d20e97f812dd8fb8a3cae05d58f73cc1e9fe93210574e"(@purse) = {
+      new purseAmountCh, return(`rho:io:stdout`) in {
+        @[purse, "getBalance"]!(*purseAmountCh) |
+        for(@wallet <- @`rho:pubkey:ed25519:2be16bad3b002d5c754d20e97f812dd8fb8a3cae05d58f73cc1e9fe93210574e`; @amount <- purseAmountCh) {
+          @[wallet, "deposit"]!(amount, purse, *return)
+        }
+      }
+    }
+    
