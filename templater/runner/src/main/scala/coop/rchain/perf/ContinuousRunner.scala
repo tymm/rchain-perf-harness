@@ -1,6 +1,6 @@
 package coop.rchain.perf
 
-import java.nio.file.{Files, Paths}
+import java.nio.file.{FileSystems, Files, Path, Paths}
 
 import io.gatling.app.Gatling
 import io.gatling.core.Predef.{Simulation, scenario}
@@ -13,6 +13,8 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 
 object ContinuousRunner {
+  val rhoMatcher = FileSystems.getDefault.getPathMatcher("glob:**.rho")
+
   def main(args: Array[String]): Unit = {
     val simClass = classOf[ContinuousSimulation].getName
 
@@ -24,10 +26,6 @@ object ContinuousRunner {
   class ContinuousSimulation extends Simulation {
     import RNodeActionDSL._
 
-    import java.nio.file.FileSystems
-
-    val rhoMatcher = FileSystems.getDefault.getPathMatcher("glob:**.rho")
-
     val contractsPath = System.getProperty("path")
     val hosts = System.getProperty("hosts")
     val sessions = Integer.getInteger("sessions", 1)
@@ -35,15 +33,7 @@ object ContinuousRunner {
     val deploy2ProposeRatio: Int = Integer.getInteger("ratio", 1)
 
     val basePath = Paths.get(contractsPath)
-    private val termsWithNames: List[(String, String)] = Files
-      .walk(basePath)
-      .filter(rhoMatcher.matches(_))
-      .iterator()
-      .asScala
-      .map { p =>
-        (basePath.relativize(p).toString, Source.fromFile(p.toFile).mkString)
-      }
-      .toList
+    private val termsWithNames: List[(String, String)] = getAllRhosFromPath(basePath)
 
     val protocol: RNodeProtocol =
       RNodeProtocol(hosts.split(" ").map((_, 40401)).toList)
@@ -60,5 +50,16 @@ object ContinuousRunner {
       scn.inject(rampUsers(sessions) over (5 seconds))
     ).protocols(protocol)
   }
+
+  def getAllRhosFromPath(basePath: Path): List[(String, String)] =
+    Files
+      .walk(basePath)
+      .filter(rhoMatcher.matches(_))
+      .iterator()
+      .asScala
+      .map { p =>
+        (basePath.relativize(p).toString, Source.fromFile(p.toFile).mkString)
+      }
+      .toList
 
 }
