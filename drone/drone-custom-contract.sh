@@ -2,7 +2,10 @@
 set -axe
 
 buildNumber=$1
-contract=$2
-image=$3
+cmnd=$2
+contract=$3
+image=$4
 
-./drone-cli.sh deploy --param CONTRACT=/workdir/rchain-perf-harness/$contract --param RNODE_IMAGE_VERSION=${image:-dev} lukasz-golebiewski-org/rchain-perf-harness $buildNumber custom_contract
+toRun=$2=/workdir/rchain-perf-harness/$contract
+
+./drone-cli.sh deploy --param $toRun --param RNODE_IMAGE_VERSION=${image:-dev} lukasz-golebiewski-org/rchain-perf-harness $buildNumber custom_contract
