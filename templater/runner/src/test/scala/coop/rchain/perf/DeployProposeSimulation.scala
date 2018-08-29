@@ -28,6 +28,8 @@ class DeployProposeSimulation extends Simulation {
     .map(Paths.get(_))
     .map(ContinuousRunner.getAllRhosFromPath)
 
+    and fail
+
   val contract = contractsFromPath.getOrElse(
     Option(System.getProperty("contract"))
       .map { s =>
