@@ -8,7 +8,7 @@ import org.rogach.scallop.ScallopConf
 object Consts {
   val javaRuntime =
     """
-      |export RCHAIN_RNODE="java -jar -Xmx16G -Xms16G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.bin -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps `pwd`/rnode.jar"
+      |export RCHAIN_RNODE="./rnode/bin/main"
     """.stripMargin
 }
 
@@ -23,8 +23,9 @@ object Templates {
       |no-upnp = true
       |default-timeout = 1000
       |standalone = true
-      |map-size = 1000000000
+      |map-size = 3000000000
       |data-dir = "./data"
+      |thread-pool-size = 200
       |
       |[grpc-server]
       |host = "grpc"
@@ -44,9 +45,10 @@ object Templates {
       |http-port = <c.httpPort>
       |no-upnp = true
       |default-timeout = 1000
-      |map-size = 1000000000
+      |map-size = 3000000000
       |data-dir = "./data"
       |bootstrap = "rnode://7119ad2a26cdcde63dca675c4f2a4df85f404726@localhost:<bootstrapPort>"
+      |thread-pool-size = 200
       |
       |[grpc-server]
       |host = "grpc"
@@ -197,6 +199,7 @@ case class NodeConfig(
 class Config(arguments: Seq[String]) extends ScallopConf(arguments) {
 //  val validators = opt[Int](required = true)
   val out = opt[Path](required = true)
+  val prefix = opt[String](required = true)
 }
 
 object Templater {
@@ -205,8 +208,9 @@ object Templater {
     conf.verify
     val amount = 4
     val out = conf.out()
+    val prefix = conf.prefix()
 
-    val bsc = genVCon(999).copy(name = "bootstrap")
+    val bsc = genVCon(999, prefix).copy(name = "bootstrap")
     genConfig(
       out,
       bsc,
@@ -216,7 +220,7 @@ object Templater {
     genBSData(out)
     genTests(out, bsc)
 
-    (1 to amount).map(genVCon).zipWithIndex.foreach {
+    (1 to amount).map(genVCon(_, prefix)).zipWithIndex.foreach {
       case (c, i) =>
         genConfig(out, c, Templates.validator, bsc.port, Store.keys(i))
         genVData(out, c.name)
@@ -249,8 +253,8 @@ object Templater {
                              Paths.get("../../store/bootstrap/genesis"))
   }
 
-  def genVCon(i: Int): NodeConfig = {
-    val prefix = f"3$i%03d"
+  def genVCon(i: Int, p: String): NodeConfig = {
+    val prefix = f"$p$i%03d"
     NodeConfig(name = prefix,
                port = (prefix + 1).toInt,
                metricsPort = (prefix + 2).toInt,

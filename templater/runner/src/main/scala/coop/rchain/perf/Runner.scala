@@ -2,7 +2,10 @@ package coop.rchain.perf
 
 import akka.actor.ActorSystem
 import com.google.protobuf.empty.Empty
-import coop.rchain.casper.protocol.DeployServiceGrpc.DeployServiceBlockingClient
+import coop.rchain.casper.protocol.DeployServiceGrpc.{
+  DeployServiceBlockingClient,
+  DeployServiceStub
+}
 import coop.rchain.casper.protocol.{
   DeployData,
   DeployServiceGrpc,
@@ -21,7 +24,9 @@ import io.gatling.core.stats.message.ResponseTimings
 import io.gatling.core.structure.ScenarioContext
 import io.gatling.core.util.NameGen
 import io.grpc.ManagedChannelBuilder
+import scala.concurrent.ExecutionContext.Implicits.global
 
+import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
 
 object Runner {}
@@ -30,16 +35,29 @@ import io.gatling.core.Predef._
 
 object Propose {
   def propose(session: Session)(
-      client: ClientWithDetails): (Session, DeployServiceResponse) = {
-    (session.remove("client"), client.client.createBlock(Empty()))
+      client: ClientWithDetails): Future[(Session, DeployServiceResponse)] = {
+    val x1 = System.currentTimeMillis()
+    val (cn, _): (String, String) = session("contract").as[(String, String)]
+    println(
+      s"starting propose of $cn on client ${client.full} session ${session.userId}")
+    val r = client.client.createBlock(Empty())
+    r.map { res =>
+      println(
+        s"finished propose of $cn on client ${client.full} session ${session.userId}, took: ${System
+          .currentTimeMillis() - x1}")
+      (session, res)
+    }
   }
 }
 
 object Deploy {
   def deploy(session: Session)(
-      client: ClientWithDetails): (Session, DeployServiceResponse) = {
-    val (_, contract): (String, String) = session("contract")
+      client: ClientWithDetails): Future[(Session, DeployServiceResponse)] = {
+    val (cn, contract): (String, String) = session("contract")
       .as[(String, String)]
+    val x1 = System.currentTimeMillis()
+    println(
+      s"starting deploy of $cn on client ${client.full} session ${session.userId}")
     val d = DeployData()
       .withTimestamp(System.currentTimeMillis())
       .withTerm(contract)
@@ -47,17 +65,22 @@ object Deploy {
       .withPhloLimit(0)
       .withPhloPrice(0)
       .withNonce(0)
-    (session.set("client", client), client.client.doDeploy(d))
+    val r = client.client.doDeploy(d)
+    r.map { res =>
+      println(
+        s"finished deploy of $cn on client ${client.full} session ${session.userId}, took: ${System
+          .currentTimeMillis() - x1}")
+      (session.set("client", client), res)
+    }
   }
 }
 
-class RNodeRequestAction(
-    val actionName: String,
-    val request: Session => ClientWithDetails => (Session,
-                                                  DeployServiceResponse),
-    val statsEngine: StatsEngine,
-    val next: Action,
-    val pool: Iterator[ClientWithDetails])
+class RNodeRequestAction(val actionName: String,
+                         val request: Session => ClientWithDetails => Future[
+                           (Session, DeployServiceResponse)],
+                         val statsEngine: StatsEngine,
+                         val next: Action,
+                         val pool: Iterator[ClientWithDetails])
     extends ExitableAction
     with NameGen {
 
@@ -98,18 +121,28 @@ class RNodeRequestAction(
                              exception.getMessage,
                              KO,
                              requestName(contractName, client.host))
-        case Success((ns, DeployServiceResponse(false, msg))) =>
-          next ! logResponse(timings,
-                             ns.markAsFailed,
-                             msg,
-                             KO,
-                             requestName(contractName, client.host))
-        case Success((ns, DeployServiceResponse(true, msg))) =>
-          next ! logResponse(timings,
-                             ns.markAsSucceeded,
-                             msg,
-                             OK,
-                             requestName(contractName, client.host))
+        case Success(future) =>
+          future.onComplete {
+            case Failure(exception) =>
+              exception.printStackTrace()
+              next ! logResponse(timings,
+                                 session.markAsFailed,
+                                 exception.getMessage,
+                                 KO,
+                                 requestName(contractName, client.host))
+            case Success((ns, DeployServiceResponse(false, msg))) =>
+              next ! logResponse(timings,
+                                 ns.markAsFailed,
+                                 msg,
+                                 KO,
+                                 requestName(contractName, client.host))
+            case Success((ns, DeployServiceResponse(true, msg))) =>
+              next ! logResponse(timings,
+                                 ns.markAsSucceeded,
+                                 msg,
+                                 OK,
+                                 requestName(contractName, client.host))
+          }
       }
     }
   }
@@ -133,7 +166,8 @@ object RNodeActionDSL {
   }
 }
 abstract class RNodeActionBuilder extends ActionBuilder {
-  val execute: Session => ClientWithDetails => (Session, DeployServiceResponse)
+  val execute: Session => ClientWithDetails => Future[(Session,
+                                                       DeployServiceResponse)]
   val actionName: String
 
   override def build(ctx: ScenarioContext, next: Action): Action = {
@@ -150,9 +184,11 @@ abstract class RNodeActionBuilder extends ActionBuilder {
 
 case class RNodeProtocol(hosts: List[(String, Int)]) extends Protocol {}
 
-case class ClientWithDetails(client: DeployServiceBlockingClient,
+case class ClientWithDetails(client: DeployServiceStub,
                              host: String,
-                             port: Int)
+                             port: Int) {
+  def full = s"$host:$port"
+}
 
 object RNodeProtocol {
 
@@ -194,9 +230,10 @@ object RNodeProtocol {
                   .forAddress(host, port)
                   .usePlaintext(true)
                   .build
-                ClientWithDetails(DeployServiceGrpc.blockingStub(channel),
-                                  host,
-                                  port)
+                ClientWithDetails(
+                  DeployServiceGrpc.stub(channel),
+                  host,
+                  port)
             }
           val pool = RoundRobin(clients.toIndexedSeq)
           RNodeComponents(rnodeProtocol, clients, pool)
