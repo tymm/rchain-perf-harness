@@ -7,7 +7,7 @@ module.exports = (robot) ->
     cmd = msg.match[2]
     contract = msg.match[3]
 
-    lastSuccessfulBuildNo = execFileSync('./drone-cli.sh', ['build', 'ls' ,'--status', 'success', '--format', '{{.Number}}', '--limit', '1', 'lukasz-golebiewski-org/rchain-perf-harness'],{
+    lastSuccessfulBuildNo = execFileSync('./drone-cli.sh', ['build', 'ls' ,'--status', 'success', '--format', '{{.Number}}', '--limit', '1', 'rchain/rchain-perf-harness'],{
       cwd: '../drone'
     }).toString()
 

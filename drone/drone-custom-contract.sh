@@ -8,4 +8,4 @@ image=$4
 
 toRun=$cmd=/workdir/rchain-perf-harness/$contract
 
-./drone-cli.sh deploy --param $toRun --param RNODE_IMAGE_VERSION=${image:-dev} lukasz-golebiewski-org/rchain-perf-harness $buildNumber custom_contract
+./drone-cli.sh deploy --param $toRun --param RNODE_IMAGE_VERSION=${image:-dev} rchain/rchain-perf-harness $buildNumber custom_contract
