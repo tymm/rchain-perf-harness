@@ -16,8 +16,10 @@ pipeline:
   debug:
     image: alpine
     commands:
-      - (exit 0 | tee exit0.out) ; exit $${PIPESTATUS[0]}
-      - (exit 1 | tee exit1.out) ; exit $${PIPESTATUS[0]}
+      - mkfifo pipe
+      - tee out.txt < pipe &
+      - command > pipe
+      - echo $?
 
 #  setup:
 #    image: docker
