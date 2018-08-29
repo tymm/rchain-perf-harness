@@ -86,7 +86,7 @@ class RNodeRequestAction(val actionName: String,
 
   override def name: String = actionName
 
-  private def requestName(cn: String, host: String) = s"$cn-$host-$name"
+  private def requestName(cn: String, host: String): FailHere = s"$cn-$host-$name"
 
   def logResponse(timings: ResponseTimings,
                   ns: Session,
