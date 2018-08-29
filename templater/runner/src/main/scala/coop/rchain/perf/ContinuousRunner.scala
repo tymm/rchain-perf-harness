@@ -28,7 +28,7 @@ object ContinuousRunner {
 
     val contractsPath = System.getProperty("path")
     val hosts = System.getProperty("hosts")
-    val sessions = Integer.getInteger("sessions", 10)
+    val sessions = Integer.getInteger("sessions", 1)
     val loops = Integer.getInteger("loops", 1)
     val deploy2ProposeRatio: Int = Integer.getInteger("ratio", 1)
 
