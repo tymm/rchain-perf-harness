@@ -99,7 +99,7 @@ pipeline:
     commands:
       - pwd
       - cd templater
-      - (sbt -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out ; exit ${{PIPESTATUS[0]}})
+      - (sbt -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out ; exit $${PIPESTATUS[0]})
       - sleep 200
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
@@ -113,7 +113,7 @@ pipeline:
     commands:
       - pwd
       - cd templater
-      - (sbt -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out ; exit ${{PIPESTATUS[0]}})
+      - (sbt -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test | tee sbt.out ; exit $${PIPESTATUS[0]})
       - sleep 200
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
