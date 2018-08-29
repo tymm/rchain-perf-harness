@@ -33,7 +33,12 @@ object ContinuousRunner {
     val deploy2ProposeRatio: Int = Integer.getInteger("ratio", 1)
 
     val basePath = Paths.get(contractsPath)
-    private val termsWithNames: List[(String, String)] = getAllRhosFromPath(basePath)
+    private val termsWithNames: List[(String, String)] = getAllRhosFromPath(
+      basePath)
+
+    println("will run contracts:")
+    termsWithNames.map(_._1).foreach(println)
+    println("-------------------")
 
     val protocol: RNodeProtocol =
       RNodeProtocol(hosts.split(" ").map((_, 40401)).toList)
@@ -47,7 +52,7 @@ object ContinuousRunner {
     }
 
     setUp(
-      scn.inject(rampUsers(sessions) over (5 seconds))
+      scn.inject(atOnceUsers(sessions))
     ).protocols(protocol)
   }
 
@@ -61,5 +66,6 @@ object ContinuousRunner {
         (basePath.relativize(p).toString, Source.fromFile(p.toFile).mkString)
       }
       .toList
+      .sortBy(_._1)
 
 }

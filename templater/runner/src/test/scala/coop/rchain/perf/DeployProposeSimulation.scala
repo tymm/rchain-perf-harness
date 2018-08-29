@@ -24,13 +24,16 @@ class DeployProposeSimulation extends Simulation {
   val conf = ConfigFactory.load()
   val rnodes = conf.getStringList("rnodes").asScala.toList
 
-  val contractsFromPath = Option(System.getProperty("path")).map(Paths.get(_)).map(ContinuousRunner.getAllRhosFromPath)
+  val contractsFromPath = Option(System.getProperty("path"))
+    .map(Paths.get(_))
+    .map(ContinuousRunner.getAllRhosFromPath)
 
-  val contract = contractsFromPath.fold(Option(System.getProperty("contract"))
-    .map { s =>
-      (Paths.get(s).getFileName.toString, Source.fromFile(s).mkString)
-    }
-    .getOrElse(("sum-list", defaultTerm)))
+  val contract = contractsFromPath.getOrElse(
+    Option(System.getProperty("contract"))
+      .map { s =>
+        (Paths.get(s).getFileName.toString, Source.fromFile(s).mkString)
+      }
+      .getOrElse(("sum-list", defaultTerm)))
 
   println(s"will run simulation on ${rnodes.mkString(", ")}, contracts:")
   println("-------------------------------")
@@ -44,8 +47,7 @@ class DeployProposeSimulation extends Simulation {
       repeat(1) {
         repeat(1) {
           exec(deploy())
-        }
-          .exec(propose())
+        }.exec(propose())
       }
     }
 
