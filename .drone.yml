@@ -115,7 +115,7 @@ pipeline:
     commands:
       - pwd
       - cd templater
-       - mkfifo pipe
+      - mkfifo pipe
       - tee sbt.out < pipe &
       - sbt -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:test > pipe
       - sleep 200
