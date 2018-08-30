@@ -2,13 +2,13 @@
 #   hubot integration with drone
 #
 # Commands:
-#   hubot test performance of <tag> using <cmd> on <path> - Tests performance of an rchain/rnode docker image labeled with <tag>. <cmd> can be either 'contract' or 'path'. The first expects a path to a contract, the latter a path to a directory containing contracts which will be deployed in alphabetical order.
+#   hubot test performance of <tag> using <contract(s)> - Tests performance of an rchain/rnode docker image labeled with <tag>. <contract(s)> can point to a single file or a directory with contracts - in the latter case all contracts will be deployed in alphabetical order.
 
 {spawn,execFileSync} = require('child_process')
 
 module.exports = (robot) ->
 
-  robot.respond /test performance of (.*) using (.*) on (.*)/i, (msg) ->
+  robot.respond /test performance of (.*) using (.*)/i, (msg) ->
     tag = msg.match[1]
     cmd = msg.match[2]
     contract = msg.match[3]
@@ -17,7 +17,7 @@ module.exports = (robot) ->
       cwd: '../drone'
     }).toString()
 
-    child = spawn("bash", ["./drone-custom-contract.sh", lastSuccessfulBuildNo, "#{cmd}", "#{contract}", "#{tag}"], {
+    child = spawn("bash", ["./drone-custom-contract.sh", lastSuccessfulBuildNo, "#{contract}", "#{tag}"], {
       cwd: '../drone'
     })
 

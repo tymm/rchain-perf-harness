@@ -16,7 +16,6 @@ pipeline:
     image: docker
     commands:
       - echo $CONTRACT
-      - echo $PATH
       - echo $RNODE_IMAGE_VERSION
       - docker pull rchain/rnode:dev
       - docker image tag rchain/rnode:dev rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
@@ -29,7 +28,6 @@ pipeline:
     image: docker
     commands:
       - echo $CONTRACT
-      - echo $PATH
       - echo $RNODE_IMAGE_VERSION
       - docker pull rchain/rnode:$RNODE_IMAGE_VERSION
       - docker image tag rchain/rnode:$RNODE_IMAGE_VERSION rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}

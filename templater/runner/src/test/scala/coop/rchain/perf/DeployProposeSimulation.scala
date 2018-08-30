@@ -1,6 +1,6 @@
 package coop.rchain.perf
 
-import java.nio.file.Paths
+import java.nio.file.{Files, Paths}
 
 import collection.JavaConverters._
 import com.typesafe.config.ConfigFactory
@@ -8,7 +8,6 @@ import io.gatling.core.Predef.{Simulation, atOnceUsers, scenario}
 import io.gatling.core.Predef._
 
 import scala.concurrent.duration._
-
 import scala.io.Source
 
 class DeployProposeSimulation extends Simulation {
@@ -24,26 +23,21 @@ class DeployProposeSimulation extends Simulation {
   val conf = ConfigFactory.load()
   val rnodes = conf.getStringList("rnodes").asScala.toList
 
-  val contractsFromPath = Option(System.getProperty("path"))
-    .map(Paths.get(_))
-    .map(ContinuousRunner.getAllRhosFromPath)
-
-  val contract = contractsFromPath.getOrElse(
-    Option(System.getProperty("contract"))
-      .map { s =>
-        (Paths.get(s).getFileName.toString, Source.fromFile(s).mkString)
-      }
-      .getOrElse(("sum-list", defaultTerm)))
+  val contracts = sys.props.get("contract")
+    .map(path => Paths.get(path) match {
+      case p if Files.isDirectory(p) => ContinuousRunner.getAllRhosFromPath(p)
+      case p => (p.getFileName.toString, Source.fromFile(p.toUri).mkString)
+    }).getOrElse(("sum-list", defaultTerm))
 
   println(s"will run simulation on ${rnodes.mkString(", ")}, contracts:")
   println("-------------------------------")
-  println(contract)
+  println(contracts)
   println("-------------------------------")
 
   val protocol = RNodeProtocol.createFor(rnodes)
 
   val scn = scenario("DeployProposeSimulation")
-    .foreach(List(contract), "contract") {
+    .foreach(List(contracts), "contract") {
       repeat(1) {
         repeat(1) {
           exec(deploy())
