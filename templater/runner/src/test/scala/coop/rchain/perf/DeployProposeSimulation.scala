@@ -26,8 +26,8 @@ class DeployProposeSimulation extends Simulation {
   val contracts = sys.props.get("contract")
     .map(path => Paths.get(path) match {
       case p if Files.isDirectory(p) => ContinuousRunner.getAllRhosFromPath(p)
-      case p => (p.getFileName.toString, Source.fromFile(p.toUri).mkString)
-    }).getOrElse(("sum-list", defaultTerm))
+      case p => List((p.getFileName.toString, Source.fromFile(p.toUri).mkString))
+    }).getOrElse(List(("sum-list", defaultTerm)))
 
   println(s"will run simulation on ${rnodes.mkString(", ")}, contracts:")
   println("-------------------------------")
@@ -37,7 +37,7 @@ class DeployProposeSimulation extends Simulation {
   val protocol = RNodeProtocol.createFor(rnodes)
 
   val scn = scenario("DeployProposeSimulation")
-    .foreach(List(contracts), "contract") {
+    .foreach(contracts, "contract") {
       repeat(1) {
         repeat(1) {
           exec(deploy())
