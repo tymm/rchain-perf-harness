@@ -10,8 +10,7 @@ module.exports = (robot) ->
 
   robot.respond /test performance of (.*) using (.*)/i, (msg) ->
     tag = msg.match[1]
-    cmd = msg.match[2]
-    contract = msg.match[3]
+    contract = msg.match[2]
 
     lastSuccessfulBuildNo = execFileSync('./drone-cli.sh', ['build', 'ls' ,'--status', 'success', '--format', '{{.Number}}', '--limit', '1', 'rchain/rchain-perf-harness'],{
       cwd: '../drone'
