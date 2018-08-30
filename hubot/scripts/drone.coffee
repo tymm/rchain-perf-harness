@@ -1,3 +1,9 @@
+# Description:
+#   hubot integration with drone
+#
+# Commands:
+#   hubot test performance of <docker-tag> using <cmd> on <path> - Tests performance of an rchain/rchain docker image labeled with <docker-tag>. <cmd> can be either 'contract' or 'path'. The first expects a path to a contract, the latter a path to a directory containing contracts which will be deployed in alphabetical order.
+
 {spawn,execFileSync} = require('child_process')
 
 module.exports = (robot) ->
