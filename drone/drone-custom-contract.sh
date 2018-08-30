@@ -2,8 +2,8 @@
 set -axe
 
 buildNumber=$1
-contract=$3
-image=$4
+contract=$2
+image=$3
 
 toRun=/workdir/rchain-perf-harness/$contract
 
