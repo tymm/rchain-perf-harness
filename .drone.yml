@@ -11,15 +11,17 @@ workspace:
 #      - sleep 15
 #      - /bin/bash loop-metrics.sh
 #
-pipeline:
-   clone-rchain:
-     git:
-       image: plugins/git
-       commands:
-         - git clone git@github.com:rchain/rchain.git /workdir/rchain
-         - git fetch
-         - git checkout dev
 
+clone:
+  git:
+    image: plugins/git
+    commands:
+      - git clone git@github.com:rchain/rchain.git /workdir/rchain
+      - git fetch
+      - git checkout dev
+
+
+pipeline:
    debug:
      image: alpine
      commands:
