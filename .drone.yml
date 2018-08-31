@@ -24,33 +24,33 @@ clone:
 
 
 pipeline:
-  debug:
-    image: alpine
-    commands:
-      - ls /workdir
+#  debug:
+#    image: alpine
+#    commands:
+#      - ls /workdir
+
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - /workdir/.ivy2
+    volumes:
+      - /tmp/cache:/cache
 
   setup-when-custom-commit:
     image: lukaszgolebiewski/rchain-builder-test
     commands:
-      - echo $COMMIT_HASH
+      - echo $RCHAIN_COMMIT_HASH
       - cd /workspace/rchain
+      - git checkout $RCHAIN_COMMIT_HASH
       - sbt -Dsbt.ivy.home=/workdir/.ivy2 ;rholang/bnfc:generate; compile; node/docker:publishLocal
       - docker image tag coop.rchain/rnode:latest rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    #when:
-    #  event: deployment
-    #  environment: custom_commit
-#
-#
-#  restore-cache:
-#    image: drillster/drone-volume-cache
-#    restore: true
-#    mount:
-#      - /workdir/.ivy2
-#    volumes:
-#      - /tmp/cache:/cache
-#
+    when:
+      event: deployment
+      environment: custom_commit
+
 #  setup:
 #    image: docker
 #    commands:
@@ -172,10 +172,10 @@ pipeline:
 #    when:
 #      status: [ success, failure ]
 #
-#  rebuild-cache:
-#    image: drillster/drone-volume-cache
-#    rebuild: true
-#    mount:
-#      - /workdir/.ivy2
-#    volumes:
-#      - /tmp/cache:/cache
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - /workdir/.ivy2
+    volumes:
+      - /tmp/cache:/cache
