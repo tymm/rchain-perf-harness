@@ -29,6 +29,18 @@ pipeline:
      commands:
        - ls /workdir
 
+  setup-when-custom-commit:
+    image: lukaszgolebiewski/rchain-builder-test
+    commands:
+      - echo $COMMIT_HASH
+      - sbt -Dsbt.ivy.home=/workdir/.ivy2 ;rholang/bnfc:generate; compile; node/docker:publishLocal
+      - docker image tag coop.rchain/rnode:latest rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    #when:
+    #  event: deployment
+    #  environment: custom_commit
+#
 #
 #  restore-cache:
 #    image: drillster/drone-volume-cache
