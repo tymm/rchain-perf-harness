@@ -2,15 +2,14 @@ workspace:
   base: /workdir
   path: rchain-perf-harness
 
-#services:
-#  push-metrics:
-#    image: cfmanteiga/alpine-bash-curl-jq
-#    detach: true
-#    commands:
-#      - cd metrics
-#      - sleep 15
-#      - /bin/bash loop-metrics.sh
-#
+services:
+  push-metrics:
+    image: cfmanteiga/alpine-bash-curl-jq
+    detach: true
+    commands:
+      - cd metrics
+      - sleep 15
+      - /bin/bash loop-metrics.sh
 
 clone:
   clone-rchain-perf-harness:
