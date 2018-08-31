@@ -19,7 +19,11 @@ clone-rchain:
 #      - sleep 15
 #      - /bin/bash loop-metrics.sh
 #
-#pipeline:
+pipeline:
+   debug:
+     image: alpine
+     commands:
+       - ls workdir
 #
 #  restore-cache:
 #    image: drillster/drone-volume-cache
