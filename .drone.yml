@@ -2,14 +2,6 @@ workspace:
   base: /workdir
   path: rchain-perf-harness
 
-clone-rchain:
-  git:
-    image: plugins-git
-    commands:
-      - git clone git@github.com:rchain/rchain.git /workdir/rchain
-      - git fetch
-      - git checkout dev
-
 #services:
 #  push-metrics:
 #    image: cfmanteiga/alpine-bash-curl-jq
@@ -20,10 +12,18 @@ clone-rchain:
 #      - /bin/bash loop-metrics.sh
 #
 pipeline:
+    clone-rchain:
+      git:
+        image: plugins-git
+        commands:
+          - git clone git@github.com:rchain/rchain.git /workdir/rchain
+          - git fetch
+          - git checkout dev
+
    debug:
      image: alpine
      commands:
-       - ls workdir
+       - ls /workdir
 #
 #  restore-cache:
 #    image: drillster/drone-volume-cache
