@@ -38,6 +38,7 @@ pipeline:
   setup-when-custom-commit:
     image: lukaszgolebiewski/rchain-builder-test
     commands:
+      - echo $CONTRACT
       - echo $RCHAIN_COMMIT_HASH
       - cd /workdir/rchain
       - git checkout $RCHAIN_COMMIT_HASH
