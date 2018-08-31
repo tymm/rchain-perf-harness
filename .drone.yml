@@ -15,6 +15,8 @@ workspace:
 clone:
   git:
     image: plugins/git
+  git:
+    image: plugins/git
     commands:
       - git clone https://github.com/rchain/rchain.git /workdir/rchain && cd /workdir/rchain
       - git fetch
