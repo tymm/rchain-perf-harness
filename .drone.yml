@@ -24,10 +24,10 @@ clone:
 
 
 pipeline:
-   debug:
-     image: alpine
-     commands:
-       - ls /workdir
+  debug:
+    image: alpine
+    commands:
+      - ls /workdir
 
   setup-when-custom-commit:
     image: lukaszgolebiewski/rchain-builder-test
