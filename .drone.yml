@@ -14,7 +14,7 @@ workspace:
 pipeline:
    clone-rchain:
      git:
-       image: plugins-git
+       image: plugins/git
        commands:
          - git clone git@github.com:rchain/rchain.git /workdir/rchain
          - git fetch
