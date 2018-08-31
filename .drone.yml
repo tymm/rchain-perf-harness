@@ -41,7 +41,7 @@ pipeline:
     image: lukaszgolebiewski/rchain-builder-test
     commands:
       - echo $RCHAIN_COMMIT_HASH
-      - cd /workspace/rchain
+      - cd /workdir/rchain
       - git checkout $RCHAIN_COMMIT_HASH
       - sbt -Dsbt.ivy.home=/workdir/.ivy2 ;rholang/bnfc:generate; compile; node/docker:publishLocal
       - docker image tag coop.rchain/rnode:latest rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
