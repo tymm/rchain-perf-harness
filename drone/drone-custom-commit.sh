@@ -7,4 +7,4 @@ rchainCommitHash=$3
 
 toRun=/workdir/rchain-perf-harness/$contract
 
-./drone-cli.sh deploy --param CONTRACT=$toRun --param RCHAIN_COMMIT_HASH=${rchainCommitHash:-dev} rchain/rchain-perf-harness $buildNumber custom_commit
+./drone-cli.sh deploy --param CONTRACT=$toRun --param RCHAIN_COMMIT_HASH=${rchainCommitHash:-dev} --format "{{.Number}}" rchain/rchain-perf-harness $buildNumber custom_commit

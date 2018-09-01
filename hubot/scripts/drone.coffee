@@ -23,7 +23,7 @@ module.exports = (robot) ->
 
     child.stdout.on 'data', (data) ->
       #console.log('stdout: ' + data)
-      msg.send "I shall see right to it!"
+      msg.send ("Scheduled build http://stress-docker.pyr8.io:8080/rchain/rchain-perf-harness/" + data)
 
   robot.respond /test performance of commit (.*) using (.*)/i, (msg) ->
     hash = msg.match[1]
@@ -39,4 +39,4 @@ module.exports = (robot) ->
 
     child.stdout.on 'data', (data) ->
       #console.log('stdout: ' + data)
-      msg.send "I shall see right to it!"
+      msg.send ("Scheduled build http://stress-docker.pyr8.io:8080/rchain/rchain-perf-harness/" + data)
