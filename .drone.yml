@@ -37,6 +37,7 @@ pipeline:
 
   setup-when-custom-commit:
     image: lukaszgolebiewski/rchain-builder
+    pull: true
     commands:
       - echo $CONTRACT
       - echo $RCHAIN_COMMIT_HASH
