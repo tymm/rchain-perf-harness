@@ -36,7 +36,7 @@ pipeline:
       - /tmp/cache:/cache
 
   setup-when-custom-commit:
-    image: lukaszgolebiewski/rchain-builder-test
+    image: lukaszgolebiewski/rchain-builder
     commands:
       - echo $CONTRACT
       - echo $RCHAIN_COMMIT_HASH
