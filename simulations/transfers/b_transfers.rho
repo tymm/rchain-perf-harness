@@ -1,203 +1,1393 @@
 
-      for(@wallet <- @`rho:pubkey:ed25519:44b6746d0abaa0cbf6b7f478f21407dfd6f8d20893708f74d78854bced50c514`) {
+      for(@wallet <- @`rho:pubkey:ed25519:d10cbe6be4f26591600ff61135fc41075ddcd9d077237f0ab2019bc910c741b6`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "a4218a4a159698f7c53ba0d0af4f1cae42b199259f826f6e638290a9e13acc9adbdf47960400349bde04f53b4193496c88ad76550d77af1456a6abcf5c600202", "0x562bcc43a53544a02984143d8c7601c3d42228e67faf92017ea8d4b09ac7ff7b", *status)
+          @[wallet, "transfer"]!(11, 0, "1ab5c654e30814f908d00559f3eaff148a9f3fa7f6d0d6db6f201d8aa166137436a3ab1cd68da95e501f91352a9874039564de10dcdd29577eff50976193550b", "0xe06ad3f2dc7092517a9646e34ff0e9d4516344ee553beb760aec5c5b22ec6117", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:562bcc43a53544a02984143d8c7601c3d42228e67faf92017ea8d4b09ac7ff7b`) {
+      for(@wallet <- @`rho:pubkey:ed25519:e06ad3f2dc7092517a9646e34ff0e9d4516344ee553beb760aec5c5b22ec6117`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "07c91dbacba1460272df6386febed5f467924d37c4f3278066f475a57cf2bdba8c3d9ed98263f289cbee828f3065fd6d5fa82aeba24d96fc6eae9068d5749207", "0x5e0557818ea73f3df4c07129e8f290bc5116ea87c5d737093ed4fefa876b8012", *status)
+          @[wallet, "transfer"]!(11, 0, "c66cfca2c3996d573d0e35795b518c6b0e6d6a4f7b30755c8625d8307412f57b2179f01870e30e0e0331268597c260aed09e82eb1f5f3e990221fb5487f7a605", "0xb09944cea0e82cf023638e46aa25b44e1f58b31a4977440ad1b683370025c2cc", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:5e0557818ea73f3df4c07129e8f290bc5116ea87c5d737093ed4fefa876b8012`) {
+      for(@wallet <- @`rho:pubkey:ed25519:b09944cea0e82cf023638e46aa25b44e1f58b31a4977440ad1b683370025c2cc`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "ddebb0e6f663e5aa4ba35e0a459f19f2732bccc3fe51cd5a0e6b3d5083785286d7aab4dce0cd5bc0515ab549db0dd3598bad4251e997d811e277474dc78e1a00", "0x38267bdfe67d9fb9691f8c0157059348e7f158654a8d62c6580f407e75818d5f", *status)
+          @[wallet, "transfer"]!(11, 0, "dadb4ef0dee480721c5bda2362e400c167e33ca5c3fe3fd6aed1bef9f9fce4e3cba3f12e562d65f51ce45a1ac89ad4b30a3281d73c9648e3ecc28d2d2c657b01", "0xb18d90670725b2f7dcb603f6d7e58830c5d9553882bbcf837f0cdf0b20f6b5b3", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:38267bdfe67d9fb9691f8c0157059348e7f158654a8d62c6580f407e75818d5f`) {
+      for(@wallet <- @`rho:pubkey:ed25519:b18d90670725b2f7dcb603f6d7e58830c5d9553882bbcf837f0cdf0b20f6b5b3`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "70c5912b5d82cc952130e20416de6478a124b91357730f2ab038a3b5513032fb6d35e188ee43336b326a7577881cd8148b33dcafaa69b4eb140aa882bc391504", "0x0a271fbe3ac6368d2416dd8897d8e7c5c1399835a2174851a76f60af1b28f3ad", *status)
+          @[wallet, "transfer"]!(11, 0, "6682f005e5c5ffe026112cc9604aa44bbe391e87e7724fca0cffd6a1928a1ee885e42c6bbab32ae535ba93bb91f6f5a6986b4c6169b8046b6f8c2803fcddca01", "0x07f7923d54e8ed5b2350c058a2481c0bbb8a7b6a6b4c8f6c804537376ddb6e83", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:0a271fbe3ac6368d2416dd8897d8e7c5c1399835a2174851a76f60af1b28f3ad`) {
+      for(@wallet <- @`rho:pubkey:ed25519:07f7923d54e8ed5b2350c058a2481c0bbb8a7b6a6b4c8f6c804537376ddb6e83`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "3590a24c67ea6eeac05b9a353b1ecdb508eec6dd850e343c02d3f709c9c3a9189b42a7e4a1ca2588f762b45ba379737188d55f45fc291212ed93137bdb1d010e", "0x0a8699ee66e13ca020bfa0dd52360a13206469ea0a758041f8187c220ebe00f7", *status)
+          @[wallet, "transfer"]!(11, 0, "afbd422b55a152dce967e49ddcc7f16ee3f0f891ff8cb036dc81c98971c62fe6a0f14a66fb18c51eac23e34942e2269fdac1c7b36e2e5146504803bc6db7570f", "0xd3448fd0125445ecd8371a72018bf37b11517cc127009cddf1bdff2eb8959106", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:0a8699ee66e13ca020bfa0dd52360a13206469ea0a758041f8187c220ebe00f7`) {
+      for(@wallet <- @`rho:pubkey:ed25519:d3448fd0125445ecd8371a72018bf37b11517cc127009cddf1bdff2eb8959106`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "4f5cc9d66d588eea322e478eae4939fb93254f61afe50399b5533af852d52ef6997a9cf9c1a25b054ecaba7e8234fc8486a8d879c1ec9c557351eac12d638909", "0x895dc64c5b859bebf7f993f80055d32dd0db70497fddedc12b5504090d26558a", *status)
+          @[wallet, "transfer"]!(11, 0, "65a5207da21d1cdade42cf87e039660c5d8cb595f8b064382ef45bf0f43c66a60dd50cbfe8178cbf0a37475d6e7109da3daa17d395e5a6ae647f30054c25a302", "0x6628e075da859c8f59b1481d4a2b9a9d37c8a84a322ec2b6dd4a40041ed0f2d2", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:895dc64c5b859bebf7f993f80055d32dd0db70497fddedc12b5504090d26558a`) {
+      for(@wallet <- @`rho:pubkey:ed25519:6628e075da859c8f59b1481d4a2b9a9d37c8a84a322ec2b6dd4a40041ed0f2d2`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "4cd319181d4487a828d5ad49536510e9db691f7f5d667c926d08af0ead42ede2df08226d5dfd0be8b16d934b5212f3a9982acb1078d04339e28ba3c836013908", "0xd33f31b28682f46cf3190748f26c5507693e575e76a96e61c7b9821e014d7c1c", *status)
+          @[wallet, "transfer"]!(11, 0, "26ca34eb7a0ca08231fa3afabd92c576b7080bc585c0e015a19d1fb59deefcf369895f2f4323eea2f8b167ca4b30a51bef52b1345632ce5a7915c707ec56d200", "0x9fd12fa75b2ddb4fc50aee4ecfaff790a4e49b35d9818800e0c85ac0fd8e71bc", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:d33f31b28682f46cf3190748f26c5507693e575e76a96e61c7b9821e014d7c1c`) {
+      for(@wallet <- @`rho:pubkey:ed25519:9fd12fa75b2ddb4fc50aee4ecfaff790a4e49b35d9818800e0c85ac0fd8e71bc`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "140cc90e49df5a28ccf7560e173a722747c276be88134a8530634bd0fda70018fd8fd16d23b51c68b79e00d6a0af0af71b75bfc8d02b70e7ff5525bcc69b280d", "0x4214e3608b46e8d7e5d20c5b2b78981880686a500661dd7b5da4d563f6770f4f", *status)
+          @[wallet, "transfer"]!(11, 0, "6063ff3fb81f69bd75c5a9af33b0cebef7d8472e110f5a417da6a70600f68a8102fa8294f13c2936f726e2fa324186337253df9a4ea41f851be8b54f54fedb01", "0xa9c0cf3e377a931ba431747d3ab66993f4836cbd58e3fc4298d7e1ab57c73901", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:4214e3608b46e8d7e5d20c5b2b78981880686a500661dd7b5da4d563f6770f4f`) {
+      for(@wallet <- @`rho:pubkey:ed25519:a9c0cf3e377a931ba431747d3ab66993f4836cbd58e3fc4298d7e1ab57c73901`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "79fc86e753a2ba3fc6bcfbd953984ee340df0a2fd0670ae27c94c10887ddde8281dec617f462e6c70b864a60d6dd6cb880a8691664228676d19a9fc94cc6af01", "0xac28af032a4b6e85c7c08bbfa231407aec94f087dddca6f375d10d676517c489", *status)
+          @[wallet, "transfer"]!(11, 0, "f44d6a3b92d6b63db1a259cde0215b531593c3c9469fd4ee3dd3df3a8893bc0a3a304221b24e662a7e3cecd9e13f36c306370c2fb73541c133c4ba6f3e509b06", "0x4762ff0b3a0e189bb2ede10ee06c08a52186aaf3adcec496d34c5fc4d29a0d37", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:ac28af032a4b6e85c7c08bbfa231407aec94f087dddca6f375d10d676517c489`) {
+      for(@wallet <- @`rho:pubkey:ed25519:4762ff0b3a0e189bb2ede10ee06c08a52186aaf3adcec496d34c5fc4d29a0d37`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "8073d08467fa65386a2b5d6c81b5738907ccdfb5b74a97a295a50df203e769bee08b46f593ace12f025217943109d9052c32e09b94b6c4b145cd2fcac174bd01", "0x9cc35dfae4b610849afdcf3cda423007225c92b28d42367f97645c6f9abf6bbe", *status)
+          @[wallet, "transfer"]!(11, 0, "5603f3e732170f7ede98c505b1324d9bd80c81c1834f520a1f02528b2744cec77bd0acf47c6ec0a02d766ef222d043311d8961c47f807c2d2b9552bc6c1fa80d", "0xe42ed3ef91030b0ff31de0e8b2b666303c25ffaf28d435a96fee848673906783", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:9cc35dfae4b610849afdcf3cda423007225c92b28d42367f97645c6f9abf6bbe`) {
+      for(@wallet <- @`rho:pubkey:ed25519:e42ed3ef91030b0ff31de0e8b2b666303c25ffaf28d435a96fee848673906783`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "60fa62a7e3aa671f81d8db9fce26d1e73133dda6259305dac7f64fa4f234f7a951d6f5e677c35f922d255e452b361b0b5cf77a4540785e1b8a42b142e148920a", "0x2c648737ca176529af2b8766982f9a642b29121cd36a449517952b072424c042", *status)
+          @[wallet, "transfer"]!(11, 0, "90b90b10dd6aa79786b96df88a6c91760ac23081c36dd24e94a674893182929dd816073bc16877c2e869b6bfac8dd3cb2d768123e618b5951144f99e84296e0d", "0xdfdef733a5747290a8b7764235b66c805aef8eb739274509c2704f461485844d", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:2c648737ca176529af2b8766982f9a642b29121cd36a449517952b072424c042`) {
+      for(@wallet <- @`rho:pubkey:ed25519:dfdef733a5747290a8b7764235b66c805aef8eb739274509c2704f461485844d`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "cef392a1f6dc25da5eea5b4a437c9a636acbd2bfc4520500223e57a60478be957858f825b2bab5f2c022ab204dca2c3d82d08153d5dbc1b2579efd4534343f08", "0xb1b13fe4d93535fe68abd349286f2251282ed0ca90fca1d8f43cb8f34bcb06c6", *status)
+          @[wallet, "transfer"]!(11, 0, "3b4070d91812d48afbb917ebecc1a9a70e73ac9e54693692163af6673a797e245b09aacbf0527163a0978b14ad37b6680c7943ea39bc12212564babd0ce6440e", "0x3d5f7736ee8be12f13765c6c1c9a1e3c50da9c6e42b15398b9034c68fa3bc490", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:b1b13fe4d93535fe68abd349286f2251282ed0ca90fca1d8f43cb8f34bcb06c6`) {
+      for(@wallet <- @`rho:pubkey:ed25519:3d5f7736ee8be12f13765c6c1c9a1e3c50da9c6e42b15398b9034c68fa3bc490`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "4cad97c6ccdac6278eecc0621bfdbc5e086ebe6b0530c3c08eba094d7e46f00a8d455c0ecac2ba9bff99d8ad5343724a838bcf4f44be6caa10ad6e73aa15a40a", "0x3489fe12a2e289b40d39106d60e1e98de2f62c64265a098e5a6a4ed73667e251", *status)
+          @[wallet, "transfer"]!(11, 0, "4deef4515e720e1726ddfd00b0789c3558887e568a9c5e43281960b56adcc7d46703bf19b33854eb0e3694da065ffd2f9f49687047dd9a8042d5b068a8f1ca0a", "0x966987c0e7e0ec78d91da8dfa52ef655ec8783b4f7333530977a3f4f18e3350b", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:3489fe12a2e289b40d39106d60e1e98de2f62c64265a098e5a6a4ed73667e251`) {
+      for(@wallet <- @`rho:pubkey:ed25519:966987c0e7e0ec78d91da8dfa52ef655ec8783b4f7333530977a3f4f18e3350b`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "f73043666bedf0c8df3260e1e44b079c30d86faa91d58a7b60c7eaef2dbfdf93e53bd6cfbb8145cabcdf3382993f72e9de4d103f4f8943533f8fb3600b266a00", "0x96d970c079fe621db9559f1b434d1c0afdc9bede0918c90d0847052f2839b271", *status)
+          @[wallet, "transfer"]!(11, 0, "9cb3cf37e3a4ebaf7747cd2c2fb6b7793b7770763d520c20c5e9cdcf26f8132fd48b9d9261e5f28902b423321d1e11979157210e9017c8c12b8259344c5baa07", "0x6156293bf6b7b74358c6b6e1638bf61c2d6778ad4ef1972c510a99777c049c1b", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:96d970c079fe621db9559f1b434d1c0afdc9bede0918c90d0847052f2839b271`) {
+      for(@wallet <- @`rho:pubkey:ed25519:6156293bf6b7b74358c6b6e1638bf61c2d6778ad4ef1972c510a99777c049c1b`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "8b8f95c89ea4062322c335bd6297a9b8d53ae3f1e31cfae4e94594ea08afc4a2ffd73ba23866570b9ed3b473499d29b1d413fcb26b98333c326072d59f960909", "0xe45eba7322fbc3502c8562b30e4f1aeef7cec3d486b28ad556e8557ee8ab1886", *status)
+          @[wallet, "transfer"]!(11, 0, "e1db95acf94274826fe8fd5b0f21d5fa8e67cf5532ef5f7fe958ade0605a2f40eb95d6f9a42b6b66414e778d90fca89d2750bb7e2301e579c8a17eee845f7e09", "0xcb236f54de63bac961a72ea79222946c475c3f8496e73bc8cc8713a48162fb80", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:e45eba7322fbc3502c8562b30e4f1aeef7cec3d486b28ad556e8557ee8ab1886`) {
+      for(@wallet <- @`rho:pubkey:ed25519:cb236f54de63bac961a72ea79222946c475c3f8496e73bc8cc8713a48162fb80`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "8f4c89b63c7dbbc0f9a4cd00f9109e1534b37bd6207aa17f6f63f91adab7fd9583da2dc99c67eb939f17c09be828ca407a37a7011515cfe2876bad424e568001", "0xbd6924e92fbc5e293c6e74a2936b441a1aff6bc0bdad6efb9f52065987e346ff", *status)
+          @[wallet, "transfer"]!(11, 0, "b069dba0fe9d169cb6f8f95f3307acc632f5616824a3aefc67ec363cb9b9f94fdbf4081c53907df3dd3712696416856345667ec1f3ab09ce1f81a7a7d59ef601", "0x107e8c781e74c9348a73eadf216e09c3171d311d9fef991b020ce50cf6a34b8c", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:bd6924e92fbc5e293c6e74a2936b441a1aff6bc0bdad6efb9f52065987e346ff`) {
+      for(@wallet <- @`rho:pubkey:ed25519:107e8c781e74c9348a73eadf216e09c3171d311d9fef991b020ce50cf6a34b8c`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "4b57b4a86bc20a53f5047d7f695f8d5586a891293de16eceb2c37a0d84c6822887778a35cb954a339f145af7f355c188e4fc32aed727f4d371f81a26670c2906", "0x0f999c0b251f7cced8c392d92336d573df551edd942097163b1418ea37854335", *status)
+          @[wallet, "transfer"]!(11, 0, "c2bc6da0396a75a37be2486be6c5eb624da2884b4e1a2f758d5d2d9d03378d2dbf66b50320517691cb225c1b82ff1ff2f2841774824d617eb6ee6c706668260c", "0xe76473575877419c2d03528a8ae091c20a8c9046efb95d97051be7ac1e1ab48d", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:0f999c0b251f7cced8c392d92336d573df551edd942097163b1418ea37854335`) {
+      for(@wallet <- @`rho:pubkey:ed25519:e76473575877419c2d03528a8ae091c20a8c9046efb95d97051be7ac1e1ab48d`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "e7b40370f9f2242b7bb2029893c06a6875c7fc29bb7456c09af2fdac648921145f946e7af2cd32c0f2ec662862900234c973fc579c9ad3107ac50c1bcd3a2207", "0xfc46ce519bcd949f164561330216d069afb146a59f3a572ad52e55a21a67a5ef", *status)
+          @[wallet, "transfer"]!(11, 0, "f3400743703f501c6629f07a41a55d21d8729a4e673dd5b0b6a7b4fa268ab08565fcf8f926dc752a671c69edb82a86b2d8f040c93293ff7dbe481cd5a6c57d07", "0xb46cb5c84150bd70cad7698a5133ecd7a503efb62ef4b19ad5627b71bd31f62f", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:fc46ce519bcd949f164561330216d069afb146a59f3a572ad52e55a21a67a5ef`) {
+      for(@wallet <- @`rho:pubkey:ed25519:b46cb5c84150bd70cad7698a5133ecd7a503efb62ef4b19ad5627b71bd31f62f`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "898879fbb897718ab3fc310f531fa7cd858162e535f10212150e408b86b265f22e4a143c509858ceee2a46fc24fcca44f88d377c4692a6f30ef54cb01b081b0f", "0xde0f3e8432a43d4db5a4b9733b3aa9a68fa62018efe46f8e904186673a00e27e", *status)
+          @[wallet, "transfer"]!(11, 0, "20e41a6ccfa7519dee47afee71b4170fb11e04538c13a131cbb02c9d3077061b97e49c40185db1e70e1e45226cbc788cf80cfcbb513718545583bffcc81bb90c", "0x575b94bb891c272e53f442fcdfbd637f1647cd2c2e9283d729f794ade5170f04", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:de0f3e8432a43d4db5a4b9733b3aa9a68fa62018efe46f8e904186673a00e27e`) {
+      for(@wallet <- @`rho:pubkey:ed25519:575b94bb891c272e53f442fcdfbd637f1647cd2c2e9283d729f794ade5170f04`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "3875a6d5a2f73e4dba382eaffa8aa4200ce98afe3a22a5c014953cef3885644bc715a5906c7bbdf88d8729ca84b892637045000839c672a8376e24326a523b04", "0x8f72f46c2d53aa3fdeb411ae3ed6973da12fa980ded8a304d9f987d9e3b7c50b", *status)
+          @[wallet, "transfer"]!(11, 0, "d4ecfab436cb800569a0337a121a936f2dd3b60370d767276e37a419ab44c54439c0e403bdeb983e317b908c5c0eace9db140eca00f8ce9c204080738e84180a", "0x95ddb46bf9a5362349814a0e311f9189fcab557ef97980d280724a1282b1e4f0", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:8f72f46c2d53aa3fdeb411ae3ed6973da12fa980ded8a304d9f987d9e3b7c50b`) {
+      for(@wallet <- @`rho:pubkey:ed25519:95ddb46bf9a5362349814a0e311f9189fcab557ef97980d280724a1282b1e4f0`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "6804e772a9da08364aa7435a4ade5414b1522ac89e6f8ac82d02d07188b868d00f7e22f9a46e74940e010604f77cb7747490d5ea1a47f4889abd8d7f5023bf06", "0xe4193c22ce0065944a7c7d6ba239c891e1e587a7efc4a0728ba4c873a3a99aa7", *status)
+          @[wallet, "transfer"]!(11, 0, "cc92f31e7a2c02b307d4faf41052a6d385e1359aa71a13aef5a849b9a3da56f51b9d643ce550957cc47dfdb0feeb48ca16c7ae1b43434da46072e7171b009909", "0xf1707249260a09f9ed6f673f795fe3a58ae4a4f6af4794c580dcd3790a577aaf", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:e4193c22ce0065944a7c7d6ba239c891e1e587a7efc4a0728ba4c873a3a99aa7`) {
+      for(@wallet <- @`rho:pubkey:ed25519:f1707249260a09f9ed6f673f795fe3a58ae4a4f6af4794c580dcd3790a577aaf`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "7f9d7ed8c95fc4274022a5072678f65b1bf03da7640059d1d76ef03069146e15b5ac54636f3d6d45bfbb0ef3383a8c070ff818129bedb5744c406a6f7ae64a04", "0x2a1d7dba885d0be7fa1462405e9b844f6a41b1bf98b1c00b052cd7cecc1c0c9c", *status)
+          @[wallet, "transfer"]!(11, 0, "b4f104d2d351e7a79c6c19bbfe04e685db6296bd5795c6eca6b4d4a11c7635ffc00c09c3ff5644fc51d2f3c5babc7375c58ba5b9b6f1d310cb24e084bd3afe08", "0xe088e48d0cd44ef616aaaac172f61c77d4c8db49269b50bd7e81da58d99811a2", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:2a1d7dba885d0be7fa1462405e9b844f6a41b1bf98b1c00b052cd7cecc1c0c9c`) {
+      for(@wallet <- @`rho:pubkey:ed25519:e088e48d0cd44ef616aaaac172f61c77d4c8db49269b50bd7e81da58d99811a2`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "88f645794d16006827f835260e40fccd1ec726cbf7e322328d721d8b9ac25c6365bfa20164fd8b6c982b03ea68dcb719ff71d3b09f3633c4a1cb1322a8160e05", "0xa73c46ca1ad7903ac21f8939380ab1975c49d0c371aeff0405ed74cde270fb04", *status)
+          @[wallet, "transfer"]!(11, 0, "5d2dfcc95ad5bad1d99ce82142f4c1287718b1312baa5d3e29528606164c9f30c99be0d10347e63196083f32404f1ba80bee5e8b2687520d9ea98e6113b4ba08", "0xf503c00ea2527f58c3e3e22fb947a0ee95cd3e6fdcd7d081eb1f33adac81f494", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:a73c46ca1ad7903ac21f8939380ab1975c49d0c371aeff0405ed74cde270fb04`) {
+      for(@wallet <- @`rho:pubkey:ed25519:f503c00ea2527f58c3e3e22fb947a0ee95cd3e6fdcd7d081eb1f33adac81f494`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "967f2282c389bcf7bd6d8e77adcd12a89a9d07685106f60b3c0231af5d7ab7b0741bac1865c71adf340577690fc2da01334ed03c2d96f114a3ee7d5eb0b0a601", "0x1e338413182dadba58c37755bc7b3093c81d25d7638109447e1f3b8cad9d65a7", *status)
+          @[wallet, "transfer"]!(11, 0, "a0451979c41c9464e4419f8ead56c129300fc704bdb0e0b95a062f6929a902bf89410b63d9d2df11f842f5596c3cc580fb71ee285f8af4621a1301d1382e3307", "0x936b8ce55944467ce1a0a6b287424a1256857f71aa40dec8fc90fd1a35eb8005", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:1e338413182dadba58c37755bc7b3093c81d25d7638109447e1f3b8cad9d65a7`) {
+      for(@wallet <- @`rho:pubkey:ed25519:936b8ce55944467ce1a0a6b287424a1256857f71aa40dec8fc90fd1a35eb8005`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "4432bb9a51f0db314f9843835dc329b452041e6df66f094301cf07eab4bbaaddec7da25aa2db7ee2168fad81abe701e0c79bbb98d05fffd57d84e2369654c408", "0xf042a93c05d41432331f9840238b1228c4ef12a18f4a18fdbf8c4ef31f26fe26", *status)
+          @[wallet, "transfer"]!(11, 0, "62535204c093c55eb1d563308a6bcadd172c214e1b8089a05d3ecc7013624d142c42db3b6ba9cefe73f1ba48809dcfe7af8e4316d098ab259359066c82445a00", "0xef56d069f8bf3c770d7aefb5622eeaa22c2ccf0d3c7e944844bb50a04e07859f", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:f042a93c05d41432331f9840238b1228c4ef12a18f4a18fdbf8c4ef31f26fe26`) {
+      for(@wallet <- @`rho:pubkey:ed25519:ef56d069f8bf3c770d7aefb5622eeaa22c2ccf0d3c7e944844bb50a04e07859f`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "11bbc775cb02b00d1809489e458088b7fb7cbe6355f3b385b7bb5579da8ed7f75d1b4c702ea98f3f428f215a2209e21feaaaf3d7aeec3d1dfd786afa16fcff07", "0x7c28b99d9f4c12b69bc4d89fc8457d18e7171cc384356ae7e1808de888dd4e2a", *status)
+          @[wallet, "transfer"]!(11, 0, "84687de54554d17ce4119cfb710b2f32960bb6cfd559969e77f1e2522cec29376f10906b2b794466728fe3ec8473d4e3d315fa4eb4d17466b396d6e148bcde0a", "0xd196438d432e0cbdb6d846179aa1034137000a641894a19189409cfa30113b2e", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:7c28b99d9f4c12b69bc4d89fc8457d18e7171cc384356ae7e1808de888dd4e2a`) {
+      for(@wallet <- @`rho:pubkey:ed25519:d196438d432e0cbdb6d846179aa1034137000a641894a19189409cfa30113b2e`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "c36b412a663ed779e72b03777c009828626ab4d23ba9a9038eafd1740c864726659ab45841b559190a7469fb8a4ec431c2b72a07648fd60256a1564451a9be0e", "0x9abd35c859b356ab96f08566af12c6c07a3d0ff6cf2bc90c2dfaa6f5980e2140", *status)
+          @[wallet, "transfer"]!(11, 0, "9bfbc60ebe18f23c0973939c850d41f14dfc4fd099567dbf155a9223a384d31e47634fb45f80329c47a4f413231f72fd60defb0d2292fa07e06312cf5456da06", "0xddabd380f90a287f46cad630751f77e08b02e87eb9382e2fa0d5428bbf8e2b55", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:9abd35c859b356ab96f08566af12c6c07a3d0ff6cf2bc90c2dfaa6f5980e2140`) {
+      for(@wallet <- @`rho:pubkey:ed25519:ddabd380f90a287f46cad630751f77e08b02e87eb9382e2fa0d5428bbf8e2b55`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "4ff0a1b8aac5095a786f31ae8ee676cee63bd26c450ec34ed6c8a0f76afaaa48ca3aa606bde330767a1553373a1da8e16421d51568a95764a148744080cbe703", "0xe88242a5f0e9874bef9159f4540197d9211f472a0271383a9443267cf114e879", *status)
+          @[wallet, "transfer"]!(11, 0, "8a62d9a53676153806c086ba7dfc3931dc62b1cdce6af226c4f58312a07e15efae68764a8940753e3762210573e387899b306f5ee4c16d5c9ccc15dbf1a6dc0d", "0xe1258574e849f4b6a0902a7d51b0ba578171560ae878e6520021cea4cf47a365", *status)
         }
       }
      |
 
-      for(@wallet <- @`rho:pubkey:ed25519:e88242a5f0e9874bef9159f4540197d9211f472a0271383a9443267cf114e879`) {
+      for(@wallet <- @`rho:pubkey:ed25519:e1258574e849f4b6a0902a7d51b0ba578171560ae878e6520021cea4cf47a365`) {
         new status(`rho:io:stdout`) in {
-          @[wallet, "transfer"]!(11, 0, "e740afb5266c394f85933c5796ac6d34e5661575864be784f9695a4d959e564ff0674014dc27614f8df17ea119e371957bceb9dc535d15d0d65860b6f7252009", "0x2be16bad3b002d5c754d20e97f812dd8fb8a3cae05d58f73cc1e9fe93210574e", *status)
+          @[wallet, "transfer"]!(11, 0, "ccdd917517d0bab7ab11bb791ba7d8fe111453728959340745d24b5bad6053d48c73903cc11d35b0fcc19208c11fad0978288f62ea12e498d4b4cf2260189d0f", "0x535d3ecef8cf85ad97ed6ed258ab2d476169fe669b6ae7d8451886c210f1ae4a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:535d3ecef8cf85ad97ed6ed258ab2d476169fe669b6ae7d8451886c210f1ae4a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "7edb0eb9f430f0a90e3009d876c1b31681694ebb75deba58cffd0ee0e1bbd9f527b739abfde264d20843567891d1034cc43e1069151c94757c29f9bbd8c8d705", "0x6c1791a713b7f46a92fcba5edfcf506c33dab228745161126ea6155bf4e58bbe", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6c1791a713b7f46a92fcba5edfcf506c33dab228745161126ea6155bf4e58bbe`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "5960c12f5b154651ceb527a398d73c782d5f98848a2bb2c755c1075682aa638f81711dca2f36aebfc257e12fae79302ff7a463dc54d1b958e8b568263ac5ab08", "0xf2077fdb19350174493c522305919ac33cb9d0458d02c83fc4d974b427952248", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:f2077fdb19350174493c522305919ac33cb9d0458d02c83fc4d974b427952248`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "44bb3870b3545c82503a4a477430bab966e34845529b2a0e386dd08b67de889ecb06edb3e164805e906b475744fab5668426a14be9b0cf7bfedbb6cac1fcdc0a", "0x19d83e0ac09ebb3d06d93614a8789c86e72bd88f7fa1df0db236d35322362b07", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:19d83e0ac09ebb3d06d93614a8789c86e72bd88f7fa1df0db236d35322362b07`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "5aa8ecf96049ac7d6b65a28c7acf8a7c426120c658d1736ff0f174389e6f122b882b903ccc157c22aacd19a655e8a60803b2769b09c75619447bfc8bada0fc05", "0xdaed7893604af5c621aa7a946845363552388411b3b66fe1e938df8216bfb34e", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:daed7893604af5c621aa7a946845363552388411b3b66fe1e938df8216bfb34e`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "be55574b0e983c42a09db967ae9739a1e144d424dee45c590205a075a2ef80ef4348a442bcea43c90e4238a332f23545b72f22dcd320b7322e475c807bb2850b", "0xc6569713d3d54d5f5c49b7e6fddfd9f5d6541e81b697dc2a833973a4a99d6966", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c6569713d3d54d5f5c49b7e6fddfd9f5d6541e81b697dc2a833973a4a99d6966`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "369d9eee33318067720456a393e285a9f9a342067e1b9e906ff102863342fc961a7aff911df3b5304c902b86bb3629cef3d9fdf5ea9b6436b64144884e595402", "0xcc49744bd27e1f25c2c7aff90c83564a262795da1c28fb97815dca304d96937b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:cc49744bd27e1f25c2c7aff90c83564a262795da1c28fb97815dca304d96937b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "64373bfd25181c8f41d39ad19c905c49893d1300219cc19736de84875b305d178bc3bf659d5fb83de38675fd181213b6b4f0ee7a3dbcba95d02b604af01ad208", "0xc61cfe1c603e2c301e014cdd547702036514ab297b499c38b874d8679b9f4787", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c61cfe1c603e2c301e014cdd547702036514ab297b499c38b874d8679b9f4787`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3a290cd69e6fc2fab5f63a1be216401783ec52595f4905ed9ab0185cd438507a41f62faee0e238f68fedf2f1461b079b891eed9b96998618b7b26dbdd3b21a08", "0x7db39ab7e5b43593a501c1deb1c53295f48d208c1490313008c09d334af3bc54", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:7db39ab7e5b43593a501c1deb1c53295f48d208c1490313008c09d334af3bc54`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "0d8fcf9540e41a6ad23616c062e381b87573686ac8f17cf56cf726185f067253c8e500161fcafac8e74f06d1e731f23dbe6c3757fb3f1ccb5af2234aaf439f00", "0xd4f3b4ea51bc5d907ac29d9c613c543b5e520efbd1efa119e44740978528348e", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d4f3b4ea51bc5d907ac29d9c613c543b5e520efbd1efa119e44740978528348e`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "1999cc6d88cb09a4f30e9830d4f56a5d44c1fc3a848d1181c4098e91af89b38a612adfab743ff18777e45066dfd41cf45af69bde29b35d1fd4d647494affe806", "0x2d33e8c44849969cc65bda3775b1d63735dfc0d05986b3cc882fe688b7efb79f", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:2d33e8c44849969cc65bda3775b1d63735dfc0d05986b3cc882fe688b7efb79f`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "aad22379797840d601e3aea1c6c99b93b2624ece9e41a8cdb19537d5368f8b3b3fa51dea86d765ee7a2358855da38843c5c5fea57553376c110c5b25b57be302", "0x6bb3a9066d6f8bc15188dcab692ef4522866cc5cb9e0932fc5c2774c49cb063d", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6bb3a9066d6f8bc15188dcab692ef4522866cc5cb9e0932fc5c2774c49cb063d`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "e4ea78e46d09fc03552fd3e463847c1382cbd0b2db15a454039de9912b9617b035ee47bdb51579ee4fc0ac69ede68ffe82e76331a84f90f665b0e3cdcf9adc0d", "0xf3f492b8b6e69200230a03f4e581c80eb5b2a0d1724b4e3be046c61edb849761", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:f3f492b8b6e69200230a03f4e581c80eb5b2a0d1724b4e3be046c61edb849761`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b4ac298010b3ac590b1569b91295ec8c5728d37df6da6e2164dc9b4bb719b8bb9d9844ff9e4487ff35b7183b0fed2a4dfadafbffd0956c42a68ca7ba9c7ee109", "0xc7f533704289d67eef01d2c67217decdc92a9179866d6e78fdfbbbac46c37423", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c7f533704289d67eef01d2c67217decdc92a9179866d6e78fdfbbbac46c37423`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "ea1848f3ab584083ded6ce31ec72e15225ba04c7a5839e3b4432de12249f25eb53181d8a1ea45788b7550c900a09351d1be4648384bf134c6fce0d7d19d4bb02", "0x68c4da9c04d70a225fbbb5a36495f3c2a758e9ca3a6f58f1c1929854bdf069a0", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:68c4da9c04d70a225fbbb5a36495f3c2a758e9ca3a6f58f1c1929854bdf069a0`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3f7f44ad216fd5ea30d06a09094da16b5a0469fe535c1c5b8eaa1374570439ec498de5dcb90bc2dde49e9307440f1b03b27e5cb8422227bb61cf721618d3b80c", "0xb66df81453d203c19cd9be22cffd99a43b518efe827f772bd5c2dcb93985522a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:b66df81453d203c19cd9be22cffd99a43b518efe827f772bd5c2dcb93985522a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "eca9263a08922615a32687c302c277a1787ca2d9ba69d256b25461513e9d8a5a4bc642deed2cd8f71a96a49c550aba257e9ca235f59dc68636c31370a35c1a02", "0xa4a85b2b20e11705b986806ad9d5bb1be5087b85a06c5b6e7b3f17ecde828a6a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:a4a85b2b20e11705b986806ad9d5bb1be5087b85a06c5b6e7b3f17ecde828a6a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "e5bbdec7f1619ebfbe121733bf3d36af2efae0beb566bb756e35fab96e5fbeac19661e797640b8ee19625e3905dff075264b52ad6bc337f0578935c4bb85970c", "0x4c2714992b6ef19b8d53147a374340452b27e65cafd0df900d3f5bd569d66c82", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:4c2714992b6ef19b8d53147a374340452b27e65cafd0df900d3f5bd569d66c82`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "92ea881925b35f372fed734a8b278d302e75e70214e8300f7ec82c7d333801f468dd52b08e737a189e8d963e36a9be7d43568957edc5d84067d8b68543efe507", "0x58fb5eb4582021500c403b6233e092cda919f423faa6797e529f58d32bb43a9b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:58fb5eb4582021500c403b6233e092cda919f423faa6797e529f58d32bb43a9b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "a601d9b8f02879ba61513cfc6decdef505b92ec5096ce614e51d6f58727f8c1d895be2225ccf171fbfbb36e18ed41a4354040d3fbf2e688ea926e4e32b593b0c", "0xfb80dbf7866b28f9e9ea40e7e967725cb09ba542305ad02013319dd435442265", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:fb80dbf7866b28f9e9ea40e7e967725cb09ba542305ad02013319dd435442265`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "8c603e4ad33cf3885771f716c849499f073caf4b4b8acbac318a5077584f33561353ed5195d1ae0236d92807d240d21d10ebc73947c52c8425a731daa370ad01", "0xe47803c027321b9af6dd807d66af12f16b82f5bf9763d61be07bdd84476a05cf", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:e47803c027321b9af6dd807d66af12f16b82f5bf9763d61be07bdd84476a05cf`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d700fbdd85189f524a2e350bb91e60d757e012e486d6eadbc13a203c872858e8210c2c16e56a13c4efa05098f8a74c9e5c9c59210ce3cb536318b6d2afaf8004", "0x47fd49e1d94467f8f2fc4e2de95bc68944adbfc2dd63e32a3015b9641166558f", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:47fd49e1d94467f8f2fc4e2de95bc68944adbfc2dd63e32a3015b9641166558f`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "85717f15affb1f43e0ba8bd4692092d2db506be286338b186f14337b912571a25e76ee4580163e0ca5136a207a435a1ddc81e5475bbc16d58cc3953c92cc000a", "0xa33cc2605a49d3a0443ecaddee5c8a0c42ea7adf87d85e83ce9508ce74c96245", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:a33cc2605a49d3a0443ecaddee5c8a0c42ea7adf87d85e83ce9508ce74c96245`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3e1579245c5f736152e0de407af7c164ed3123e0c65a0dac370bfbd9a867606c7a4ab685f15efc136acfa190fe4d7a5ec42c5cd2a74ecd130abf74a39064c406", "0xc5f8394829117a9e4bd46258d88e1f95d7bd4be80ba19dc6e64636915b55c870", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c5f8394829117a9e4bd46258d88e1f95d7bd4be80ba19dc6e64636915b55c870`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "549ca0ff1f498301d88b6b55811547fef453d4b59b23b48a4ce367f46f957b703f4ee59304826c92e130e2f3d849e2d1b9ef11e137239c214016c7fc9ab37808", "0x826c96c5ba037f5c84d2223de5fd56a37e62ee05fa352f2b6d8485b53f3cd272", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:826c96c5ba037f5c84d2223de5fd56a37e62ee05fa352f2b6d8485b53f3cd272`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c457b49370763e457b3103948e7badb53afd4572a2c2bd6e2a44b0242b367498fdfece4af51e623230b178b3cd0ae3f44b61839c9a4356e56ca5f393824d5409", "0x7b6f9be775fdeb9fce1a5a52453509c4dd910da0f162520912fc8ef0ed82c9e6", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:7b6f9be775fdeb9fce1a5a52453509c4dd910da0f162520912fc8ef0ed82c9e6`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "4f6a60348391da3028e361ae58966334b4c93458e060ffe7ee2bce738534c4bfa34277b5727fb622bf969dbf5ccdb57971638edd982dbdb0dde42d1aa2b5e108", "0x1d668748da51b39c72884779169cf9cde560fb1f1d0108075f256d4e2f9069e7", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:1d668748da51b39c72884779169cf9cde560fb1f1d0108075f256d4e2f9069e7`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "576faddafd40c593dbfb5aa3a293aa62a6714ad9c724d8faf1fe3ea3050d420467495ea047f416c26a9fbffce69e4aa4a6f245b53d9b483028f0c60dc7dc5f05", "0x8772bbc562b82a9a4c604188e30320df853ba7ab2802b772baf797d2485ebd86", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:8772bbc562b82a9a4c604188e30320df853ba7ab2802b772baf797d2485ebd86`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3a7dfeb8fa35b01b164e25c13e527261a4af013e511577aaf58165e0765eae992d764fb57749133413385e1f4ccce3a8392032099d322c3e06d704a94ed4fc09", "0xb4f21e175fdcf19ff07903b058b5e5cd9214db92a26b8263fe09b2e160f840bd", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:b4f21e175fdcf19ff07903b058b5e5cd9214db92a26b8263fe09b2e160f840bd`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "cefa93a3368f7277720de2a9039e555f0a221f58dbc99b2d56e4fd58fbd6438f6e8d438fc60d58b6edd33bb0996b9657e528fa8a645d7ab36ea7915227ef2305", "0x66e7c18c8062f3f2a304ab68bda00808a650f6646301950094f5236248fce5de", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:66e7c18c8062f3f2a304ab68bda00808a650f6646301950094f5236248fce5de`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "f0292efbce9491a1f540a4572ac3d2298a6d2a4912b0e1362af21cae5467f879cc1530d7ad21900a59637e613d47ee4eba30b82c5f4fde1b2fca0dc36a6fe708", "0x1b6c7ca8f170d1e16a26078e0e2e645059c0ad7d19bb010748f16ff76ec52a3a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:1b6c7ca8f170d1e16a26078e0e2e645059c0ad7d19bb010748f16ff76ec52a3a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "0c8a98b7d231f08948206be4a87392df7fc89e29f2d94a20cbe1c68211e7fa4e2617e150a8843adef3d62d66cf0912ca3f6d3dec2c49647e56adc3b44b858f03", "0x43affa82433ea4227701c4b2245c97e737cd9114d890c92bbcf30f94f5d10758", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:43affa82433ea4227701c4b2245c97e737cd9114d890c92bbcf30f94f5d10758`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "75aab41e1c821de6997a69147c8016b15f3521ae53501ab17b33c5cf21fa52cef8e7b15c72fc11b930492a2d430dd60f3b320ad7e8d98ebe4dc8891b7f8ecd02", "0x03dc787e8ca1b9a13eb41c859129b4f49a99a9e210daada691dad04ccfb1717c", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:03dc787e8ca1b9a13eb41c859129b4f49a99a9e210daada691dad04ccfb1717c`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "26d910e04e87c251cf1664d8538269c74f5168e77ab4da8e8ac51ece7ddc24678c37ae823bbf59b150f69761332f600e8910b545014250192bf0bc4da63dd10d", "0x8e67199e2ca31c3418cc9cd8dae518fa1eda826a21f6ffd9df36b404b7b78e1a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:8e67199e2ca31c3418cc9cd8dae518fa1eda826a21f6ffd9df36b404b7b78e1a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "07ce61af5cea3932adcbeec8c551b13553272e3565be044e0b219883bb9e4d1df6657c61bfd6326e44c352604db56b292ccd65e1cd70a0a50115ce7dda08d202", "0xfb6991ce9b5c2aa73dc0fd571a41277dfd8933a300ff67100cdad483cc718128", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:fb6991ce9b5c2aa73dc0fd571a41277dfd8933a300ff67100cdad483cc718128`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d7ecc2fc958a3bfbbb6ef0e0cdd6761be76648f985b5870b63f0025448c99b9263cc18b4c673891e343bc394bd133151f0cba99494ec23ae138fbcc2a05ed403", "0x66b8ab44e2ecbfb36e4aef7c294f09db29cf47b6072f6cce87a39f6efb6e7673", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:66b8ab44e2ecbfb36e4aef7c294f09db29cf47b6072f6cce87a39f6efb6e7673`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d30e579b968a89512e93f1f720c45d44d691c2f839fe113d03f09643ab703a034c50bb3d0893d53c10749b2da4720c902df237844adb3470a4d71c9a29e8ad09", "0x9487d7107a1058052721be36c876a8e28191caa7560c0ee703cd7b0566f4b189", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:9487d7107a1058052721be36c876a8e28191caa7560c0ee703cd7b0566f4b189`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "07852f7d58f35ba73eab2f78c9a2b45313811a1d28ee6b8123724134c8aee6704302e4c788c253515a748be6432498139101c142dada7b22559fe19fb316cd0b", "0xd76b7ba87976b11d0b369a700a6537e6b3db7133b486156b9749c8525e4fde95", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d76b7ba87976b11d0b369a700a6537e6b3db7133b486156b9749c8525e4fde95`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "258aed3ebaba572de2b58654cbbf6e06ed9e8c1fab7a7ff00121d56c9bba65393be8d47b880eee7873bbfbee110ace677a1b93227e9801b84fac364fc3821704", "0x3be025826c92d4d566c1e92e23f9df47067b1e41655120b25e234d893003eb37", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:3be025826c92d4d566c1e92e23f9df47067b1e41655120b25e234d893003eb37`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "10cfd87d8bf5a8c1e0f1f619121ca82cee4cfef6197c9be65f6f631d5a71e0ba4d6ee9b6836c1307bfd0c50f99212bd1f0c1a556962fd835e12f123e1967150e", "0x3770ccb215395e7ebb72c612a3f80b82fe7547ac521a78aa697c3024c8ce84e8", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:3770ccb215395e7ebb72c612a3f80b82fe7547ac521a78aa697c3024c8ce84e8`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "8cced85c90923253733330a6c202b09a065f489d026ea9dabed754e4cd9bf0727409aa586a4a01a951b655638107fdd4fee4e20ff1848378b4f3202b0ca2a50d", "0x91a991a345624c5a66baec8b0232e3373c391e1f14085364fa1f8e00c44c612b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:91a991a345624c5a66baec8b0232e3373c391e1f14085364fa1f8e00c44c612b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "884c5bc7c3ded06d4309709a86032fa03a4603f335e8447fbec8a8497daf115c87d1ebca82ad4ae2f63007f11d6b8d8a73b69aa7fd144b7d9cd7b69262992403", "0xf22860f153735b160f3c24ca79d4830e89f977232c9bb0e06541e79b1a8414c1", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:f22860f153735b160f3c24ca79d4830e89f977232c9bb0e06541e79b1a8414c1`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "6919b6ee45f67f228c99f8b9e3bcaf8b09a35ec63c9965e688206b53db4ba2ccb87cad388cedaab992c971eb19ac5481d59528f4fc88bf6623a13e733b2a4e01", "0x51639cf67bb10f33e86562687522c002939e116e0aa6338f03edc35ddee44cf2", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:51639cf67bb10f33e86562687522c002939e116e0aa6338f03edc35ddee44cf2`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "db93160d88d6c9e4d972bfdbde17c163d635e593a731f54d76bbdf202087f771d3468e8f0a6ee46ae404be6a4ea51d1fe31a1b57446e34f4aa35e22f4b5b4f0b", "0xe44c148777c13934906e87f53d8915205d849b454f79c0dfe71d50bee476676d", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:e44c148777c13934906e87f53d8915205d849b454f79c0dfe71d50bee476676d`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3a217effcdd9b2e9cade5d34058ab351cb89c77cf64f85ee6e29bbc93df64ff41d58be574300bb1389501a23d4820d9f68bba1f36571759353cddd8658b2410a", "0x90a239b7835aba005b109101d8da82a6960f1121ee2c06b7f85b0fea7bf75de0", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:90a239b7835aba005b109101d8da82a6960f1121ee2c06b7f85b0fea7bf75de0`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "9959713eb8ddb04b3cc67bef92815a3c1662c9d4bc19c03dd629363a587a7e820dfb4fe75a127a55b35c871d7c92a93c8b6310858547f412adde0d3f57acc901", "0xf469c68e2c49024d06c7a5e1f5ddea0852fa59d251818d37fd4fb7107e831559", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:f469c68e2c49024d06c7a5e1f5ddea0852fa59d251818d37fd4fb7107e831559`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b570db2cd8313a7cc7b2ffa555a7702b25756df1107b4f33e7bdb97ccf85450f276e5d50eb1bcef26324fda73aeea9e26a69272b8f40e696c67007eea3edf307", "0x9e9ea3564b18d475eb4f51052a9ac620dde23af46d65bda7a02958847b03cfa3", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:9e9ea3564b18d475eb4f51052a9ac620dde23af46d65bda7a02958847b03cfa3`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "30259148da3262c192aea2139594265729ac3509602c6493108a76f0aa980a005c353821629ea46b8f99792ddac87bd81c40c4e37245ddab1715d4049ffcf10f", "0x5be0d509b93b7e463aa8ac6b6c1be0b99b2cf77071c438d45b42658e648e0b7f", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5be0d509b93b7e463aa8ac6b6c1be0b99b2cf77071c438d45b42658e648e0b7f`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "506cba61c399eafe4e9f3bdde41e4e90ffb6304e2d09cf4144b5a22faa78f68b598237e0fc1d1166e621a243becd2b0e2d3474e8bce50c3f918f8200b3b8140c", "0x6899500dae184e634e5a8269871e1862a4c1ea1bd58332f6ef6cf3fd9f393a65", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6899500dae184e634e5a8269871e1862a4c1ea1bd58332f6ef6cf3fd9f393a65`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "ccc5256e1fc4a5420d067e463823619f110971b9abc3755e9073baaf483c9ab489daa0535ecbcc453536e523a59cd167fcd8fce130a94af969f3c94b2b07bf05", "0xc35be9e4b44b72dee33139c416f7db82b4fedfec102cbe957eb53f4361eb3949", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c35be9e4b44b72dee33139c416f7db82b4fedfec102cbe957eb53f4361eb3949`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "ce4f35c7c43b0f89a126b08de630979fe7db00f56bf0a72221f265c12f9fe471a0cf857e3313641b39a521a1dbdaef7a49e6bcd2d4dddf683aa8bc6a5b757803", "0xc9ade0f4c616a585da5183736735396f985c2f2a6ab51626f2ce94260941eb4c", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c9ade0f4c616a585da5183736735396f985c2f2a6ab51626f2ce94260941eb4c`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "929d0327f7a3fdf6e700e7185ae2e4ce57cbc841a4ad2031adb261d8ce1f22397888441265e04672f76f79267395716e62c8f4baca341854d0a1cd4ffa6dae0d", "0x080ef20c9d2b8b88dc746b8ab70e477d14b7bef43193e5b840bbfea36317c7f5", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:080ef20c9d2b8b88dc746b8ab70e477d14b7bef43193e5b840bbfea36317c7f5`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "1e525e9ef5008ed2d56d1ab61e14a23d2c136419f114101b57c9faada495403962f2a4b76e7ec2939e705f507e5a50af1f175ef8435a5f771b3a9fb6314aff07", "0xe7a539214bbc208798de08d691c729f1855546396231ce2a777c07c44a3123e3", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:e7a539214bbc208798de08d691c729f1855546396231ce2a777c07c44a3123e3`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "427930b7b3dafc4f737b6fa1294af061c63cc4705e7cd39fb5649e092947ac4bda1d82e9b6399f5a342653ee45faa9e028d5113219ed4bf4ff0c0b5140378e0a", "0xd67f0a679b6b52938a0d05362ecaf0fcfc9aeb417700f086807c3cb05b674142", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d67f0a679b6b52938a0d05362ecaf0fcfc9aeb417700f086807c3cb05b674142`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "7d68d63863345e1b20a8e12624f6ccf902e32f627cefe5ecc2c700bdca42455f307f18b5d72eef715b41dd4a391a9042c524d3e760a6f11edf327dfc671bfd01", "0x5e7dec3939ba29d5db25347ba5dbd9d435614b9dd9427a693d0be010abc3df84", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5e7dec3939ba29d5db25347ba5dbd9d435614b9dd9427a693d0be010abc3df84`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "aee282075f5939677ec9785761cc49fdc1ecbd818142f9b6cf69c72b7ab2a17178ef5b4ef896c182ec52af9269d1321d0d73dca09b3c2e19e6a58d2c84525806", "0x8e799f375f46243a50e0cf9f4d566927b5ce044fb0f56d40e2937faf96c65d89", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:8e799f375f46243a50e0cf9f4d566927b5ce044fb0f56d40e2937faf96c65d89`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "fb312d386b11ccfe8787215fe656cd25118579123af8b4adb319fa496417ea7d248745246415e3c77a01e19bc7d76800e40c1012e05b9cd0f88dd970c2421c04", "0x2a3023ca13126f1eaf7a226723bd6c4fe496161faa8ed94551dde33db04b2343", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:2a3023ca13126f1eaf7a226723bd6c4fe496161faa8ed94551dde33db04b2343`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "14d340d2069f47badd1f525c2575af7c5900d3f20e11ca247353972f7e15b94a7e77095a09c8ba4f0a1585d7ed5db4157fbbcc699196c23fc96b100ee988e103", "0x6694101077d6a7b4e54002d7dcb7f43ec94cbb5f5c6ba1a7ce07432d48c603ff", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6694101077d6a7b4e54002d7dcb7f43ec94cbb5f5c6ba1a7ce07432d48c603ff`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "f4bce542494ddc5de54c661f425204fb2a9a4aa76f0f50670bb307539d2796bf003a9fb7d6feca40c8f669473a93c6c82be1960892f03d3f2ed3e336688aa80e", "0xe75c5d0d26c3a74acec20f434cbe307f73b1de093fd8f9f22e9e56df22960da0", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:e75c5d0d26c3a74acec20f434cbe307f73b1de093fd8f9f22e9e56df22960da0`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c33cf4c7af523fb3d77e499742e50836a6ae9464f3863a75dd56c8c1e34f2361edb47ce9f59cc1dd59fc959cde42e1afb2efbf7a624ec6c7e96b73128da6c301", "0xd5613530ddbd2992a264af69b0510787d65e531bf5b97c60cf13d73ea1935641", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d5613530ddbd2992a264af69b0510787d65e531bf5b97c60cf13d73ea1935641`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d993129d2c835d2fab1edddb2f68f9c53203e72cf107bc2e5cbc8620fe718caaa8609498e9e62d85c54ec16788a1c112302b4425dbc0912d2843255e1227b60c", "0xbbbd8e91855a0e840717fb83280e1524f6cf02acad9458ee4ba917e0ed9fa92c", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:bbbd8e91855a0e840717fb83280e1524f6cf02acad9458ee4ba917e0ed9fa92c`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "45a0a16a1f8d1240e744de0c2e7219e32e96205d277a389a66a25d051fce562ae5f30bd8572f472c125d6b58360ce0011bc00c39d067217921b758ea3f15bb0c", "0xb531dd4e13ed55bd3b12ae1b6b83546849b570277757cb01d4e1a042e0ff2217", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:b531dd4e13ed55bd3b12ae1b6b83546849b570277757cb01d4e1a042e0ff2217`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "64e1c2bfb366f5a747f329c42eb72e8d105274830bf3ed37104228a3d31097cdb72fc0f4f9814def1b719bda1e213b7c72fc7ccdd82762586ef5350580440709", "0x8aef21edd24ceffecf05541f5ad7f73c117b4f68a0dca2311e579db0bac68b94", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:8aef21edd24ceffecf05541f5ad7f73c117b4f68a0dca2311e579db0bac68b94`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "6c1e1bb833eb4770665eaf8444a9cf563c0259e5d41229699d4d150474c1e1a38647676e2f5cba91d86a4daa070759852ad034d8eb783205b923ed9280037e06", "0x054294b7e2539b4c4810fb603cde667848296cff9ca818a3a9106d88f02c4f17", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:054294b7e2539b4c4810fb603cde667848296cff9ca818a3a9106d88f02c4f17`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b57571fef7b10fb540dc0f3f65163289ee416d3f4dca6e6bcad4910826080e82029db7695a61a6ff91914642a091cf91ee833cd0f18e4225e4a1fa5e46fe5508", "0x7b3e488d5b8f47e87a5387fcdf50ecf52fe93dafd0ec2fe5b5390fa720343045", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:7b3e488d5b8f47e87a5387fcdf50ecf52fe93dafd0ec2fe5b5390fa720343045`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "862cf0da5eb9d645f5509334bacd449b65ec0abf2c3ea1187ef708481fa9b31d79f67960196fe6882cab49873c2a50c163302e430389b6865cb4ee562b8aa803", "0x44cd401f2154047499c282dc2c6f9ea1703edebddc55e5a95cb1288ebe303645", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:44cd401f2154047499c282dc2c6f9ea1703edebddc55e5a95cb1288ebe303645`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "9c36f8a8877f36928e759721833ab90603032ab0812992404843a481e669360d5ad05fec2fdd69daf102efe6b716003d20ac42d10b29e8853a87cee1a18f2f0c", "0x021d6d0e0f97ae507b88af536d833a99ea57f4b10e98db77bad805324e4ca024", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:021d6d0e0f97ae507b88af536d833a99ea57f4b10e98db77bad805324e4ca024`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "f429a6f36db350e6d6edb3cedf5715983a7b9f87ff0406f4d69af3d499c1ca46ccd613f5591e9eed5b0459f80ae3290fd59bcd6ad6173109a6560cb044eeb807", "0xa630fca9f0abb9ad8eb8e8f0ba62cae5e535b97ffd41d0923229f481fa1edf09", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:a630fca9f0abb9ad8eb8e8f0ba62cae5e535b97ffd41d0923229f481fa1edf09`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "581de206db355a624007291c968cd8d05658399585fea2de2f048bc18002898bbc6f05530b7f66d11f85389ebca02f90fe1f511d06a6f79d2351c7b6a4afca0c", "0x6cd21155f9e94048c846c05e7c3be76c4288a9300e47c7d2a141044867f004b6", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6cd21155f9e94048c846c05e7c3be76c4288a9300e47c7d2a141044867f004b6`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "effe94c6c27a72dca837e53c7e5b19f98caa82973a811f3f19c1f9ea6985b0bcdc3d9e4079f45e2f48e1915cb563a0ee67b2b5df4d118edf1ba16b6860e0e201", "0xd832f8b0d9e583ad85755772f73ca66a5fe07cfaac1bb6ab7cef947cf82018e9", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d832f8b0d9e583ad85755772f73ca66a5fe07cfaac1bb6ab7cef947cf82018e9`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "5531d8ab95153cd09b2bc85067ec5f8c66f4535e2e29c69deb6bc53b8bd8b14f04cd5d1e00b061a3c934cf4ebee9db71f124e781f2cc11b96e04bb74e4af7c04", "0xcf48bfa039e0532bcad92fcfa32c0fe9f539a95cc3a5f1f30b0ae2bc4fa5ddde", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:cf48bfa039e0532bcad92fcfa32c0fe9f539a95cc3a5f1f30b0ae2bc4fa5ddde`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "bfdf586785d579ea074fc40787105c0afdd5278fa5d64f276423eadd38dfe4843bc9addbfad736dec5ac52e4c8a485fcadb31f7d78ba28fdac8c79793d3a4707", "0x7729ea6fa3b34cbe5f08bf93fc7840e8381ec9996b14605dd83dfa7b3f560e8d", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:7729ea6fa3b34cbe5f08bf93fc7840e8381ec9996b14605dd83dfa7b3f560e8d`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c9e4c19ca849104cd4590648838ec52d9e4937f0f8f9e53a0a85f86b37f6fda64515bae1e1c41744be3bad8be0a745ac8f1bbef0664f9fa0d80325292f769102", "0xd927451f6106a3ffdc13ba7cfa11b62401e3d332770f692bd252eef05a20603b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d927451f6106a3ffdc13ba7cfa11b62401e3d332770f692bd252eef05a20603b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b2a9d7e1900fb17f21c80fc4044ae4c6566dad2531284f3bf49858a42479a9a3e7d94efda1ab285ed8a3e666151a814306ca1eb58348c654c26ed35ed7aabe01", "0xd7e5796d848d62d8a39819727cdbf0aa1c0f7cf8f809dcc69a05efed0412b0c4", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d7e5796d848d62d8a39819727cdbf0aa1c0f7cf8f809dcc69a05efed0412b0c4`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c29ae9dc0b2f036f58e76559d3106c8df013eddd2074a0572ed5abe0a5a5b39c40a669738743e979a5911f0e05651f25c7c5ef11aca94636a90304000a90e404", "0x45bebcf11d92c3f515ceb86f65ceb3928d8fb658356cbbc7fb1eb5c2fed3626e", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:45bebcf11d92c3f515ceb86f65ceb3928d8fb658356cbbc7fb1eb5c2fed3626e`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "17d67784364c61a80e9441f60a1ab2364cb6309c60b104d4b2dadf362fe50231c2e218f7692dab70fed141f17f5be0d42a1f933bf9148c94c76a9f19af26740d", "0x4cd6e81f959e4d49c879c16d1f18f986b10fed5ed45a4d1db8382b6c0eb0aea9", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:4cd6e81f959e4d49c879c16d1f18f986b10fed5ed45a4d1db8382b6c0eb0aea9`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c64f0a73029b9050784fca185dbee7843040aafd72f8009aee9d1f464af35b297ad5a6d9bce8ff98f179a0d254f7b016dd257afbd5380c922a435c773eef3e05", "0x2264493fc9034349a6a6f0056e14c06e09933305252cb1e3e27ccd905a448964", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:2264493fc9034349a6a6f0056e14c06e09933305252cb1e3e27ccd905a448964`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "88d7a3c25fe33894c317abacedbf6eb0de7102decbe5b67073303762d6851dc884f5193d4134dafb114c112e3854e6ede055a8163ee2ecba686568c89eacf608", "0xfbf659f8bb6b40b9deb7691e1f23217ee532622e8c2e37ddb830dda97eeb57a1", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:fbf659f8bb6b40b9deb7691e1f23217ee532622e8c2e37ddb830dda97eeb57a1`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "a81419b8eb4cbf0e524ad8400a5b6c9156904c2b10ea91fd0bfb469227f2b68e7dca8b600a1cbb554c61aadfe51ad6888233ddd0258057fcae590b32021a4903", "0x80117d6a4ffbfdef4a40ffd47a674aec7b125569b1beff538a8f16ef28e2b1b7", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:80117d6a4ffbfdef4a40ffd47a674aec7b125569b1beff538a8f16ef28e2b1b7`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "f2e3c9611a16936457f557cce07d6a924e035c8f61721805d1693fc63d7f74a77465ae5a0989dff5eb0376b7e800d985afe83d07311bd211e8acbbe5523b5e0a", "0xe53faab33581ed4d5cad437da58c7d23aa46fb094376b534413711f7a37bcbcb", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:e53faab33581ed4d5cad437da58c7d23aa46fb094376b534413711f7a37bcbcb`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "0d5cccb2ed39b049aeac2b51f08103d691cc0be5878b8598107e9504258df396cca5f4bc024fcbd7d8e98c57b649640a51f548f81629d692f26ca4fbfdac2104", "0x27100b7902a1d7aefcdae593a78a9117c6a88e1794acf45d1f5f47b924ee72c3", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:27100b7902a1d7aefcdae593a78a9117c6a88e1794acf45d1f5f47b924ee72c3`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "47d58027b5eb8a35f33ffdc1e8e01b2b15836bdb1182c98ede31e392d7490f41f7622d44a44d04293e42dfd951c05f41b7bc4d3fe503014f5ede25b39cb91307", "0x808e07b010c43ede71e2f88c64eeb1e95b789582b108c49d1b04194eb87b169c", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:808e07b010c43ede71e2f88c64eeb1e95b789582b108c49d1b04194eb87b169c`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "ee8f659931a839b55d0854ce5653449a64a3cec11c3cd7418702aa1fb47861178ce627b9c4e619a97c41fc02ee5a7ff2e51070e505ce0ff4325390a5683ca00b", "0xdf5882926b59a2db26ea2cb8016dc53fa8f83d090ced639ebe20ad848426e46f", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:df5882926b59a2db26ea2cb8016dc53fa8f83d090ced639ebe20ad848426e46f`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "52434d46e2ec9a2d0a9d4fbc87a1cca3f4009568bde8ad891635f39464012bf3aabc8b5b2ae13fe3be4cfb3b415ff508b844147c4af927144db8e35c352f8507", "0x4aa96cf03b9dfa3ec22be86206e3bfcee3b721efc2bd47d4e702cba2aa11585e", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:4aa96cf03b9dfa3ec22be86206e3bfcee3b721efc2bd47d4e702cba2aa11585e`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "6b536a32ddc131bb72fbfaf0dbb6cf901f0910b8c4e81a4410e448da716415706bbf9eaabd0831fefa7ea7173c3f1b0ec42ae3217d7789dc7429d00550df3e06", "0x81b1748ae8b4d5dc06450bea5bcda0c0390f9690c18bb6ff240d92898103c722", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:81b1748ae8b4d5dc06450bea5bcda0c0390f9690c18bb6ff240d92898103c722`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "727ef9f99fe1154e4757bb8b5fdeb010ee1d64db88208d854f92b9e089d11162adfeaf0560eecba677f08e5cb8353ab2b15f4bde555a9626c096d7820aae730a", "0x997e1131bea06a180aa18c99f035001a29fcd588320abf7fae93151c95c07cc3", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:997e1131bea06a180aa18c99f035001a29fcd588320abf7fae93151c95c07cc3`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3379146f91c6b4e5cccdc876c54b6c2922739e213843ec3ecd54250d82ebf39c37be5ddef502e7cd6d14cd748e19a950de3470d409839e2d437e791556582b0e", "0x5c3d8a284ab0add36b71ff0ae33efc822f8336c1eff0a49ea999727faa9f5eaf", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5c3d8a284ab0add36b71ff0ae33efc822f8336c1eff0a49ea999727faa9f5eaf`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "0a20ff64e03680f316882f0c335ec6fdf6046e86d8f5333e4f3d68e980b018d60a6629055e38d868e884c92a0c999281964ce5fe6864f52d7e87b07defdaa701", "0x5aa7455d7f29bf5a2b88fdf8d64b2262dcc44b0f1c20b7f156334049c51ccfc6", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5aa7455d7f29bf5a2b88fdf8d64b2262dcc44b0f1c20b7f156334049c51ccfc6`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c1ef714942e5ab1b350612a4e896c82370e52a1b10a95ed30bf3044d95f14a3dd15404a14af52864cb3d2ed2c33e8921873e849175705d2e9a12a3fd9bf8010c", "0x6671927b49cb3e44c4c00d26d442a784caf7f791585b2ff71b6621a4973ced99", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6671927b49cb3e44c4c00d26d442a784caf7f791585b2ff71b6621a4973ced99`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "7c5733695bf245b9fc2a9fa17170b074d1af07cdb0ff9b3f541f2b8f963748f38d28dc8fb55cbc64add8f7d5a676d717680d2738dbb278e20cb5b9bf1057710d", "0x1113c486e7481a81ff73c523e1880dff599d55985b78855be6a022a0c8697137", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:1113c486e7481a81ff73c523e1880dff599d55985b78855be6a022a0c8697137`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "dbab057c448e9b816006d454ba6bb7faf42b587d5a8c4252f0a4b320e4cf987cfd422a3d9f130ae0592e7468fce28fa434e5ceaa9c57eb7be7037da51d7dbf07", "0xba410856fc6e2d6201c77ffa1b8e9c602e654bfc1e08fb9492a31ab4846e04d7", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:ba410856fc6e2d6201c77ffa1b8e9c602e654bfc1e08fb9492a31ab4846e04d7`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c803f854f617ebcd1e027540b7f80dacd9e930e8bfb59bced5ac061144783a68c8cca0f36cbfb6815e4f5dbfc4e4ff1f71221db0f10045703953dc83b3999303", "0xf5b0b824f4fddaa9590c4cf27233604cd25cfc08515d8bce479b88d4b1f6c2fb", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:f5b0b824f4fddaa9590c4cf27233604cd25cfc08515d8bce479b88d4b1f6c2fb`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "dceca923830133d4b5b6f45baaa439539b7da70aaf5cd86c510c898d7d64a266b29b32b61f6e827d532f6723ba4dd8170b50a9afb287b7aaaeb084a427de720a", "0xb91efeb99e010891657a58b42c12e4ce809622ad207bc9bc09f54367a81e1f66", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:b91efeb99e010891657a58b42c12e4ce809622ad207bc9bc09f54367a81e1f66`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "71c32fee98367089f4e83b22ad251ea585c84dadaeb6fbb230e4ff72dc2135aa24894a72c26f27470a6de1d0bd1d320d7b2e6d9eccdb52a6d8c545593f940b03", "0x64e3b2c49da6f622007c296dcdb903a7b1f28ae034b469b519162aa2df8d7b6c", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:64e3b2c49da6f622007c296dcdb903a7b1f28ae034b469b519162aa2df8d7b6c`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b6e2f3e15d9134ff76beb94f4265ad11557397a76289cad6ea276b4ccf1d9f3a8e33aa40d787872c79d2dd4e7a1dab69081e49e6a47589beea1edd97031c4d01", "0x724d4ff0345c4c0943ce5d454702f2bf5a1348f5b6968b2222e4bb588a054509", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:724d4ff0345c4c0943ce5d454702f2bf5a1348f5b6968b2222e4bb588a054509`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d68126ed56dd7a871c3bb948ce25607e886d41ca3720d78e0cfdeb6d632a78721e5250e3703a178408f4db5739ba7885e6bc816ca709ecbe330d86248ddbbf02", "0x89e4029cef4d769fa6deeb36bb8c737e0d59d1c3ad4d35e742dbcfd95c7b6e7d", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:89e4029cef4d769fa6deeb36bb8c737e0d59d1c3ad4d35e742dbcfd95c7b6e7d`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b11f6d0c1421a69b426868b0c5a15ac21a50c81f2609cde63396a9b659a76bf6373ca543524d3c7de23e6bb31dcf62d280f55d6d6427e00114db8778c16d6205", "0xcbbad04310a243b8711e6c8c896cb021aec8c50e231c17650ed169684af0934b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:cbbad04310a243b8711e6c8c896cb021aec8c50e231c17650ed169684af0934b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "fe31a1bb66a936a2c3bd80a1f53269f79782354134816ecb0e32d884e4fcc36a92bdb16c21b1b731291c6884c2be9f27e78f158c68a007549f08458dde14530a", "0x520c9d266db366956341a547ef11ced5a0c9f2785bb3d661352e12197f5f453e", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:520c9d266db366956341a547ef11ced5a0c9f2785bb3d661352e12197f5f453e`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "967acbc288007e7f0d07322784e5d643538f6cec83ef5941bacad861963ba6ada78ef10f939739f3d0073df48707519438f2d8fb63fe2b63a423fa917dd68707", "0xa68571b068ce8927e37c8783ccb761d471ba662f4294deaa5c4a818cd7d92cfc", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:a68571b068ce8927e37c8783ccb761d471ba662f4294deaa5c4a818cd7d92cfc`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c876d6f65815a0797f1be7fb4cf71425eef62ce22936bf2e5bcad4cfa3a9f66d6d06b3f74038b22f8b3db9ccb1f68caee9996f767ef9d6ef5040e6f877fa7d04", "0x972593c1cb9741693630d062f85219042bf1f60a1144bd937e179d9874c9427a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:972593c1cb9741693630d062f85219042bf1f60a1144bd937e179d9874c9427a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "09310650039c1af03fb4a6e728a486019800a602849ba916c2e6be07ead7fcca269f1e9a61babb6928cbb880c38d6e3c2143a0094badaac69e4f182fe07a8307", "0x9052a3ae259f75ca824f5e77bde8095ab4230c739a44e16dc5e4a4b881238073", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:9052a3ae259f75ca824f5e77bde8095ab4230c739a44e16dc5e4a4b881238073`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "962cdcd1d250e69086a621e85a67c206ebe7349ead514dc43c55e3ab724021d2b28884d2b2940c3026a2ac6cb8668b1e1ff10190fc003a427d971c11537b8e0d", "0x0bf2a73f3520a791ca68dfd547121c7490bbde2035e95943cce4df7e8b41ec95", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:0bf2a73f3520a791ca68dfd547121c7490bbde2035e95943cce4df7e8b41ec95`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d6043afe27bb22bbbe3c5866454f588a224f27ffe6d0ec16081fcd3b0661f792b9908f64003749d8ae9925f526abb1eb24f5535d8f4c1a029b78bc1f6064fd01", "0xc482b2403d263788d790d3fee8035d05288a0038c5f330d47630f8cffa600c24", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c482b2403d263788d790d3fee8035d05288a0038c5f330d47630f8cffa600c24`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "8b3d1cffac5f6fa8e7cc11b8263c55942d258dcd1aee66af1370506bb3962c28cd151c73065f7d60e75b615b7b0d358a507053eaea1e7cdb850dda316b59a20d", "0x47dbb200a1cf7b8fbdf872da9685c4a19dfa090bc49ae98bb1cc39648f1cc4ea", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:47dbb200a1cf7b8fbdf872da9685c4a19dfa090bc49ae98bb1cc39648f1cc4ea`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "16360cbb658fb377781282ae495fd53107c0e50859eac12d23721a4bf8d63b10e1ab81ae65c3f49cb362b32ce9c0701d108feb3985f25675038b9b3a70ed4e07", "0x810ff15e713a3bd457289017daf71b516a821fa9adea47ac999837b5d760e694", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:810ff15e713a3bd457289017daf71b516a821fa9adea47ac999837b5d760e694`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "cb3f16f76fbd86c99d78da07b1545fae26bc4ecb2d9227cf2f6ce99b43f0c4f14aeb072adea9ee7e926d2f2164b25730e8d93647dc25678a3f0000a39010910f", "0x0bea452a320e485f0bed5566115e7f9a49a2aeabb2c566e712e702d989959c86", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:0bea452a320e485f0bed5566115e7f9a49a2aeabb2c566e712e702d989959c86`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "a7602e2e315acc71bfaadf8ba2ad3fde4cd79f1bdfdb363bae9637b16798d26add428a9931c5394155cf8b8f4df002b3fa264e6d408f0449a56e4ab671862b0d", "0x690c595c7874872c5077c808547989337cdf558d8089a28ac00ac8c44d809872", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:690c595c7874872c5077c808547989337cdf558d8089a28ac00ac8c44d809872`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "a3c5ba25e0c8280c42008a803e21672022f07dffc212de915752af6880e32903a1ee6db6f1d36bfb02d1054c6cb75d3965b504903ac6661428a63926a0a82203", "0x9ca8541976db0bbfd1946d46e25ba5d5f6c77d857e50ab2c0f4d165e84a2f13a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:9ca8541976db0bbfd1946d46e25ba5d5f6c77d857e50ab2c0f4d165e84a2f13a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "640cdb59c5081f55b20a8fea8efe66f0da00a74899ccbe64c3231f80122f23d5cb44e17dc4cd5851d21f7e0a773b19e0042ea455551a33ce10b728f5333b0b00", "0x20da94328683151e5124ecd141a63024859f03aac7d3b6ce8dd5986c1f8502bc", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:20da94328683151e5124ecd141a63024859f03aac7d3b6ce8dd5986c1f8502bc`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "f3b07b22985a1ae73e92d12b290d2880012017157aa46385bbd2efd8495ed69a92f72a47410abc3a73530c423dedeae6e5be0c99c1299992b9b12bf96f33700f", "0x32ff11a1adc0d888ac99fd54db314d9fadff9b66b72659302cef6e9bd44633f4", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:32ff11a1adc0d888ac99fd54db314d9fadff9b66b72659302cef6e9bd44633f4`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "0dd97d2d0a124224efb5224d61dc7dcffd123e631e9c7aae7e7d1dfefcd4fa3f9ec465a32b86e8de817db8da29d8ba7b15b8b545dc3fafe05261ff0af58b1508", "0x48c302e33507e3c1a5f260b083a15742233d909d2bd5f84301c11b4c0294aeee", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:48c302e33507e3c1a5f260b083a15742233d909d2bd5f84301c11b4c0294aeee`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "89fe323fd8781e87199a9925073444af0e7f4ccd58d680f678220e8e7339f03a769b2c67069860de8c43d6bee82d9cdf3cb918e195bf5a8b0e87f922a3bab803", "0x21bf74226937e76b4eef2b9488611194c50c0e65930ba5e79bceb6b4e317a35f", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:21bf74226937e76b4eef2b9488611194c50c0e65930ba5e79bceb6b4e317a35f`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "dd0f3d29e8e8d954b4c55e8a57d0a207dbfdb52763ba0de901e5e6feea70c367be7f4d3cb4d12e2273a744bf95f55a1ce5dfcd08deb0ae0f73dea8081ffc5104", "0xcdf7a59e5ea8be18765bd2c59ec4dace329e3af3844e5fcf4148fffcda62f810", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:cdf7a59e5ea8be18765bd2c59ec4dace329e3af3844e5fcf4148fffcda62f810`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b409873e1294a7061484a709fb56d41c0ed2796c6a8025b525f034395cce2e0619acd8040fbc429b4540bfa3d9d7a6f9929e7e19f9fd3a42d79f2fc41b25df05", "0x338b2f9eb099b633d66864f68b9400155aea8fba864442101053d2f188616e0b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:338b2f9eb099b633d66864f68b9400155aea8fba864442101053d2f188616e0b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "09ee59fe8f66a6201d9ed01919727227500ad0db76807d6f486674e655eaa848b084f3ad7e837d786485862c53754c53bbfce53f0ad30b3566a96498eb32f20d", "0x6b17cd39d49f1232f857663cbde02364a3c65a0b0c620a8ee26d76bda577c016", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6b17cd39d49f1232f857663cbde02364a3c65a0b0c620a8ee26d76bda577c016`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "6de1b2a50f0e47259da4d4607be1f03ce3b65677b76d1869649c248df2f61f107012fd4946dc7112fff766143ce0384db1ca6627b1c3792997c2a7eb3fda9c0b", "0x115a9f0966e750350573a1f65a09ba65bd30e0abce5fc1f7323356a8eac23251", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:115a9f0966e750350573a1f65a09ba65bd30e0abce5fc1f7323356a8eac23251`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "ef75671fceb7e5c2b09c1ca83579b04b89e4b9ef03772efa5f720a9c79f1348f2d1e2f7575e43bae08841f78ed81a0466401a8c8be9bf0d67d91285d64303004", "0x99bb108b1efd1c8adb0d67c6296d8bc93c40d8698678f1ff07804e3f1162bf10", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:99bb108b1efd1c8adb0d67c6296d8bc93c40d8698678f1ff07804e3f1162bf10`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "2be411a4c127c7a21f0f1fb356575a2ef94aa4485c89da5762fb500ec9f92e23aa9338655362c5a2e869025c8f6a56da745b3f5f88e3a2f28cff2bd550926b0c", "0xeaaa6ee0b45a867544f8fe3c271a91c531b9129ddf9fd7afcfb242f678849e7a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:eaaa6ee0b45a867544f8fe3c271a91c531b9129ddf9fd7afcfb242f678849e7a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "a7b9a19039eff9df7e97ee975a25614bf8a848b84f4253746328f8e6e615c3bc8935de94b4d8e6b77451a667faf497060439de8b757da6f104a23ff2b709a20a", "0xc0292c4170b34940dcb6c4e66f7aa4ea8f41017f60ebb96a96b446c7df5f6df5", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c0292c4170b34940dcb6c4e66f7aa4ea8f41017f60ebb96a96b446c7df5f6df5`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3bd89758bb0a7c40d0eff0f32a55d28465df8907757c978db41b6234204869d821906a5529945c2603c4aab391c39fb974c2f7b426d5fc8857beb3a0c8416209", "0x68eed6d5507bca91eace25652e7773cfe2a571b0f61883afdfaf161db5500b24", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:68eed6d5507bca91eace25652e7773cfe2a571b0f61883afdfaf161db5500b24`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "31e02b8a9407e802f380699d30d8f203a09c608281eb33ca2559a083a5b862837dafe1e027f8d36c7606b7915e588c3174e6f345e5c81de090c1697795acfc0f", "0xdc99b0a0f2ef0a2f620051ce84fa8ec9138fea4ee669b7b02526b4188a9cd8c2", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:dc99b0a0f2ef0a2f620051ce84fa8ec9138fea4ee669b7b02526b4188a9cd8c2`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "dca2e90cfe3556f467b42524b2a9ad50e6dfb473f70552613e77e1b85fc949bfc862b70f888927da89a8e8b69fe89397b9727a9b1395a78b2d719dc99a23cd0e", "0x59f6b7760e9157e25511f55d44915fb0574b88d0e6e63ce8a960a218f91122cb", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:59f6b7760e9157e25511f55d44915fb0574b88d0e6e63ce8a960a218f91122cb`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d6ae0059df4d8416912116367938ac2bb52703f85f008e46668e6f702f1c9f7bb6841f698087eecd21b237bb1b24726141342b9e1a37f2af7b71dc5bb164a902", "0x50325e087d82cfcb5739b4fbcdab02bc078d9d5547932cc3d8e2673994b630ec", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:50325e087d82cfcb5739b4fbcdab02bc078d9d5547932cc3d8e2673994b630ec`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "30c0c5859f32433eedd068e0d43717dff5c34ca28a24c7d78b78d0c9e5d85403ac311944f09ca5a531004adff84d7256672d9f1e0934b964036f3d9b8e727507", "0x216dac21adfec949a600c883f317af62ffdcd7399501ce20a50e2f31128a910b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:216dac21adfec949a600c883f317af62ffdcd7399501ce20a50e2f31128a910b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "5176aa29974612c9fdb946bee542501bbe2f85a2752c8d58d240eed48010e8175b57cfb962af8999427b5b5095d0a3b19ee0ef83dd8d4f4b563185b7e964b800", "0x21c1d9ac1667b537c838c6e6c29da029e1212a382a5d075ca59800dda871080b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:21c1d9ac1667b537c838c6e6c29da029e1212a382a5d075ca59800dda871080b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "ddedee7a69a03da694e9d321cae48c9e48a035b5678e940e0f14bd923443b58dd9dba2000941d1ced2300e0194dab8f12ffcbbda1f14b1271d714ab83470fd01", "0x92dd160c9d011e7381b903329021da375b4ff08aa9aad035a416f625ccfda638", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:92dd160c9d011e7381b903329021da375b4ff08aa9aad035a416f625ccfda638`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "b99018ff01024b6e9285686a9ad9d72ed8bf40d5e8e567efbc2d40c449313db354b38b1671fa9c847513b03a46632f8cafe884cd62c30f361f5a3744b5c50201", "0x5176fe20b0d166d1be25dede97b0bd8fe94272a6da97442e13f57d92fee6df45", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5176fe20b0d166d1be25dede97b0bd8fe94272a6da97442e13f57d92fee6df45`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "5a1f5d05499a1e9a9de7a45902af8d0b08aa869cb68d880aebc59d4e826cef75005ea76075d29a41401b2aa5003702fccd5ae564ecee5c44210518f8a7583000", "0x1e86f07078b3b0c4ddfa411e4b87e784a050d2b14019149ecf81eb1ef8cbc61b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:1e86f07078b3b0c4ddfa411e4b87e784a050d2b14019149ecf81eb1ef8cbc61b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "1c9dd43f6b077a3de3291a4081289c761078561478aa801b19442d899d14ce227ea75303fec86b957094f82c88acc217293acf522f567ba7214ba25e2beab60c", "0x6e536940f4f3f6b1c83205a951e96bf7ae6f0c48bfbb558277963fe333300cfb", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6e536940f4f3f6b1c83205a951e96bf7ae6f0c48bfbb558277963fe333300cfb`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "a99c32f695ec573d6569bfeea2ef91b466cb7148b02a4349ee1146614eb3a8a4c36ea7e2453767a5842477c311817f713f24040414825d17678170fbb3c18e0f", "0xc57d4bfe745519c3e9a2e98fcef140a5a039ad41af15ae9133441f3b4f50e9fb", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c57d4bfe745519c3e9a2e98fcef140a5a039ad41af15ae9133441f3b4f50e9fb`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "eb0bf55ca8f2d77f9640db26a17dd660dca70d9038f262c0bd7af1a74b63a6e4d6688a44dcfc8fa765bd045bca780c6e7e022dd5a990a4ac7811c96485d02303", "0x550d41d3e03a66fc88e3cda2504fae9c998bbf274d21ef6de3241421f8f17ce4", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:550d41d3e03a66fc88e3cda2504fae9c998bbf274d21ef6de3241421f8f17ce4`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "234a80fd0e509437c491bbf400270aceace26075d22459cd57acbffc208f98755ed9d39ffefbcaa7a43be2e3f9cc1e31ec2e186fad05eda32d0dfe5523e5080d", "0x53e719d1f93241cca49a2589e5aae4a3dca7423642c7043279ab7ffe59da1c38", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:53e719d1f93241cca49a2589e5aae4a3dca7423642c7043279ab7ffe59da1c38`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "974df7ad864eae3073b8749b453b48192d97d7aca777b1e35354fb90a6b5a952d86bb18565b9b6c86ceaf4d4bb9d234d2e8677305a58badd7d7e30e50a7f1209", "0x5427afa1580d5f11e2949ebb33605aa4b8bd1ce5185c8c802a5fecbecc28c4e9", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5427afa1580d5f11e2949ebb33605aa4b8bd1ce5185c8c802a5fecbecc28c4e9`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "afd9dbacfeca840eaa3956050b86aa6f8234792111025c350cb2eb3c000c2f498c9a480ea4193613d90605655e42bccc4d4a9e46070087cc269e92a178b16a04", "0x5dcdced6315aef331b3c428e8d2a1083cdd31cfed8504a3423bf71aba5b335e5", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5dcdced6315aef331b3c428e8d2a1083cdd31cfed8504a3423bf71aba5b335e5`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c302ef4fb53252743ef900bf9d782c23d7420c812d4c27397b0525caa063e30558beac18e710294293cbcb3fd391402bb707cbf8c6b4febb0e06157f63048806", "0x4e653624e4a2605ed0bbd2947d78e377d7015268045af021e62d8bd449f69c75", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:4e653624e4a2605ed0bbd2947d78e377d7015268045af021e62d8bd449f69c75`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c2841caf0fd8c78364a8f88af97dd2918efa3df2fd58df30f4fe442b54b59a4dedf99cb1e4a3a85cf4a61c7d439747bf177ee1bbd473213e2bd5eb481947490e", "0x22d7ad12de0e6d391daec01c9ff302bd1fa27dabfd74dd8be69c7b536795e903", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:22d7ad12de0e6d391daec01c9ff302bd1fa27dabfd74dd8be69c7b536795e903`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "34c82d301f7e56b72b7f7f816cca3b06811ec27c6e3766d5246d61666b9d14f5f9b2d98dacb68ad8b0ca4138851fe39973a5b4a2ac48bf013cc33e6df47ba009", "0xc356ec9bb209616119da54d26bebdbd359dcdf0aa2ded29e3c9962191690aa88", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c356ec9bb209616119da54d26bebdbd359dcdf0aa2ded29e3c9962191690aa88`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "093ab9cde4d8232de45fee5b19acad8832bed10975819804fe13cdb22d79c3b989f096b3213158413f9fe6ebb01d229e9bb1d0096461ce4bc927a1f1bd290e07", "0x806767694f3290711cbf76de8cbe691a77b95390ea72aae3c55989c97ac5ffe7", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:806767694f3290711cbf76de8cbe691a77b95390ea72aae3c55989c97ac5ffe7`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "94f9bb3a218c666005deda7fae21f7f358ecb9785c0c2f0522162582e7d0e83a3582d0f1985cc2d43802e23ada13b6d85236b6cf59a499f6a04fa852cc132707", "0x54e84a128d7dbcfcbd4680eba5893e70e4ce185487eb11fc45042b21746ac262", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:54e84a128d7dbcfcbd4680eba5893e70e4ce185487eb11fc45042b21746ac262`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "66bde796309d4f00d395f654923c3fd2c1d45690b15214f76684ec7dee9fc79f0a2b70326e54f85e63d6238ed6e16fea238ac2cd3d967a5210645e72d434ae02", "0x04a16bfac7015b1bf949e2a13af30b74a3a15ddfa2554f50c556a5d80aff4405", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:04a16bfac7015b1bf949e2a13af30b74a3a15ddfa2554f50c556a5d80aff4405`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "17d90dd0e8b20d345604c28592d880cf39c44c018a5802a9b278b2476ac1b18f090d06a80ba7fb264944b9fa5a5946eddca4808c6f384e6fbb3bb6436efac708", "0x88caf5b495cb3addb72af1fcb0afe84e453ae78dbe28d77c32309157e4692f75", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:88caf5b495cb3addb72af1fcb0afe84e453ae78dbe28d77c32309157e4692f75`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "8b2277586acc774857fbe125080aed4201a9df91f2dda6e52d58ebda0194fa62d32e12b0c4f5e13bb07c3bc1e25241dcc7c05abdb12144254748d1fcc4736a04", "0x8d7160feca2eac57478fdade521196cfd58fd9b77991bc101219944537332dce", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:8d7160feca2eac57478fdade521196cfd58fd9b77991bc101219944537332dce`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "e80161cc6d700c33c70d147523b62867138d67fe2ff49d1656e53178d2dab6f0a77e82dd70789b8ed973a1fe92ca265d867572b189a96221e6a7515a46eebf02", "0xea46a5d702f905010abfd06c0544fe360ae2aed30fcb6520239b5ecd0a3d0efa", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:ea46a5d702f905010abfd06c0544fe360ae2aed30fcb6520239b5ecd0a3d0efa`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "1007fff5c5992d849b6df99d6bea6505692dfc7c540a40db4499aa693dcceac99c951b71c507de3933dd2b3e0f52355501e805ac3d84816e5529aef1436b720f", "0x79ee61e91a0df5f19eaf279edd3d27a740d9afcb88dfe613ef9e146ff66c9c7e", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:79ee61e91a0df5f19eaf279edd3d27a740d9afcb88dfe613ef9e146ff66c9c7e`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "7c62426a4473181f31da4864d6fc704a62a4be59ebaa272d87628ad8f682bfd8a5984b1fa865efdb60d335be5e95e7a0047199a7e024227c3ccc57e17dab9e06", "0xa2ba8536d61ec1842f23fa995a8430e9411ba700d895a7dbac00e5054a5b7db4", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:a2ba8536d61ec1842f23fa995a8430e9411ba700d895a7dbac00e5054a5b7db4`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "8199244bfa916773c21d97b33b30096ca200fc2b4a91ab550db4af5e8e9929dd12be420dc3b054d31388a8d0a257e4f74bae6cd8da10408a1b0dfc05d35a150b", "0xd7320457d7889545315141e16c6ca07c490bff7ef3467dfe83d4f350f7b05cfb", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d7320457d7889545315141e16c6ca07c490bff7ef3467dfe83d4f350f7b05cfb`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "78812c66780510808c09f731e4dd996291f075bfd167a30eb4581437f1c03b20fa13d580cfdfe566a1bab99069c678ed08112aac49b92636295f768d56060503", "0x3830e782fe20b0a0cf890e1c9c56184619349c0c84007aae593d8e482287e07a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:3830e782fe20b0a0cf890e1c9c56184619349c0c84007aae593d8e482287e07a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "ec331ab3261b4a57d37296be4587aaade57be7b92ff8705b3230b56d96ae04fb5866ed59b166907ba27bde70cb44a15017c9569044b207b461bba688889ac10b", "0x5947114063539fd449d0a53bbbc87e4d32e483d1b9d191ea52c90d18b44318c9", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5947114063539fd449d0a53bbbc87e4d32e483d1b9d191ea52c90d18b44318c9`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "9a8401f7cf4c87e013e377889b5502093f733f7a50befa850004b2892c973f64fe2548e7ab9150ab69188a90f66e3b5b582c3a0497b2f06333045ad62552d802", "0xdb23f4baa033a70813746c03c7a1f9102e9e1760b5e27d9c9cdf8683b7e86cc4", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:db23f4baa033a70813746c03c7a1f9102e9e1760b5e27d9c9cdf8683b7e86cc4`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "3da03f63faec252346f7a351fc51b8f6cd04c86378e218902968ca4487f5e6d995492e848c27d24d631f3af394043468fcf6016eed043428ae8da09a01419c03", "0x7a66e509aba023c59f2781de0b03156aff39ae05eb23b5dfefb5f7a32c3abcf6", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:7a66e509aba023c59f2781de0b03156aff39ae05eb23b5dfefb5f7a32c3abcf6`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "a984c5acb79c09a5404aee7b0b887d4cd7249060ba004c768487af3a9972e01b7197265b8fe369fcd842aefdb1e91d7fcd543dfa5f5cafd9998fd925b20dca03", "0x41c270dd5deed777f16c63ed0be3cc7eec86df283c2d5516f6540d095c9c7007", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:41c270dd5deed777f16c63ed0be3cc7eec86df283c2d5516f6540d095c9c7007`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "2f8f4e309c9403bef964d2ad355e7d048dc71ebe724117d845f34e2d47274f53ee6ba888e983cad4da205a524a7742b19ddf4f4ba7fdaaf2a02a06d5365a920f", "0x53ff557eabf682ccf6dbd52fce19232e7f436ac83ae8a26e1ad18f4f57e62918", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:53ff557eabf682ccf6dbd52fce19232e7f436ac83ae8a26e1ad18f4f57e62918`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "95ae28e3f069d9aab8a4eb9702c26a71e5bd58c0198474b3e498b83a154bdef692c7c483f3e3750f4cbe94d84f68cf02f7c0064b8123d943560c73a53de0ba01", "0x0c98e0dc59bbbf122fdb598bb25a2c45045dab07af6b6cedbc5ee1174eda558b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:0c98e0dc59bbbf122fdb598bb25a2c45045dab07af6b6cedbc5ee1174eda558b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "1b6a8726bafd392d839e9ef6475a984ed653c74bb987f8fab7f703db9c48e292f0786d002ea017e7fafdf1e772564cbf8ee576f81069e296e031d407ea8a5c0e", "0xcc69d05efa33203580c172fbe1598f4cbcf2ae2e3a9b1f79b2fad373d61fd4a0", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:cc69d05efa33203580c172fbe1598f4cbcf2ae2e3a9b1f79b2fad373d61fd4a0`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "61aa25c9f80a06c9811ffb0b54d0e533492feabead296292b00f517dc5761202c33a261c0899caca71287324cbc1526dc48925978979ac7c346bd4f8d3af3901", "0xed5c7e04b74cf5128eb120d24d329a18c75eb56913d97ba45370310c5efabcf9", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:ed5c7e04b74cf5128eb120d24d329a18c75eb56913d97ba45370310c5efabcf9`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "7905443bb27e3578234e229606105fc0a9d6cab4c6da3cb79a59f093aaff2578c941f5d0230c30d06903ff29b354bf54f9b6a3008c83482300f1b7a2021a720c", "0x70368b16d82fc502261ac68f4ad793814b1ab8c436a598fe06d7371a232ed0f1", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:70368b16d82fc502261ac68f4ad793814b1ab8c436a598fe06d7371a232ed0f1`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "12662135e61c9135d9d00125e5b7a072718f601bf9d07162fdb4ae09558404dbd9eb0e782259cb6936a875eb766977d3ad648b5c3ff6292e751f1b8e9c8dac04", "0xdcf3850249b056bc5457e3704966f90311c1315d6d728be842bfde221f783cda", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:dcf3850249b056bc5457e3704966f90311c1315d6d728be842bfde221f783cda`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "e9cf78fb0e1f0349ce215045487fcffeb1ea21566e2b40ace6484a3c72453e4f60dedf7669790b9670eac91486f5108edee04220996ed71e5851f3a11e95650b", "0xb03e9b424c3c844fbd3e35158056571c70e0fff91554e72fdaa3625dd24e73eb", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:b03e9b424c3c844fbd3e35158056571c70e0fff91554e72fdaa3625dd24e73eb`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "2777f73057ad96b9f0288c76cc5b64b9f282fbc4579fd1383b1aa084d41532213226935643374a203becb2f160b9d4f335402397f41487db220f220886e5e60d", "0x2054dd62dd8b832c4178ad4e0925468f2e12901641d0530651c2c4554d82f777", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:2054dd62dd8b832c4178ad4e0925468f2e12901641d0530651c2c4554d82f777`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "c863f0c54567123752cedfa0386a2bf51e7814c05e60e9c1fdc0138568a66f58929283214fcdccda83fa062195b712ffa31113711477268224502fca9cb45a02", "0x1ea9beba07966f43cd57155d44b60077d19d20f22c5e851384cdd720573b793d", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:1ea9beba07966f43cd57155d44b60077d19d20f22c5e851384cdd720573b793d`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d16f2bfd05777dfe597e329bfad17184dbcd4fa17c367d6857d946ed7e5155fc067d82de6aeb348b84cdd0eb16d4674efc709732eadcc1f6069f7583d9d09204", "0x7f5583604cd7e1b13d82d1c9941f24c0261b125d53a5a358795fc02bb8541c40", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:7f5583604cd7e1b13d82d1c9941f24c0261b125d53a5a358795fc02bb8541c40`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "8e9da4b8794dbf34969ec617bbd29200fb66bcc1069c79c59652b34f98ef81e29cac416d80a87be6c4ba509d16d4b54718b3a553c8f745bd9d4776d216fbd10c", "0xc579e68432d2b6717f66705f8ea86cafa270965a00158aeb130ed92e541dbdb9", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c579e68432d2b6717f66705f8ea86cafa270965a00158aeb130ed92e541dbdb9`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "da246e39550c7c30619238817b08bbbc46773ab4c59f2bc9cec2262d7b19ef1e32f4a9c0de606cfd3929100d559eae3c1fb0b13c137b37f1ed1f608c185a7802", "0x212750d2253aafe0900e513cb848eb2cac1a0205d7e6eea62ab65ed0bec2aaa1", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:212750d2253aafe0900e513cb848eb2cac1a0205d7e6eea62ab65ed0bec2aaa1`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "e8e7c41263acde7daac59b12e442e91027a13d2b3f1285e75dd20bc886472f5e37be1be8ff92b58ad802ad4d11a0e4708613adf8362603938774347e9031f10b", "0x6a35047552b7890416cf1c455e26b9018f169e4f9eade452b5710cc1d9928274", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:6a35047552b7890416cf1c455e26b9018f169e4f9eade452b5710cc1d9928274`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "0c51910fb0e55e8e46b61a0e8a563d0a27c3f99aad8e4a5d21af5dfb629421e421b901e0eeee6d9199bccbb79e7897e05919cf7664b4bd1eff9ce85be5bc8008", "0x65f9232e88d0368cc69885168b0573e90c5cee022eb999bcc734e7c3987f3e72", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:65f9232e88d0368cc69885168b0573e90c5cee022eb999bcc734e7c3987f3e72`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "d18d330e4828a063097c7e4803799f9edafd31fad9353d0b747fe0448d95411342b2eeffd159625a39e26784d9d45927ecd8cfcefa464e96d2afaf36b9323702", "0x5ee34963df5c0e7cd1945fe0016a7aeb4f2a070610c06a92eb5ff06404ca7402", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:5ee34963df5c0e7cd1945fe0016a7aeb4f2a070610c06a92eb5ff06404ca7402`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "fe9178ac9f2d72ab05de03f036d2da8bccf13f72b9cf477f5a8d7e5ed57730aadc81cfaa071c716d9a15a123690b3dcf7f0958627544534f7af2aff0d40f0702", "0xe70e99e4dceca42e8fa212e530767cdceaadf8a9b0debdb02549aba10b3b1c4a", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:e70e99e4dceca42e8fa212e530767cdceaadf8a9b0debdb02549aba10b3b1c4a`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "1ba9e0ad92d98a631728ed17f34542403a4167516dfb15ada433d0d8fd9af91ba0c4f90beac6d05428ff42d16ad5e9ea24a1d9c8f4aefce355686cc70aa2c00e", "0xd0f5f6dd85dca9ebeaef640034e08b7db2399330c27e55570f5d387ad95cd22b", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:d0f5f6dd85dca9ebeaef640034e08b7db2399330c27e55570f5d387ad95cd22b`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "29669af266fa1eaca6480dd390bc88596475c673f71f4b414dfaa17793903fd49ec7adc114d461011be4c8550b3673158c99ce4e38fc0fc5e3beeb263e62220e", "0x3c04aecf5b65f4cadea63945e62365733b61f797b462294b2cfde20ab8ade16f", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:3c04aecf5b65f4cadea63945e62365733b61f797b462294b2cfde20ab8ade16f`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "5f139e30ba1d7a850d46a4a7b46796764dbecaf5c599fa2ac80e58de477b7a7f75137e717ffad73e19792527c5b862dc3870c46846f4f7eda5e0a9f87aa93a05", "0xc2ac31582839a3283f56d62cd10fb5d2843b1cde41e1f3cd18f97fa2a5f88093", *status)
+        }
+      }
+     |
+
+      for(@wallet <- @`rho:pubkey:ed25519:c2ac31582839a3283f56d62cd10fb5d2843b1cde41e1f3cd18f97fa2a5f88093`) {
+        new status(`rho:io:stdout`) in {
+          @[wallet, "transfer"]!(11, 0, "82eefa9f7d8fbc917a596f090c409418ebd7941f6b9ba0ba63df8aae07f0fbe4650aef2ee1127ecfa84b6407846d1b90f0e34383dd622b06764beea1443a4d07", "0x827ce1a241a5efedf71083ba4d0f8ac4874be283c251caa8083b07def55fbd72", *status)
         }
       }
     
