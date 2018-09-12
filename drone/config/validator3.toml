@@ -1,8 +1,7 @@
 [server]
 host = "validator3"
 port = 30011
-metrics-port = 30012
-http-port = 30013
+http-port = 30012
 no-upnp = true
 default-timeout = 1000
 map-size = 1000000000
