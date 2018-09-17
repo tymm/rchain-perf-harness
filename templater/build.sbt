@@ -1,6 +1,6 @@
 import sbt._
 
-Global / conflictManager := ConflictManager.latestCompatible
+Global / conflictManager := ConflictManager.latestRevision
 
 name := "rchain-perf-harness"
 
