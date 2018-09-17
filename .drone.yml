@@ -132,7 +132,7 @@ pipeline:
       - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 propose
 
   gatling:
-    image: hseeberger/scala-sbt
+    image: lukaszgolebiewski/rchain-builder
     environment:
       - RCHAIN_REPO_HASH=${RNODE_IMAGE_VERSION}
     commands:
