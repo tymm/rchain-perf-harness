@@ -27,13 +27,13 @@ pipeline:
 #    commands:
 #      - ls /workdir
 
-  restore-cache:
-    image: drillster/drone-volume-cache
-    restore: true
-    mount:
-      - /workdir/.ivy2
-    volumes:
-      - /tmp/cache:/cache
+#  restore-cache:
+#    image: drillster/drone-volume-cache
+#    restore: true
+#    mount:
+#      - /workdir/.ivy2
+#    volumes:
+#      - /tmp/cache:/cache
 
   setup-when-custom-commit:
     image: lukaszgolebiewski/rchain-builder
