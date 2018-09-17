@@ -1,6 +1,6 @@
 import sbt._
 
-Global / conflictManager := ConflictManager.latestRevision
+Global / conflictManager := ConflictManager.strict
 
 name := "rchain-perf-harness"
 
@@ -49,7 +49,8 @@ lazy val runner = (project in file("runner"))
       gatling,
       gatlingTF,
       config,
-    )
+    ),
+    dependencyOverrides += "org.bouncycastle" % "bcprov-jdk15on" % "1.59"
   )
   .settings(
     assemblyJarName in assembly := "runner.jar",
