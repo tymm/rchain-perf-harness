@@ -14,7 +14,7 @@ lazy val projectSettings = Seq(
   scalafmtOnCompile := true
 )
 
-val config              = "com.typesafe"                % "config"                    % "1.3.2"
+val config              = "com.typesafe"                % "config"                    % "1.3.1"
 val scalapbRuntimegGrpc = "com.thesamet.scalapb"       %% "scalapb-runtime-grpc"      % scalapb.compiler.Version.scalapbVersion
 val gatling             = "io.gatling.highcharts"       % "gatling-charts-highcharts" % "2.3.1" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
 val gatlingTF           = "io.gatling"                  % "gatling-test-framework"    % "2.3.1" % "test" exclude("org.asynchttpclient", "async-http-client-netty-utils") excludeAll(ExclusionRule(organization = "io.netty"), ExclusionRule(organization = "org.asynchttpclient"))
