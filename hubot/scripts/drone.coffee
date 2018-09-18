@@ -4,7 +4,7 @@
 # Commands:
 #   hubot test performance of image <tag> using <contract(s)> - Tests performance of an rchain/rnode docker image labeled with <tag>. <contract(s)> can point to a single file or a directory with contracts - in the latter case all contracts will be deployed in alphabetical order.
 #   hubot test performance of commit <hash> using <contract(s)> - Tests performance of an image built from rchain/rchain:<hash>. <contract(s)> can point to a single file or a directory with contracts - in the latter case all contracts will be deployed in alphabetical order.
-
+#   hubot test performance of commit <hash> in Dom's fork using <contract(s)> - Tests performance of an image built from rchain/rchain:<hash>. <contract(s)> can point to a single file or a directory with contracts - in the latter case all contracts will be deployed in alphabetical order.
 {spawn,execFileSync} = require('child_process')
 
 stressDockerUrl = 'http://stress-docker.pyr8.io:8080'
