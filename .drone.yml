@@ -17,7 +17,7 @@ clone:
   clone-rchain:
     image: plugins/git
     commands:
-      - git clone https://github.com/rchain/rchain.git /workdir/rchain && cd /workdir/rchain
+      - git clone https://github.com/dzajkowski/rchain.git /workdir/rchain && cd /workdir/rchain
       - git fetch
       - git checkout dev
 

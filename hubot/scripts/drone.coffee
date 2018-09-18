@@ -40,3 +40,18 @@ module.exports = (robot) ->
     child.stdout.on 'data', (data) ->
       #console.log('stdout: ' + data)
       msg.send ("Scheduled build #{stressDockerUrl}/#{repoName}/" + data)
+
+  robot.respond /test performance of commit (.*) in Dom's fork using (.*)/i, (msg) ->
+    hash = msg.match[1]
+    contract = msg.match[2]
+
+    lastSuccessfulBuildNo=() -> execFileSync('./drone-cli.sh', ['build', 'ls' ,'--status', 'success', '--branch', 'chore/test-fine-grained-locks', '--format', '{{.Number}}', '--limit', '1', repoName],{
+      cwd: '../drone'
+    }).toString()
+    child = spawn("bash", ["./drone-custom-commit.sh", lastSuccessfulBuildNo(), "#{contract}", "#{hash}"], {
+      cwd: '../drone'
+    })
+
+    child.stdout.on 'data', (data) ->
+      #console.log('stdout: ' + data)
+      msg.send ("Scheduled build #{stressDockerUrl}/#{repoName}/" + data)
