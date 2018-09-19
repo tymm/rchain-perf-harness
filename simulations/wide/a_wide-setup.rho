@@ -12,7 +12,18 @@ contract @"makeWideSingle"(@n, ret) = {
   }
 } |
 contract @"makeWide"(@n, ret) = {
-  new w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16, w17, w18, w19, w20 in {
+  new
+    w1, w2, w3, w4, w5, w6, w7, w8, w9,
+    w10, w11, w12, w13, w14, w15, w16, w17, w18, w19, w20,
+    w20, w21, w22, w23, w24, w25, w26, w27, w28, w29, w30,
+    w30, w31, w32, w33, w34, w35, w36, w37, w38, w39, w40,
+    w40, w41, w42, w43, w44, w45, w46, w47, w48, w49, w50,
+    w50, w51, w52, w53, w54, w55, w56, w57, w58, w59, w60,
+    w60, w61, w62, w63, w64, w65, w66, w67, w68, w69, w70,
+    w70, w71, w72, w73, w74, w75, w76, w77, w78, w79, w80,
+    w80, w81, w82, w83, w84, w85, w86, w87, w88, w89, w90,
+    w90, w91, w92, w93, w94, w95, w96, w97, w98, w99, w100
+   in {
     @"makeWideSingle"!(n, *w1) |
     @"makeWideSingle"!(n, *w2) |
     @"makeWideSingle"!(n, *w3) |
@@ -33,11 +44,110 @@ contract @"makeWide"(@n, ret) = {
     @"makeWideSingle"!(n, *w18) |
     @"makeWideSingle"!(n, *w19) |
     @"makeWideSingle"!(n, *w20) |
+    @"makeWideSingle"!(n, *w21) |
+    @"makeWideSingle"!(n, *w22) |
+    @"makeWideSingle"!(n, *w23) |
+    @"makeWideSingle"!(n, *w24) |
+    @"makeWideSingle"!(n, *w25) |
+    @"makeWideSingle"!(n, *w26) |
+    @"makeWideSingle"!(n, *w27) |
+    @"makeWideSingle"!(n, *w28) |
+    @"makeWideSingle"!(n, *w29) |
+    @"makeWideSingle"!(n, *w30) |
+    @"makeWideSingle"!(n, *w31) |
+    @"makeWideSingle"!(n, *w32) |
+    @"makeWideSingle"!(n, *w33) |
+    @"makeWideSingle"!(n, *w34) |
+    @"makeWideSingle"!(n, *w35) |
+    @"makeWideSingle"!(n, *w36) |
+    @"makeWideSingle"!(n, *w37) |
+    @"makeWideSingle"!(n, *w38) |
+    @"makeWideSingle"!(n, *w39) |
+    @"makeWideSingle"!(n, *w40) |
+    @"makeWideSingle"!(n, *w41) |
+    @"makeWideSingle"!(n, *w42) |
+    @"makeWideSingle"!(n, *w43) |
+    @"makeWideSingle"!(n, *w44) |
+    @"makeWideSingle"!(n, *w45) |
+    @"makeWideSingle"!(n, *w46) |
+    @"makeWideSingle"!(n, *w47) |
+    @"makeWideSingle"!(n, *w48) |
+    @"makeWideSingle"!(n, *w49) |
+    @"makeWideSingle"!(n, *w50) |
+    @"makeWideSingle"!(n, *w51) |
+    @"makeWideSingle"!(n, *w52) |
+    @"makeWideSingle"!(n, *w53) |
+    @"makeWideSingle"!(n, *w54) |
+    @"makeWideSingle"!(n, *w55) |
+    @"makeWideSingle"!(n, *w56) |
+    @"makeWideSingle"!(n, *w57) |
+    @"makeWideSingle"!(n, *w58) |
+    @"makeWideSingle"!(n, *w59) |
+    @"makeWideSingle"!(n, *w60) |
+    @"makeWideSingle"!(n, *w61) |
+    @"makeWideSingle"!(n, *w62) |
+    @"makeWideSingle"!(n, *w63) |
+    @"makeWideSingle"!(n, *w64) |
+    @"makeWideSingle"!(n, *w65) |
+    @"makeWideSingle"!(n, *w66) |
+    @"makeWideSingle"!(n, *w67) |
+    @"makeWideSingle"!(n, *w68) |
+    @"makeWideSingle"!(n, *w69) |
+    @"makeWideSingle"!(n, *w70) |
+    @"makeWideSingle"!(n, *w71) |
+    @"makeWideSingle"!(n, *w72) |
+    @"makeWideSingle"!(n, *w73) |
+    @"makeWideSingle"!(n, *w74) |
+    @"makeWideSingle"!(n, *w75) |
+    @"makeWideSingle"!(n, *w76) |
+    @"makeWideSingle"!(n, *w77) |
+    @"makeWideSingle"!(n, *w78) |
+    @"makeWideSingle"!(n, *w79) |
+    @"makeWideSingle"!(n, *w80) |
+    @"makeWideSingle"!(n, *w81) |
+    @"makeWideSingle"!(n, *w82) |
+    @"makeWideSingle"!(n, *w83) |
+    @"makeWideSingle"!(n, *w84) |
+    @"makeWideSingle"!(n, *w85) |
+    @"makeWideSingle"!(n, *w86) |
+    @"makeWideSingle"!(n, *w87) |
+    @"makeWideSingle"!(n, *w88) |
+    @"makeWideSingle"!(n, *w89) |
+    @"makeWideSingle"!(n, *w90) |
+    @"makeWideSingle"!(n, *w91) |
+    @"makeWideSingle"!(n, *w92) |
+    @"makeWideSingle"!(n, *w93) |
+    @"makeWideSingle"!(n, *w94) |
+    @"makeWideSingle"!(n, *w95) |
+    @"makeWideSingle"!(n, *w96) |
+    @"makeWideSingle"!(n, *w97) |
+    @"makeWideSingle"!(n, *w98) |
+    @"makeWideSingle"!(n, *w99) |
+    @"makeWideSingle"!(n, *w100) |
 
     for(@p1 <- w1; @p2 <- w2; @p3 <- w3; @p4 <- w4; @p5 <- w5; @p6 <- w6; @p7 <- w7; @p8 <- w8; @p9 <- w9; @p10 <- w10;
-        @p11 <- w11; @p12 <- w12; @p13 <- w13; @p14 <- w14; @p15 <- w15; @p16 <- w16; @p17 <- w17; @p18 <- w18; @p19 <- w19; @p20 <- w20) {
-      ret!({p1 | p2 | p3 | p4 | p5 | p6 | p7 | p8 | p9 | p10 | p11 | p12 | p13 | p14 | p15 | p16 | p17 | p18 | p19 | p20})
+        @p11 <- w11; @p12 <- w12; @p13 <- w13; @p14 <- w14; @p15 <- w15; @p16 <- w16; @p17 <- w17; @p18 <- w18; @p19 <- w19; @p20 <- w20;
+        @p21 <- w21; @p22 <- w22; @p23 <- w23; @p24 <- w24; @p25 <- w25; @p26 <- w26; @p27 <- w27; @p28 <- w28; @p29 <- w29; @p30 <- w30;
+        @p31 <- w31; @p32 <- w32; @p33 <- w33; @p34 <- w34; @p35 <- w35; @p36 <- w36; @p37 <- w37; @p38 <- w38; @p39 <- w39; @p40 <- w40;
+        @p41 <- w41; @p42 <- w42; @p43 <- w43; @p44 <- w44; @p45 <- w45; @p46 <- w46; @p47 <- w47; @p48 <- w48; @p49 <- w49; @p50 <- w50;
+        @p51 <- w51; @p52 <- w52; @p53 <- w53; @p54 <- w54; @p55 <- w55; @p56 <- w56; @p57 <- w57; @p58 <- w58; @p59 <- w59; @p60 <- w60;
+        @p61 <- w61; @p62 <- w62; @p63 <- w63; @p64 <- w64; @p65 <- w65; @p66 <- w66; @p67 <- w67; @p68 <- w68; @p69 <- w69; @p70 <- w70;
+        @p71 <- w71; @p72 <- w72; @p73 <- w73; @p74 <- w74; @p75 <- w75; @p76 <- w76; @p77 <- w77; @p78 <- w78; @p79 <- w79; @p80 <- w80;
+        @p81 <- w81; @p82 <- w82; @p83 <- w83; @p84 <- w84; @p85 <- w85; @p86 <- w86; @p87 <- w87; @p88 <- w88; @p89 <- w89; @p90 <- w90;
+        @p91 <- w91; @p92 <- w92; @p93 <- w93; @p94 <- w94; @p95 <- w95; @p96 <- w96; @p97 <- w97; @p98 <- w98; @p99 <- w99; @p100 <- w100) {
+      ret!({
+        p1 | p2 | p3 | p4 | p5 | p6 | p7 | p8 | p9 | p10 |
+        p11 | p12 | p13 | p14 | p15 | p16 | p17 | p18 | p19 | p20 |
+        p21 | p22 | p23 | p24 | p25 | p26 | p27 | p28 | p29 | p30 |
+        p31 | p32 | p33 | p34 | p35 | p36 | p37 | p38 | p39 | p40 |
+        p41 | p42 | p43 | p44 | p45 | p46 | p47 | p48 | p49 | p50 |
+        p51 | p52 | p53 | p54 | p55 | p56 | p57 | p58 | p59 | p60 |
+        p61 | p62 | p63 | p64 | p65 | p66 | p67 | p68 | p69 | p70 |
+        p71 | p72 | p73 | p74 | p75 | p76 | p77 | p78 | p79 | p80 |
+        p81 | p82 | p83 | p84 | p85 | p86 | p87 | p88 | p89 | p90 |
+        p91 | p92 | p93 | p94 | p95 | p96 | p97 | p98 | p99 | p100
+      } )
     }
   }
 } |
-@"makeWide"!(2000, "myWide")
+@"makeWide"!(200, "myWide")
