@@ -85,7 +85,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.consume\"}[1m])",
+          "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.consume\"}[1s])",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -93,14 +93,14 @@
           "refId": "D"
         },
         {
-          "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.produce\"}[1m])",
+          "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.produce\"}[1s])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Produce@{{exported_instance}}@{{exported_job}}",
           "refId": "A"
         },
         {
-          "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.install\"}[1m])",
+          "expr": "rate(span_processing_time_seconds_count{operation=~\"rspace.install\"}[1s])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Install@{{exported_instance}}@{{exported_job}}",
@@ -185,7 +185,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(rspace_comm_consume_total[1m])",
+          "expr": "rate(rspace_comm_consume_total[1s])",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -194,7 +194,7 @@
           "refId": "A"
         },
         {
-          "expr": "rate(rspace_comm_produce_total[1m])",
+          "expr": "rate(rspace_comm_produce_total[1s])",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -280,14 +280,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(span_processing_time_seconds_count{operation=~\"replayrspace.consume\"}[1m])",
+          "expr": "rate(span_processing_time_seconds_count{operation=~\"replayrspace.consume\"}[1s])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Consume@{{exported_instance}}@{{exported_job}}",
           "refId": "A"
         },
         {
-          "expr": "rate(span_processing_time_seconds_count{operation=~\"replayrspace.produce\"}[1m])",
+          "expr": "rate(span_processing_time_seconds_count{operation=~\"replayrspace.produce\"}[1s])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Produce@{{exported_instance}}@{{exported_job}}",
@@ -371,14 +371,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(replayrspace_comm_consume_total[1m])",
+          "expr": "rate(replayrspace_comm_consume_total[1s])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Consume COMM@{{exported_instance}}@{{exported_job}}",
           "refId": "A"
         },
         {
-          "expr": "rate(replayrspace_comm_produce_total[1m])",
+          "expr": "rate(replayrspace_comm_produce_total[1s])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Produce COMM@{{exported_instance}}@{{exported_job}}",
