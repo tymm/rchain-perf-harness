@@ -32,18 +32,6 @@ services:
       - DRONE_SERVER=drone-server:9000
       - DRONE_SECRET=${DRONE_SECRET}
 
-  drone-agent-2:
-    image: drone/agent:0.8
-    command: agent
-    restart: always
-    depends_on:
-      - drone-server
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - DRONE_SERVER=drone-server:9000
-      - DRONE_SECRET=${DRONE_SECRET}
-
 networks:
   default:
     external:
