@@ -6,7 +6,7 @@ new LoopRecursive, stdout(`rho:io:stdout`) in {
         stdout!(".")
          | LoopRecursive!(x - 1)
       }
-    }  
+    }   
   } |
   new myChannel in {
     LoopRecursive!(5000)
