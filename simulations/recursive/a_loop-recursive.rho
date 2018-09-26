@@ -1,0 +1,14 @@
+new LoopRecursive, stdout(`rho:io:stdout`) in {
+  contract LoopRecursive(@count) = {  	
+    match count {
+    0 => stdout!("Done!")
+    x => {
+        stdout!(".")
+         | LoopRecursive!(x - 1)
+      }
+    }  
+  } |
+  new myChannel in {
+    LoopRecursive!(5000)
+  }
+}
