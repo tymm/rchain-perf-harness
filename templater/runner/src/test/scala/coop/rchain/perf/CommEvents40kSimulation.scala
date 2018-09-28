@@ -18,7 +18,7 @@ class CommEvents40kSimulation extends Simulation {
 
   val iterationsCount = 100
   val path = Paths.get(Paths.get("").toAbsolutePath().normalize().toString(),
-    "simulations/mvcepp/mvcepp.rho")
+    "../../simulations/mvcepp/mvcepp.rho")
 
   val contract = List("")
 
