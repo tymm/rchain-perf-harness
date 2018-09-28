@@ -57,16 +57,22 @@ abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
       exec(propose())
     }
 
+  val scnCombined = scenario(s"BinaryFileStore_${fileSizeInBytes}_bytes")
+      .exec(scnInstallToStore)
+      .exec(scnSave)
+
 //  val scnLoad = scenario("LoadFrom_BinaryFileStore")
 //    .foreach(List("loadContract.rho"), "contract") {
 //      exec(deploy())
 //      exec(propose())
 //    }
 
+  scnInstallToStore.inject(rampUsers(1) over (5 seconds))
+  scnSave.inject(rampUsers(1) over (20 seconds))
+  //scnLoad.inject(rampUsers(1) over (20 seconds))
+
   setUp(
-    scnInstallToStore.inject(rampUsers(1) over (5 seconds)),
-    scnSave.inject(rampUsers(1) over (20 seconds))
-    //scnLoad.inject(rampUsers(1) over (20 seconds))
+    scnCombined.inject(rampUsers(1) over (60 seconds))
   ).protocols(protocol)
 }
 
