@@ -63,11 +63,11 @@ abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
 //      exec(propose())
 //    }
 
-  setUp({
-    scnInstallToStore.inject(rampUsers(1) over (5 seconds))
+  setUp(
+    scnInstallToStore.inject(rampUsers(1) over (5 seconds)),
     scnSave.inject(rampUsers(1) over (20 seconds))
     //scnLoad.inject(rampUsers(1) over (20 seconds))
-  }).protocols(protocol)
+  ).protocols(protocol)
 }
 
 object BinaryFileSimulation {
