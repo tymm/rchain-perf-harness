@@ -18,7 +18,7 @@ class CommEvents40kSimulation extends Simulation {
 
   val iterationsCount = 1
   val path = Paths.get(Paths.get("").toAbsolutePath().normalize().toString(),
-    "../../simulations/mvcepp/loop-mvcepp.rho")
+                       "../../simulations/mvcepp/loop-mvcepp.rho")
 
   val conf = ConfigFactory.load()
   val rnodes = conf.getStringList("rnodes").asScala.toList
@@ -43,6 +43,6 @@ class CommEvents40kSimulation extends Simulation {
     }
 
   setUp(
-    scn.inject(rampUsers(1) over (5 seconds))
+    scn.inject(rampUsers(1) over (10 seconds))
   ).protocols(protocol)
 }
