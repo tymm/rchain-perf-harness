@@ -7,5 +7,5 @@ new chan, stdout(`rho:io:stdout`) in {
     }
   }
 } | new MyRunner in {
-  @"chan"!(1000)
+  @"chan"!(10000)
 }

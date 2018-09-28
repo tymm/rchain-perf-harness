@@ -16,7 +16,7 @@ class CommEvents40kSimulation extends Simulation {
 
   import RNodeActionDSL._
 
-  val iterationsCount = 100
+  val iterationsCount = 1
   val path = Paths.get(Paths.get("").toAbsolutePath().normalize().toString(),
     "../../simulations/mvcepp/loop-mvcepp.rho")
 
