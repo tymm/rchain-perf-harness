@@ -18,14 +18,11 @@ class CommEvents40kSimulation extends Simulation {
 
   val iterationsCount = 100
   val path = Paths.get(Paths.get("").toAbsolutePath().normalize().toString(),
-    "../../simulations/mvcepp/mvcepp.rho")
-
-  val contract = List("")
+    "../../simulations/mvcepp/loop-mvcepp.rho")
 
   val conf = ConfigFactory.load()
   val rnodes = conf.getStringList("rnodes").asScala.toList
 
-  println("")
   val rhoContent = Source.fromFile(path.toUri).mkString
   val contracts = List((path.getFileName.toString, rhoContent))
 

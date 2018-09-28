@@ -1,4 +1,3 @@
 new chan, stdout(`rho:io:stdout`) in {
-  stdout!(".") |
   for (_ <- chan) { Nil } | chan!(Nil)
 }
