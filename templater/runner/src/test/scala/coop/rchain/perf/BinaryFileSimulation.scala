@@ -51,7 +51,7 @@ abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
     }
 
   val scnSave = scenario("SaveTo_BinaryFileStore")
-    .foreach(List(s"saveToStore_$fileSizeInBytes.rho", storeScript),
+    .foreach(List((s"saveToStore_$fileSizeInBytes.rho", storeScript)),
              "contract") {
       exec(deploy())
       exec(propose())
