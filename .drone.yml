@@ -124,7 +124,7 @@ pipeline:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
     commands:
       - sleep 40
-      - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 100000000 --phlo-price 0 --nonce 0 drone/config/contracts/tut-philosophers.rho
+      - /opt/docker/bin/rnode --grpc-host validator1 --grpc-port 30015 deploy --from "0x1" --phlo-limit 100000000 --phlo-price 1 --nonce 0 drone/config/contracts/tut-philosophers.rho
 
   propose:
     image: rchain/rnode:for_drone_${DRONE_BUILD_NUMBER}
