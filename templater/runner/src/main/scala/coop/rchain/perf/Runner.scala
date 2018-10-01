@@ -11,6 +11,7 @@ import coop.rchain.casper.protocol.{
   DeployServiceGrpc,
   DeployServiceResponse
 }
+import coop.rchain.rholang.interpreter
 import io.gatling.commons.util.RoundRobin
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
@@ -62,7 +63,7 @@ object Deploy {
       .withTimestamp(System.currentTimeMillis())
       .withTerm(contract)
       .withFrom("0x1")
-      .withPhloLimit(100000000)
+      .withPhloLimit(accounting.MAX_VALUE)
       .withPhloPrice(1)
       .withNonce(0)
     val r = client.client.doDeploy(d)
@@ -230,10 +231,7 @@ object RNodeProtocol {
                   .forAddress(host, port)
                   .usePlaintext(true)
                   .build
-                ClientWithDetails(
-                  DeployServiceGrpc.stub(channel),
-                  host,
-                  port)
+                ClientWithDetails(DeployServiceGrpc.stub(channel), host, port)
             }
           val pool = RoundRobin(clients.toIndexedSeq)
           RNodeComponents(rnodeProtocol, clients, pool)
