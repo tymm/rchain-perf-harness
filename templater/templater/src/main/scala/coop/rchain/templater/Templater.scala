@@ -69,7 +69,7 @@ object Templates {
     """
       |#!/bin/bash
       |
-      |$RCHAIN_RNODE --grpc-port <grpcPort> deploy --from "0x1" --phlo-limit 0 --phlo-price 0 --nonce 0 ../contracts/performance/loop_recursive.rho
+      |$RCHAIN_RNODE --grpc-port <grpcPort> deploy --from "0x1" --phlo-limit 100000000 --phlo-price 0 --nonce 0 ../contracts/performance/loop_recursive.rho
     """.stripMargin
 
   val propose =
