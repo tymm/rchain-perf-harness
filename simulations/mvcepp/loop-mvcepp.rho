@@ -1,11 +1,9 @@
 new chan, stdout(`rho:io:stdout`) in {
-  stdout!(".") |  
-  for (@count <- chan) {
-    match count {
-      0 => { Nil }
-      x => { @"chan"!(x-1) }
-    }
-  }
-} | new MyRunner in {
-  @"chan"!(10000)
+  contract chan(@count) = {  
+      stdout!(".") |
+      match count {
+        0 => { Nil }
+        x => { chan!(x-1) }
+      } 
+  } | chan!(100)
 }
