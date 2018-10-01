@@ -62,8 +62,8 @@ object Deploy {
       .withTimestamp(System.currentTimeMillis())
       .withTerm(contract)
       .withFrom("0x1")
-      .withPhloLimit(0)
-      .withPhloPrice(0)
+      .withPhloLimit(100000000)
+      .withPhloPrice(1)
       .withNonce(0)
     val r = client.client.doDeploy(d)
     r.map { res =>
