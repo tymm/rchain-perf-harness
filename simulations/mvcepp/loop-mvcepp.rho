@@ -1,9 +1,8 @@
-new chan, stdout(`rho:io:stdout`) in {
+new chan in {
   contract chan(@count) = {  
-      stdout!(".") |
       match count {
         0 => { Nil }
         x => { chan!(x-1) }
       } 
-  } | chan!(100)
+  } | chan!(1000)
 }
