@@ -30,10 +30,14 @@ abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
   val binMapInstallContract = (path.getFileName.toString, rhoContent)
 
   val storeScript = s"""
-       | new myRunSave in {
-       |   @["BinaryStore", "save"]!($fileId, [${formatAsIntArray(
-                         fileSizeInBytes,
-                         4)}])
+       | new mySave in {
+       |   @"binSave"!($fileId, "${strOfSize(fileSizeInBytes)}".toByteArray())
+       | }
+     """.stripMargin
+
+  val loadScript = s"""
+       | new myLoad in {
+       |   @"binLoad"!($fileId, *myLoad)
        | }
      """.stripMargin
 
@@ -57,31 +61,35 @@ abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
       exec(propose())
     }
 
+  val scnLoad = scenario("LoadFrom_BinaryFileStore")
+    .foreach(List((s"loadFromStore_$fileSizeInBytes.rho", loadScript)),
+             "contract") {
+      exec(deploy())
+      exec(propose())
+      //exec(getDataFromBlock(s"@\"myLoad_$fileSizeInBytes\""))
+    }
+
   val scnCombined = scenario(s"BinaryFileStore_${fileSizeInBytes}_bytes")
-      .exec(scnInstallToStore)
-      .exec(scnSave)
+    .exec(scnInstallToStore)
+    .exec(scnSave)
+    .exec(scnLoad)
 
-//  val scnLoad = scenario("LoadFrom_BinaryFileStore")
-//    .foreach(List("loadContract.rho"), "contract") {
-//      exec(deploy())
-//      exec(propose())
-//    }
-
-  scnInstallToStore.inject(rampUsers(1) over (5 seconds))
+  scnInstallToStore.inject(rampUsers(1) over (10 seconds))
   scnSave.inject(rampUsers(1) over (20 seconds))
-  //scnLoad.inject(rampUsers(1) over (20 seconds))
+  scnLoad.inject(rampUsers(1) over (20 seconds))
 
   setUp(
-    scnCombined.inject(rampUsers(1) over (60 seconds))
+    scnCombined.inject(rampUsers(1) over (80 seconds))
   ).protocols(protocol)
 }
 
 object BinaryFileSimulation {
-  def formatAsIntArray(fileSizeInBytes: Int, intSize: Int): String = {
+  def strOfSize(fileSizeInBytes: Int): String = {
+    val start = 'a'.toInt
+    val range = 'z'.toInt - start
     val sb: StringBuilder = new StringBuilder()
-    for (i <- 0 to fileSizeInBytes by intSize) {
-      sb ++= i.toString
-      sb ++= ","
+    for (i <- 0 to fileSizeInBytes) {
+      sb += (start + (i % range)).toChar
     }
     sb.toString
   }

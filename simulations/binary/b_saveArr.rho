@@ -1,0 +1,4 @@
+new mySave in {
+  //bin data size in storage will be 4+string.Length if string contains ASCII chars only
+  @"binSave"!(1, "abcd".toByteArray())
+}

@@ -6,13 +6,8 @@ import coop.rchain.casper.protocol.DeployServiceGrpc.{
   DeployServiceBlockingClient,
   DeployServiceStub
 }
-import coop.rchain.casper.protocol.{
-  DeployData,
-  DeployServiceGrpc,
-  DeployServiceResponse,
-  PhloLimit,
-  PhloPrice
-}
+import coop.rchain.casper.protocol._
+import coop.rchain.models.{EVar, Expr, Par}
 import io.gatling.commons.util.RoundRobin
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.core.CoreComponents
@@ -26,8 +21,8 @@ import io.gatling.core.stats.message.ResponseTimings
 import io.gatling.core.structure.ScenarioContext
 import io.gatling.core.util.NameGen
 import io.grpc.ManagedChannelBuilder
-import scala.concurrent.ExecutionContext.Implicits.global
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
 
@@ -73,6 +68,38 @@ object Deploy {
         s"finished deploy of $cn on client ${client.full} session ${session.userId}, took: ${System
           .currentTimeMillis() - x1}")
       (session.set("client", client), res)
+    }
+  }
+}
+
+object GetDataFromBlock {
+  def getData(dataName: String)(session: Session)(
+      client: ClientWithDetails): Future[(Session, DeployServiceResponse)] = {
+
+    val (cn, contract): (String, String) = session("contract")
+      .as[(String, String)]
+
+    val x1 = System.currentTimeMillis()
+
+    println(
+      s"getting binary data of $cn on client ${client.full} session ${session.userId}")
+
+    val par = Par().withExprs(Seq(Expr().withGString(dataName)))
+    val parData = client.client.listenForDataAtName(par)
+
+    parData.map { res =>
+      res.status match {
+        case "Success" =>
+          println(
+            s"got binary data ${res.length} of $cn on client ${client.full} session ${session.userId}, took: ${System
+              .currentTimeMillis() - x1}")
+          (session.set("client", client),
+           DeployServiceResponse(true, "Successfully retrieved binary data"))
+        case _ =>
+          println(s"$res")
+          (session.set("client", client),
+           DeployServiceResponse(false, "Failed to get binary data"))
+      }
     }
   }
 }
@@ -164,6 +191,13 @@ object RNodeActionDSL {
     new RNodeActionBuilder {
       override val execute = Deploy.deploy
       override val actionName: String = "deploy"
+    }
+  }
+
+  def getDataFromBlock(dataName: String): RNodeActionBuilder = {
+    new RNodeActionBuilder {
+      override val execute = GetDataFromBlock.getData(dataName)
+      override val actionName: String = "getData"
     }
   }
 }
