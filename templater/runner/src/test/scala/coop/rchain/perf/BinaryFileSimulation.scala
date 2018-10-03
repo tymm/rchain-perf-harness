@@ -9,11 +9,11 @@ import io.gatling.core.Predef._
 import scala.concurrent.duration._
 import scala.io.Source
 
-class BinaryFileSimulation1MB extends BinaryFileSimulation(1, 1024)
+class BinaryFileSimulation1MB extends BinaryFileSimulation(1, 1024*1024)
 
-//class BinaryFileSimulation5MB extends BinaryFileSimulation(2,5*1024)
+//class BinaryFileSimulation5MB extends BinaryFileSimulation(2,5*1024*1024)
 
-//class BinaryFileSimulation10MB extends BinaryFileSimulation(3,10*1024)
+//class BinaryFileSimulation10MB extends BinaryFileSimulation(3,10*1024*1024)
 
 abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
     extends Simulation {
@@ -50,33 +50,21 @@ abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
 
   val scnInstallToStore = scenario("Create_BinaryFileStore")
     .foreach(List(binMapInstallContract), "contract") {
-      exec(deploy())
-      exec(propose())
+      exec(deploy()).exec(propose())
     }
 
   val scnSave = scenario("SaveTo_BinaryFileStore")
     .foreach(List((s"saveToStore_$fileSizeInBytes.rho", storeScript)),
              "contract") {
-      exec(deploy())
-      exec(propose())
+      exec(deploy()).exec(propose())
     }
-
-//  val scnLoad = scenario("LoadFrom_BinaryFileStore")
-//    .foreach(List((s"loadFromStore_$fileSizeInBytes.rho", loadScript)),
-//             "contract") {
-//      exec(deploy())
-//      exec(propose())
-//      exec(getDataFromBlock("@\"myLoad_" + fileSizeInBytes.toString + "\""))
-//    }
 
   val scnCombined = scenario(s"BinaryFileStore_${fileSizeInBytes}_bytes")
     .exec(scnInstallToStore)
     .exec(scnSave)
-    //.exec(scnLoad)
 
   scnInstallToStore.inject(rampUsers(1) over (10 seconds))
   scnSave.inject(rampUsers(1) over (20 seconds))
-  //scnLoad.inject(rampUsers(1) over (20 seconds))
 
   setUp(
     scnCombined.inject(rampUsers(1) over (80 seconds))
