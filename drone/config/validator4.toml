@@ -6,7 +6,7 @@ no-upnp = true
 default-timeout = 5000
 map-size = 1000000000
 data-dir = "./validator4"
-bootstrap = "rnode://7119ad2a26cdcde63dca675c4f2a4df85f404726@bootstrap:30011"
+bootstrap = "rnode://7119ad2a26cdcde63dca675c4f2a4df85f404726@bootstrap?protocol=30011&discovery=40404"
 
 [grpc-server]
 host = "grpc"

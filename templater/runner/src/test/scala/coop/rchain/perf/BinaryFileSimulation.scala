@@ -9,7 +9,7 @@ import io.gatling.core.Predef._
 import scala.concurrent.duration._
 import scala.io.Source
 
-class BinaryFileSimulation100kb extends BinaryFileSimulation(1, 100*1024)
+class BinaryFileSimulation100kb extends BinaryFileSimulation(1, 100 * 1024)
 
 //class BinaryFileSimulation1MB extends BinaryFileSimulation(2, 1024*1024)
 
@@ -61,11 +61,11 @@ abstract class BinaryFileSimulation(fileId: Int, fileSizeInBytes: Int)
       exec(deploy()).exec(propose())
     }
 
-    val scnLoad = scenario("LoadFrom_BinaryFileStore")
-      .foreach(List((s"loadFromStore_$fileSizeInBytes.rho", loadScript)),
-               "contract") {
-        exec(deploy()).exec(propose())
-      }
+  val scnLoad = scenario("LoadFrom_BinaryFileStore")
+    .foreach(List((s"loadFromStore_$fileSizeInBytes.rho", loadScript)),
+             "contract") {
+      exec(deploy()).exec(propose())
+    }
 
   val scnCombined = scenario(s"BinaryFileStore_${fileSizeInBytes}_bytes")
     .exec(scnInstallToStore)
