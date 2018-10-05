@@ -4,3 +4,19 @@ builder/envs/**
 *.log
 templater/results/**
 
+# Maven Output #
+#################
+target
+
+# Intellij IDEA Project Files
+#############################
+*.iml
+.idea
+Springsprout.iml
+
+# SBT
+#####
+target/
+lib_managed/
+src_managed/
+boot/

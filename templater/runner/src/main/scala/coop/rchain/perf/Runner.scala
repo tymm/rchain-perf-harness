@@ -85,7 +85,7 @@ object GetDataFromBlock {
       s"getting binary data of $cn on client ${client.full} session ${session.userId}")
 
     val par = Par().withExprs(Seq(Expr().withGString(dataName)))
-    val parData = client.client.listenForDataAtName(par)
+    val parData = client.client.listenForDataAtName(DataAtNameQuery(0, par))
 
     parData.map { res =>
       res.status match {
