@@ -10,7 +10,7 @@
 stressDockerUrl = 'http://stress-docker.pyr8.io:8080'
 repoName = 'rchain/rchain-perf-harness'
 
-lastSuccessfulBuildNo = () -> execFileSync('./drone-cli.sh', ['build', 'ls' ,'--status', 'success', '--format', '{{.Number}}', '--limit', '1', repoName],{
+lastSuccessfulBuildNo = () -> execFileSync('./drone-cli.sh', ['build', 'ls' ,'--status', 'success', '--format', '{{.Number}}', '--branch', 'master', '--limit', '1', repoName],{
       cwd: '../drone'
     }).toString()
 
