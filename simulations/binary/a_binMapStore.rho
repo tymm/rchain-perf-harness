@@ -1,0 +1,21 @@
+new binMapStore, stdout(`rho:io:stdout`) in {
+  binMapStore!({}) | 
+  contract @"binSave"(@binaryFileId, @binaryFileIn) = {        
+    for(@binMap <- binMapStore) {
+      binMapStore!(binMap.set(binaryFileId, binaryFileIn))
+    }
+  } |
+  contract @"binLoad"(@binaryFileId, binaryFileOut) = {    
+    for(@binMap <- binMapStore) {      
+      binMapStore!(binMap) |
+      binaryFileOut!(binMap.get(binaryFileId))      
+    }
+  } |
+  contract @"binList"() = {  
+    for(@binMap <- binMapStore) {
+      stdout!("list") | 
+      binMapStore!(binMap) |      
+      stdout!(binMap)     
+    }
+  } 
+}

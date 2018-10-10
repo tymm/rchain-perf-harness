@@ -4,3 +4,35 @@ builder/envs/**
 *.log
 templater/results/**
 
+# Maven Output #
+#################
+target
+
+# Intellij IDEA Project Files
+#############################
+*.iml
+.idea
+Springsprout.iml
+
+# SBT
+#####
+target/
+lib_managed/
+src_managed/
+boot/
+
+# Actual code editors
+###################
+*~
+\#*
+.ensime*
+ensime.sbt
+TAGS
+node-client/__pycache__
+node-client/ve
+research/sharding/ve
+*.pyc
+integration-testing/.pytest_cache
+integration-testing/.virtualenv
+integration-testing.log
+*.log

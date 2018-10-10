@@ -1,0 +1,3 @@
+new myLoad in {
+  @"binLoad"!(1, *myLoad)
+}

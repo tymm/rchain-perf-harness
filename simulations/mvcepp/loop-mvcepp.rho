@@ -1,0 +1,8 @@
+new chan in {
+  contract chan(@count) = {  
+      match count {
+        0 => { Nil }
+        x => { chan!(x-1) }
+      } 
+  } | chan!(1000)
+}
