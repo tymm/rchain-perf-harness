@@ -140,7 +140,7 @@ pipeline:
       - cd templater
       - mkfifo pipe
       - tee sbt.out < pipe &
-      - sbt -Dsbt.ivy.home=/workdir/.ivy2 -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:testOnly coop.rchain.perf.CommEvents40kSimulation > pipe
+      - sbt -Dsbt.ivy.home=/workdir/.ivy2 -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 "runner/gatling:testOnly coop.rchain.perf.CommEvents40kSimulation" > pipe
       - sleep 200
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
@@ -157,7 +157,7 @@ pipeline:
       - echo $CONTRACT
       - mkfifo pipe
       - tee sbt.out < pipe &
-      - sbt -Dsbt.ivy.home=/workdir/.ivy2 -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:testOnly coop.rchain.perf.DeployProposeSimulation > pipe
+      - sbt -Dsbt.ivy.home=/workdir/.ivy2 -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 "runner/gatling:testOnly coop.rchain.perf.DeployProposeSimulation" > pipe
       - sleep 200
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
@@ -175,7 +175,7 @@ pipeline:
       - echo $CONTRACT
       - mkfifo pipe
       - tee sbt.out < pipe &
-      - sbt -Dsbt.ivy.home=/workdir/.ivy2 -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 runner/gatling:testOnly coop.rchain.perf.DeployProposeSimulation > pipe
+      - sbt -Dsbt.ivy.home=/workdir/.ivy2 -Dcontract=$CONTRACT -Drnodes.0=bootstrap:30015 -Drnodes.1=validator1:30015 -Drnodes.2=validator2:30015 -Drnodes.3=validator3:30015 -Drnodes.4=validator4:30015 "runner/gatling:testOnly coop.rchain.perf.DeployProposeSimulation" > pipe
       - sleep 200
       - echo "stop" > ../metrics/stop-loop
       - /bin/bash ../etc/check-build-status.sh
