@@ -1,0 +1,9 @@
+[Unit]
+Requires=docker.service
+After=docker.service
+StopWhenUnneeded=true
+[Service]
+ExecStart=/usr/local/bin/docker-compose -f /opt/rchain-perf-harness/docker-compose.yml up
+ExecStopPost=/usr/local/bin/docker-compose -f /opt/rchain-perf-harness/docker-compose.yml down
+[Install]
+WantedBy=rchain-perf-harness.target

@@ -1,0 +1,13 @@
+[Unit]
+Requires=docker.service metrics.service
+After=docker.service metrics.service
+StopWhenUnneeded=true
+[Service]
+EnvironmentFile=/etc/rchain-perf-harness/drone.env
+ExecStart=/usr/local/bin/docker-compose -f /opt/rchain-perf-harness/drone/docker-compose.yml up
+ExecStopPost=/usr/local/bin/docker-compose -f /opt/rchain-perf-harness/drone/docker-compose.yml down
+# Sometimes, drone.service starts before metrics.service manages to create
+# the rchain-perf-harness_metrics network.
+Restart=on-failure
+[Install]
+WantedBy=rchain-perf-harness.target

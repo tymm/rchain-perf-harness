@@ -1,0 +1,30 @@
+#!/bin/bash -ex
+D=/opt/rchain-perf-harness
+C=/etc/rchain-perf-harness
+
+copy_files() {
+	local projdir=$(git rev-parse --show-toplevel)
+	mkdir -p $D
+	rsync -rt --exclude=/.git --filter=':- .gitignore' $projdir/ $D
+	git archive HEAD $projdir | tar -xC $D
+}
+copy_files()
+
+(
+umask 077
+mkdir -p $C
+cp -n *.env $C
+)
+
+systemctl stop rchain-perf-harness.target || true
+cp *.service *.target /etc/systemd/system/
+systemctl daemon-reload
+for unit in *.service *.target; do
+	systemctl enable $(basename $unit)
+done
+
+docker pull rchain/rchain-hubot:latest
+
+echo "*** Edit configuration files in $C ***"
+
+#systemctl start rchain-perf-harness.target
