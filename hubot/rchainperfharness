@@ -1,0 +1,36 @@
+#!/bin/bash
+
+: ${DRONE_BUILD_REPO:=rchain/rchain-perf-harness}
+
+usage() {
+	echo "Usage $0 dockerimg|gitrev args" >&2
+	exit 1
+}
+
+lastbuildno() {
+	drone build ls --format {{.Number}} --limit 1 "$DRONE_BUILD_REPO"
+}
+
+run_dockerimg() {
+	[[ $# -ge 1 ]] || usage
+	drone deploy --format "{{.Number}}" \
+		--param CONTRACT="/workdir/rchain-perf-harness/$1" \
+		--param RNODE_IMAGE_VERSION="${2:-dev}" \
+		"$DRONE_BUILD_REPO" "$(lastbuildno)" custom_contract
+}
+
+run_gitrev() {
+	[[ $# -ge 1 ]] || usage
+	drone deploy --format "{{.Number}}" \
+		--param CONTRACT="/workdir/rchain-perf-harness/$1" \
+		--param RCHAIN_COMMIT_HASH="${2:-dev}" \
+		"$DRONE_BUILD_REPO" "$(lastbuildno)" custom_commit
+}
+
+cmd="$1"
+shift
+
+case "$cmd" in
+	dockerimg|gitrev) run_$cmd "$@" ;;
+	*) usage ;;
+esac

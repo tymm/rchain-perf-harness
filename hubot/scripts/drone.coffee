@@ -7,13 +7,7 @@
 
 {spawn,execFileSync} = require('child_process')
 
-stressDockerUrl = 'http://stress-docker.pyr8.io:8080'
-repoName = 'rchain/rchain-perf-harness'
-
-lastSuccessfulBuildNo = () -> execFileSync('./drone-cli.sh', ['build', 'ls' ,'--status', 'success', '--format', '{{.Number}}', '--branch', 'master', '--limit', '1', repoName],{
-      cwd: '../drone'
-    }).toString()
-
+baseUrl = process.env.DRONE_SERVER + '/' + process.env.DRONE_BUILD_REPO + '/'
 
 module.exports = (robot) ->
 
@@ -21,22 +15,18 @@ module.exports = (robot) ->
     tag = msg.match[1]
     contract = msg.match[2]
 
-    child = spawn("bash", ["./drone-custom-contract.sh", lastSuccessfulBuildNo(), "#{contract}", "#{tag}"], {
-      cwd: '../drone'
-    })
+    child = spawn('rchainperfharness', ['dockerimg', contract, tag])
 
     child.stdout.on 'data', (data) ->
       #console.log('stdout: ' + data)
-      msg.send ("Scheduled build #{stressDockerUrl}/#{repoName}/" + data)
+      msg.send ("Scheduled build #{baseUrl}" + data)
 
   robot.respond /test performance of commit (.*) using (.*)/i, (msg) ->
     hash = msg.match[1]
     contract = msg.match[2]
 
-    child = spawn("bash", ["./drone-custom-commit.sh", lastSuccessfulBuildNo(), "#{contract}", "#{hash}"], {
-      cwd: '../drone'
-    })
+    child = spawn('rchainperfharness', ['gitrev', contract, hash])
 
     child.stdout.on 'data', (data) ->
       #console.log('stdout: ' + data)
-      msg.send ("Scheduled build #{stressDockerUrl}/#{repoName}/" + data)
+      msg.send ("Scheduled build #{baseUrl}" + data)
