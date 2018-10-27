@@ -16,6 +16,7 @@ run_dockerimg() {
 	drone deploy --format "{{.Number}}" \
 		--param CONTRACT="/workdir/rchain-perf-harness/$1" \
 		--param RNODE_IMAGE_VERSION="${2:-dev}" \
+		--param RCHAIN_REPO="https://github.com/${3:-rchain/rchain}" \
 		"$DRONE_BUILD_REPO" "$(lastbuildno)" custom_contract
 }
 
@@ -24,6 +25,7 @@ run_gitrev() {
 	drone deploy --format "{{.Number}}" \
 		--param CONTRACT="/workdir/rchain-perf-harness/$1" \
 		--param RCHAIN_COMMIT_HASH="${2:-dev}" \
+		--param RCHAIN_REPO="https://github.com/${3:-rchain/rchain}" \
 		"$DRONE_BUILD_REPO" "$(lastbuildno)" custom_commit
 }
 

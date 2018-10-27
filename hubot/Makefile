@@ -1,6 +1,6 @@
 NAME = rchain/rchain-hubot
 REV = $(shell git rev-parse --short HEAD)
-VER = 0.1
+VER = 0.2
 
 .PHONY: all
 all: build

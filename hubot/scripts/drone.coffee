@@ -11,21 +11,23 @@ baseUrl = process.env.DRONE_SERVER + '/' + process.env.DRONE_BUILD_REPO + '/'
 
 module.exports = (robot) ->
 
-  robot.respond /test performance of image (.*) using (.*)/i, (msg) ->
+  robot.respond /test performance of image (\S+) using (\S+)(?: from (\S+))?/i, (msg) ->
     tag = msg.match[1]
     contract = msg.match[2]
+    repo = msg.match[3] || 'rchain/rchain'
 
-    child = spawn('rchainperfharness', ['dockerimg', contract, tag])
+    child = spawn('rchainperfharness', ['dockerimg', contract, tag, repo])
 
     child.stdout.on 'data', (data) ->
       #console.log('stdout: ' + data)
       msg.send ("Scheduled build #{baseUrl}" + data)
 
-  robot.respond /test performance of commit (.*) using (.*)/i, (msg) ->
+  robot.respond /test performance of commit (\S+) using (\S+)(?: from (\S+))?/i, (msg) ->
     hash = msg.match[1]
     contract = msg.match[2]
+    repo = msg.match[3] || 'rchain/rchain'
 
-    child = spawn('rchainperfharness', ['gitrev', contract, hash])
+    child = spawn('rchainperfharness', ['gitrev', contract, hash, repo])
 
     child.stdout.on 'data', (data) ->
       #console.log('stdout: ' + data)
