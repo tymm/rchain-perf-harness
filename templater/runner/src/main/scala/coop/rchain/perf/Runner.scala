@@ -59,8 +59,8 @@ object Deploy {
       .withTimestamp(System.currentTimeMillis())
       .withTerm(contract)
       .withFrom("0x1")
-      .withPhloLimit(PhloLimit(Long.MaxValue))
-      .withPhloPrice(PhloPrice(1))
+      .withPhloLimit(Integer.MAX_VALUE)
+      .withPhloPrice(1)
       .withNonce(0)
     val r = client.client.doDeploy(d)
     r.map { res =>
@@ -85,7 +85,8 @@ object GetDataFromBlock {
       s"getting binary data of $cn on client ${client.full} session ${session.userId}")
 
     val par = Par().withExprs(Seq(Expr().withGString(dataName)))
-    val parData = client.client.listenForDataAtName(DataAtNameQuery(0, Some(par)))
+    val parData =
+      client.client.listenForDataAtName(DataAtNameQuery(0, Some(par)))
 
     parData.map { res =>
       res.status match {
