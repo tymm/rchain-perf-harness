@@ -12,15 +12,13 @@ networks:
 services:
   prometheus-pushgateway:
     image: prom/pushgateway
-    ports:
-      - 19091:9091
     networks:
       - metrics
 
   prometheus-server:
     image: prom/prometheus:v2.3.2
     ports:
-      - 19090:9090
+      - 127.0.0.1:19090:9090
     networks:
       - metrics
     volumes:
@@ -37,7 +35,7 @@ services:
     networks:
       - metrics
     ports:
-      - 13000:3000
+      - 127.0.0.1:13000:3000
     env_file:
       - ./grafana/grafana.conf
     volumes:
