@@ -65,3 +65,72 @@ This is the image that was built using [Automation/tools script](tools/setup.sh)
 - `sessions` amount of concurrent clients
 - `ratio` deploy : propose ratio
 - `hosts` space separated list of hosts to test (assumed port is 40401)
+
+## Installation
+
+Docker, docker-compose and systemd are required for installation and run time.
+Bash, rsync and Git are required only for installation.
+
+### Installation steps
+
+1. Clone the repository on your server and `cd` into it.
+2. `cd` into `systemd` directory and run `./install`. This will install copy of
+   the repository files into `/opt/rchain-perf-harness` and configuration files
+   into `/etc/rchain-perf-harness`.
+3. Edit the `/etc/rchain-perf-harness/drone.env` configuration file:
+
+       DRONE_HOST
+
+   Set this to HTTP(S) URL that'll point to this Drone instance from outside.
+
+       DRONE_GITHUB_CLIENT
+       DRONE_GITHUB_SECRET
+
+   Set this to values of an GitHub OAuth application created at
+   https://github.com/organizations/rchain/settings/applications
+
+       DRONE_SECRET
+
+   Set this to a random string. It's used to authenticate Drone agent with
+   server. Both server and agent source this file.
+
+       DRONE_ORGS
+
+   Set this to comma separated list of GitHub organizations whose users can use
+   this Drone instance.
+
+       DRONE_ADMIN
+
+   Set this to comma separated list of GitHub users who can manage this Drone
+   instance.
+
+4. Start the metrics and Drone services:
+
+       systemctl start metrics drone
+
+5. Edit the `/etc/rchain-perf-harness/hubot.env` configuration file:
+
+       DRONE_SERVER
+       DRONE_TOKEN
+
+   Get these values from `${DRONE_HOST}/account/token` page.
+
+       DRONE_BUILD_REPO
+
+   _GitHub path_ of this repository, i.e. most probably
+   `rchain/rchain-perf-harness` unless this is a fork.
+
+       HUBOT_DISCORD_TOKEN
+
+   Set this to token of a Discord bot you've created.
+
+6. Start the Hubot:
+
+       systemctl start hubot
+
+Services will be started on every boot. Check with
+
+    systemctl status rchain-perf-harness.target
+    systemctl status metrics
+    systemctl status drone
+    systemctl status hubot
